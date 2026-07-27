@@ -12,6 +12,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { StyleSheet } from 'react-native';
 
 import type { Locale, MassetStorage, ThemePack, VariantLabel } from './pack';
+import { MassetSignalProvider } from './signal';
 import { defaultPackTokens, motion, radius, spacing, type PackTokens, type ThemeColors } from './tokens';
 import { makeTypography, type Typography } from './typography';
 
@@ -159,7 +160,13 @@ export function MassetProvider<V extends string>({
   // cannot be generic — and restored by the type argument on useMasset<V>().
   // Provider and consumer are the same pack, so the round trip is sound; it is
   // simply not something the compiler can follow.
-  return <MassetContext.Provider value={value as unknown as MassetValue<string>}>{children}</MassetContext.Provider>;
+  return (
+    <MassetContext.Provider value={value as unknown as MassetValue<string>}>
+      {/* Live signal sits inside, on its own contexts — see core/signal.tsx for
+          why it is not part of MassetValue. */}
+      <MassetSignalProvider>{children}</MassetSignalProvider>
+    </MassetContext.Provider>
+  );
 }
 
 /**

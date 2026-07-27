@@ -44,6 +44,7 @@ MASSETS/
 | `seasons` | rain · snow · blossom · meadow | rain | yes | Opens on the season matching the real month |
 | `stormy` | drizzle · downpour · thunder · tempest | all but drizzle | no | One storm at four intensities; builds through the day |
 | `cartoon` | jungle · ocean · space · candy | space | no | Rounder shapes, snappier motion; rotates by day of month |
+| `voidcore` | abyss · frost · ember · verdant · violet | all | no | A turning vortex that **reacts to live signal** |
 
 Only `seasons` ships ambience, so `expo-audio` is optional for the other two.
 `stormy` is the escalation of `seasons`' calm `rain`: `intensity()` grades the
@@ -177,6 +178,25 @@ export const duskPack = definePack<Dusk>({
   Ambience: DuskSound,               // optional
 });
 ```
+
+### Live signal (voidcore)
+
+Most packs are decoration. `voidcore` reacts to two values the host pushes in —
+neither is persisted, and both are optional:
+
+```tsx
+const { setPulse, setFocus } = useMassetSignalControls();
+
+setPulse(0.8);                    // 0–1: how hard the core is reacting
+setFocus({ x: 0.62, y: 0.31 });   // normalized point to attend to; null to release
+```
+
+As `pulse` rises the vortex takes a rotational kick, its fast inner swirl fades
+up, the rim brightens, the throat opens and more lightning emitters arm. Given
+a `focus`, the disc leans toward it and throws forked bolts at it.
+
+They live on their own React contexts (`core/signal.tsx`) precisely so pushing
+them every frame does **not** re-render screens that only call `useMasset()`.
 
 **Make it live.** A background that only drops particles reads as wallpaper.
 Build motion from `core/animation.ts`:

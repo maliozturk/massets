@@ -32,6 +32,14 @@ export {
   type StorageKeys,
 } from './provider';
 export { Button, Card, Chip, Eyebrow, EmptyState, IconButton, Spinner, type ButtonVariant } from './primitives';
+export {
+  MassetSignalProvider,
+  useMassetSignal,
+  useMassetSignalControls,
+  type MassetSignal,
+  type MassetSignalControls,
+} from './signal';
+export { pivotRotate, useLoop, type LoopOptions } from './animation';
 export { FadeIn } from './FadeIn';
 export { fontsToLoad } from './fonts';
 export * as icons from './icons';

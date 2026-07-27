@@ -16,9 +16,11 @@ import { THEME_COLOR_KEYS, radius as defaultRadius, spacing, type ThemeColors } 
 import { cartoonPreview } from '../packs/cartoon/preview';
 import { seasonsPreview } from '../packs/seasons/preview';
 import { stormyPreview } from '../packs/stormy/preview';
+import { voidcorePreview } from '../packs/voidcore/preview';
+import { boltPoints, forkPoints } from '../packs/voidcore/voids';
 
 // Every pack the showroom renders. One line per pack.
-const PACKS: PackPreview<string>[] = [seasonsPreview, stormyPreview, cartoonPreview];
+const PACKS: PackPreview<string>[] = [seasonsPreview, stormyPreview, cartoonPreview, voidcorePreview];
 
 // --- Colour maths ----------------------------------------------------------
 
@@ -301,6 +303,128 @@ function sceneryHtml(preview: VariantPreview, colors: ThemeColors): string {
     .join('');
 }
 
+// --- Voidcore vortex -------------------------------------------------------
+// Colours come from the panel's CSS variables, so one piece of markup themes
+// itself for all five voids. The filters are the same feTurbulence /
+// feDisplacementMap / feGaussianBlur chain the RN overlay uses.
+
+function swirlLayer(key: string, id: string, rings: number, inner: number, wisp: number, seed: number): string {
+  const bands: string[] = [];
+  for (let i = 0; i < rings; i++) {
+    const t = (i + 1) / rings;
+    const r = 470 * (inner + t * (1 - inner));
+    const dashOn = 6 + (1 - t) * 46 + i * 3;
+    const dashOff = 10 + t * 90;
+    const width = 1 + (1 - t) * 3.2;
+    const alpha = (0.14 + (1 - t) * 0.5).toFixed(2);
+    bands.push(
+      `<circle cx="500" cy="500" r="${r.toFixed(0)}" fill="none" stroke="${
+        i % 3 === 0 ? 'var(--scenery-alt)' : 'var(--scenery)'
+      }" stroke-width="${width.toFixed(1)}" stroke-dasharray="${dashOn.toFixed(0)} ${dashOff.toFixed(
+        0
+      )}" stroke-dashoffset="${i * 37}" stroke-linecap="round" opacity="${alpha}"/>`
+    );
+  }
+  const fid = `wisp-${id}-${key}`;
+  return (
+    `<svg class="vx-layer vx-${id}" viewBox="0 0 1000 1000" aria-hidden="true">` +
+    `<defs><filter id="${fid}" x="-25%" y="-25%" width="150%" height="150%">` +
+    `<feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="${seed}" result="n"/>` +
+    `<feDisplacementMap in="SourceGraphic" in2="n" scale="${wisp}" xChannelSelector="R" yChannelSelector="G" result="d"/>` +
+    `<feGaussianBlur in="d" stdDeviation="2.2" result="s"/>` +
+    `<feMerge><feMergeNode in="s"/><feMergeNode in="d"/></feMerge>` +
+    `</filter></defs>` +
+    `<g filter="url(#${fid})">${bands.join('')}</g></svg>`
+  );
+}
+
+function boltSvg(key: string, id: string, length: number, seed: number, scale: number): string {
+  const rand = mulberry32(seed);
+  const main = boltPoints(length, 9, length * 0.09, rand);
+  const forks = [
+    forkPoints(length, 0.32, -38 - rand() * 24, rand),
+    forkPoints(length, 0.58, 34 + rand() * 26, rand),
+    forkPoints(length, 0.76, -26 - rand() * 20, rand),
+  ];
+  const h = Math.max(56, length * 0.5);
+  const fid = `glow-${id}-${key}`;
+  return (
+    `<svg viewBox="0 ${-h / 2} ${length} ${h}" width="${length}" height="${h}" aria-hidden="true">` +
+    `<defs><filter id="${fid}" x="-40%" y="-140%" width="180%" height="380%">` +
+    `<feGaussianBlur in="SourceGraphic" stdDeviation="${(5.5 * scale).toFixed(1)}" result="w"/>` +
+    `<feGaussianBlur in="SourceGraphic" stdDeviation="${(1.8 * scale).toFixed(1)}" result="t"/>` +
+    `<feMerge><feMergeNode in="w"/><feMergeNode in="w"/><feMergeNode in="t"/><feMergeNode in="SourceGraphic"/></feMerge>` +
+    `</filter></defs>` +
+    `<g filter="url(#${fid})">` +
+    `<polyline points="${main}" fill="none" stroke="var(--scenery-alt)" stroke-width="${(4.2 * scale).toFixed(
+      1
+    )}" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>` +
+    forks
+      .map(
+        (f) =>
+          `<polyline points="${f}" fill="none" stroke="var(--scenery-alt)" stroke-width="${(1.8 * scale).toFixed(
+            1
+          )}" stroke-linecap="round" opacity="0.7"/>`
+      )
+      .join('') +
+    `<polyline points="${main}" fill="none" stroke="var(--celestial)" stroke-width="${(1.7 * scale).toFixed(
+      1
+    )}" stroke-linecap="round" stroke-linejoin="round"/>` +
+    `</g></svg>`
+  );
+}
+
+function vortexHtml(key: string): string {
+  const rand = mulberry32(seedFrom(`motes-${key}`));
+
+  // Each mote is a rotating wrapper with an element travelling inward — the
+  // composition of the two is the spiral, using nothing but transforms.
+  const motes = Array.from({ length: 34 }, () => {
+    const size = (1.4 + rand() * 2.6).toFixed(1);
+    const dur = (4.2 + rand() * 5.2).toFixed(2);
+    const delay = (rand() * 8).toFixed(2);
+    const spin = (140 + rand() * 190).toFixed(0);
+    const start = (38 + rand() * 22).toFixed(1);
+    return `<i style="--spin:${spin}deg;--start:${start}%;animation-duration:${dur}s;animation-delay:-${delay}s"><b style="width:${size}px;height:${size}px;animation-duration:${dur}s;animation-delay:-${delay}s"></b></i>`;
+  }).join('');
+
+  // Rim lightning: the first is always live, the rest arm as pulse rises.
+  const rim = [
+    { a: -64, len: 200, seed: 11, dur: 8.2, arm: 0 },
+    { a: 128, len: 160, seed: 29, dur: 9.8, arm: 0.25 },
+    { a: 26, len: 180, seed: 47, dur: 5.8, arm: 0.5 },
+    { a: -142, len: 140, seed: 83, dur: 4.8, arm: 0.75 },
+    { a: 82, len: 220, seed: 101, dur: 4.0, arm: 0.95 },
+  ]
+    .map(
+      (b, i) =>
+        `<div class="vx-rimbolt" style="--a:${b.a}deg;--arm:${b.arm};animation-duration:${b.dur}s;animation-delay:-${(
+          i * 1.7
+        ).toFixed(1)}s">${boltSvg(key, `r${i}`, b.len, b.seed, 0.75)}</div>`
+    )
+    .join('');
+
+  return (
+    `<div class="vortex">` +
+    swirlLayer(key, 'outer', 9, 0.28, 22, 7) +
+    swirlLayer(key, 'mid', 11, 0.28, 14, 19) +
+    swirlLayer(key, 'inner', 8, 0.28, 7, 31) +
+    `<div class="vx-throat"></div>` +
+    `<svg class="vx-rim" viewBox="0 0 1000 1000" aria-hidden="true">` +
+    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--scenery-alt)" stroke-width="5" opacity="0.55"/>` +
+    `<circle cx="500" cy="500" r="288" fill="none" stroke="var(--celestial)" stroke-width="2.2" opacity="0.35"/>` +
+    `</svg>` +
+    `<svg class="vx-hotspot" viewBox="0 0 1000 1000" aria-hidden="true">` +
+    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--celestial)" stroke-width="10" stroke-linecap="round" stroke-dasharray="330 3000" opacity="0.85"/>` +
+    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--celestial)" stroke-width="30" stroke-linecap="round" stroke-dasharray="210 3000" opacity="0.18"/>` +
+    `</svg>` +
+    `<div class="vx-motes">${motes}</div>` +
+    `<div class="vx-rimbolts">${rim}</div>` +
+    `<div class="vx-strike">${boltSvg(key, 'strike', 340, 7, 1)}</div>` +
+    `</div>`
+  );
+}
+
 /** The named moving parts a world can ask for, beyond scenery and particles. */
 function effectsHtml(preview: VariantPreview, key: string): string {
   const wanted = preview.effects ?? [];
@@ -387,6 +511,8 @@ function effectsHtml(preview: VariantPreview, key: string): string {
     out.push(`<div class="bolts">${bolt(52, 10.2, 0)}${bolt(14, 16.4, 6.1)}<b></b></div>`);
   }
 
+  if (wanted.includes('void-vortex')) out.push(vortexHtml(key));
+
   if (wanted.includes('spray')) {
     const streaks = [
       { y: 18, len: 130, dur: 1.3, delay: 0 },
@@ -450,6 +576,7 @@ function variantPanel(pack: PackPreview<string>, variant: string): string {
   const isDark = pack.darkVariants.includes(variant);
   const key = slug(pack.id, variant);
   const cel = preview.celestial ?? { x: 0.75, y: 0.12 };
+  const interactive = (preview.effects ?? []).includes('pointer-strike');
 
   const tokenGroups = GROUPS.map(
     (group) => `<section class="group">
@@ -483,14 +610,27 @@ function variantPanel(pack: PackPreview<string>, variant: string): string {
       </header>
 
       <div class="split">
-        <div class="stage" style="--cel-x:${(cel.x * 100).toFixed(1)}%;--cel-y:${(cel.y * 100).toFixed(1)}%">
+        <div class="stage${interactive ? ' interactive' : ''}" data-stage="${key}" style="--cel-x:${(cel.x * 100).toFixed(
+          1
+        )}%;--cel-y:${(cel.y * 100).toFixed(1)}%">
           <div class="sky"></div>
           <div class="celestial${preview.celestialPulse === false ? '' : ' pulsing'}"></div>
           ${sceneryHtml(preview, colors)}
-          ${effectsHtml(preview, key)}
           <div class="particles">${particleField(pack.id, variant, preview, colors)}</div>
-          <div class="stage-caption">Living background — CSS approximation</div>
+          ${effectsHtml(preview, key)}
+          <div class="stage-caption">${
+            interactive ? 'Move the pointer over this — it strikes where you point' : 'Living background — CSS approximation'
+          }</div>
         </div>
+        ${
+          interactive
+            ? `<div class="signal-bar">
+          <label>pulse <input type="range" class="pulse" data-for="${key}" min="0" max="100" value="0"></label>
+          <output class="pulse-out" data-for="${key}">0.00</output>
+          <button class="pulse-demo" data-for="${key}">simulate a reply</button>
+        </div>`
+            : ''
+        }
 
         <div class="mock">
           <div class="mock-card">
@@ -796,6 +936,100 @@ ${themeBlocks}
     100% { transform: translate(-180px, 44px) rotate(9deg); opacity: 0; }
   }
 
+  /* --- Voidcore vortex ---
+     Same feTurbulence / feDisplacementMap / feGaussianBlur chain as the RN
+     overlay. --pulse is driven live by the slider below the stage. */
+  .stage.interactive { cursor: crosshair; --pulse: 0; --sa: 0deg; --sd: 300px; --fx: 50%; --fy: 42%; min-height: 520px; }
+  .vortex { position: absolute; inset: 0; overflow: hidden; }
+  .vx-layer, .vx-rim, .vx-hotspot {
+    position: absolute; left: 50%; top: 42%; width: 148%; aspect-ratio: 1; translate: -50% -50%;
+    transform-origin: 50% 50%; will-change: transform;
+  }
+  .vx-outer { width: 184%; opacity: 0.5; animation: vspin 92s linear infinite; }
+  .vx-mid   { width: 148%; opacity: 0.85; animation: vspin 54s linear infinite reverse; }
+  .vx-inner { width: 116%; animation: vspin 19s linear infinite; opacity: calc(0.12 + var(--pulse) * 0.8); }
+  @keyframes vspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .vx-throat {
+    position: absolute; left: 50%; top: 42%; width: 148%; aspect-ratio: 1; translate: -50% -50%;
+    border-radius: 50%;
+    background: radial-gradient(circle closest-side,
+      var(--bg-deep) 0%, var(--bg-deep) 42%,
+      var(--scenery) 62%, var(--celestial-glow) 78%, transparent 100%);
+    scale: calc(1 + var(--pulse) * 0.09);
+    transition: scale 0.42s cubic-bezier(0.2,0.7,0.3,1);
+  }
+  .vx-rim { width: 92%; opacity: calc(0.5 + var(--pulse) * 0.5); }
+  .vx-hotspot { width: 92%; opacity: calc(0.5 + var(--pulse) * 0.5); animation: vspin 16s linear infinite; }
+
+  /* Motes: a rotating wrapper plus an element travelling inward. The two
+     composed give a spiral without needing offset-path. */
+  .vx-motes { position: absolute; inset: 0; }
+  .vx-motes i {
+    position: absolute; left: 50%; top: 42%; width: 0; height: 0; display: block;
+    animation-name: vmote-spin; animation-timing-function: linear; animation-iteration-count: infinite;
+  }
+  .vx-motes b {
+    position: absolute; display: block; border-radius: 50%; background: var(--celestial);
+    animation-name: vmote-fall; animation-timing-function: cubic-bezier(0.45,0,0.9,0.5); animation-iteration-count: infinite;
+  }
+  @keyframes vmote-spin { from { transform: rotate(0deg); } to { transform: rotate(var(--spin)); } }
+  @keyframes vmote-fall {
+    0%   { left: var(--start); opacity: 0; transform: scaleX(1); }
+    10%  { opacity: 0.75; }
+    72%  { opacity: 0.5; }
+    100% { left: 0%; opacity: 0; transform: scaleX(4); }
+  }
+
+  .vx-rimbolts { position: absolute; inset: 0; }
+  .vx-rimbolt {
+    position: absolute; left: 50%; top: 42%; transform-origin: 0 50%;
+    transform: rotate(var(--a)) translateX(24%);
+    opacity: 0;
+    animation-name: vstrike; animation-timing-function: linear; animation-iteration-count: infinite;
+  }
+  /* Armed only once pulse passes this bolt's threshold — the storm thickens
+     with the reaction, and nothing has to restart to do it. */
+  .vx-rimbolt { --armed: clamp(0, (var(--pulse) - var(--arm)) * 8, 1); }
+  @keyframes vstrike {
+    0%, 100% { opacity: 0; }
+    1%   { opacity: calc(1 * var(--armed)); }
+    2.2% { opacity: calc(0.2 * var(--armed)); }
+    3.4% { opacity: calc(0.85 * var(--armed)); }
+    5%   { opacity: calc(0.15 * var(--armed)); }
+    7%   { opacity: 0; }
+  }
+
+  /* What it throws at the pointer. JS sets --sa (angle) and --sd (distance). */
+  .vx-strike {
+    position: absolute; left: 50%; top: 42%; transform-origin: 0 50%;
+    transform: rotate(var(--sa));
+    width: var(--sd); opacity: 0; pointer-events: none;
+  }
+  .vx-strike svg { width: 100%; height: auto; }
+  .stage.interactive.pointing .vx-strike { animation: vstrike-hold 0.78s linear infinite; }
+  @keyframes vstrike-hold {
+    0%   { opacity: 0; }
+    6%   { opacity: 1; }
+    14%  { opacity: 0.25; }
+    22%  { opacity: 0.9; }
+    34%  { opacity: 0.2; }
+    46%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  /* The whole disc leans toward the pointer. */
+  .stage.interactive .vortex {
+    transform: translate(calc((var(--fx) - 50%) * 0.09), calc((var(--fy) - 42%) * 0.07));
+    transition: transform 0.5s cubic-bezier(0.2,0.7,0.3,1);
+  }
+
+  .signal-bar { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-family: var(--mono); font-size: 11.5px; color: var(--text-tertiary); flex-wrap: wrap; }
+  .signal-bar label { display: flex; align-items: center; gap: 8px; letter-spacing: 1.2px; text-transform: uppercase; }
+  .signal-bar input[type=range] { width: 190px; accent-color: var(--accent); }
+  .signal-bar output { color: var(--accent-bright); min-width: 4ch; }
+  .signal-bar button { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 12px; border-radius: var(--r-sm); background: var(--accent-dim); color: var(--accent-bright); border: 1px solid var(--accent-border); cursor: pointer; }
+  .signal-bar button:hover { background: var(--accent-border); }
+
   .lightning { background: var(--scenery-alt); opacity: 0; animation: flash 16.9s linear infinite; }
   @keyframes flash {
     0%, 100% { opacity: 0; }
@@ -976,6 +1210,68 @@ ${themeBlocks}
       });
     });
     packTabs.forEach(function (t) { t.addEventListener('click', function () { selectPack(t.dataset.packtab); }); });
+
+    // --- Voidcore: feed the stage's pointer into the same focus value the RN
+    // overlay consumes, and give pulse a slider. This is the only way to judge
+    // a theme whose whole point is that it reacts.
+    Array.prototype.slice.call(document.querySelectorAll('.stage.interactive')).forEach(function (stage) {
+      function aim(ev) {
+        var r = stage.getBoundingClientRect();
+        var fx = (ev.clientX - r.left) / r.width;
+        var fy = (ev.clientY - r.top) / r.height;
+        // The disc sits at 50% / 42% of the stage; the bolt is drawn from there.
+        var dx = (fx - 0.5) * r.width;
+        var dy = (fy - 0.42) * r.height;
+        var dist = Math.max(60, Math.sqrt(dx * dx + dy * dy));
+        stage.style.setProperty('--fx', (fx * 100).toFixed(2) + '%');
+        stage.style.setProperty('--fy', (fy * 100).toFixed(2) + '%');
+        stage.style.setProperty('--sa', (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(2) + 'deg');
+        stage.style.setProperty('--sd', dist.toFixed(0) + 'px');
+        stage.classList.add('pointing');
+      }
+      stage.addEventListener('mousemove', aim);
+      stage.addEventListener('touchmove', function (ev) { if (ev.touches[0]) aim(ev.touches[0]); }, { passive: true });
+      stage.addEventListener('mouseleave', function () {
+        stage.classList.remove('pointing');
+        stage.style.setProperty('--fx', '50%');
+        stage.style.setProperty('--fy', '42%');
+      });
+      stage.addEventListener('touchend', function () { stage.classList.remove('pointing'); });
+    });
+
+    function stageFor(key) { return document.querySelector('.stage[data-stage="' + key + '"]'); }
+
+    Array.prototype.slice.call(document.querySelectorAll('input.pulse')).forEach(function (slider) {
+      var key = slider.dataset.for;
+      var out = document.querySelector('.pulse-out[data-for="' + key + '"]');
+      function apply(v) {
+        var st = stageFor(key);
+        if (st) st.style.setProperty('--pulse', String(v));
+        if (out) out.textContent = v.toFixed(2);
+      }
+      slider.addEventListener('input', function () { apply(Number(slider.value) / 100); });
+      apply(0);
+    });
+
+    // Ramp up and decay, the way a core answering a question would.
+    Array.prototype.slice.call(document.querySelectorAll('button.pulse-demo')).forEach(function (btn) {
+      var key = btn.dataset.for;
+      btn.addEventListener('click', function () {
+        var slider = document.querySelector('input.pulse[data-for="' + key + '"]');
+        var out = document.querySelector('.pulse-out[data-for="' + key + '"]');
+        var st = stageFor(key);
+        var t = 0;
+        var timer = setInterval(function () {
+          t += 0.05;
+          // Fast attack, long tail.
+          var v = t < 0.35 ? t / 0.35 : Math.max(0, 1 - (t - 0.35) / 1.9);
+          if (st) st.style.setProperty('--pulse', String(v));
+          if (slider) slider.value = String(Math.round(v * 100));
+          if (out) out.textContent = v.toFixed(2);
+          if (t > 2.3) { clearInterval(timer); if (st) st.style.setProperty('--pulse', '0'); if (slider) slider.value = '0'; if (out) out.textContent = '0.00'; }
+        }, 50);
+      });
+    });
 
     // A #pack-variant hash deep-links straight to one variant.
     var hash = location.hash.slice(1);

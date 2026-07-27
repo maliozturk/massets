@@ -48,7 +48,12 @@ export type PreviewEffect =
   | 'puddle-ripples'
   | 'water-sheets'
   | 'forked-lightning'
-  | 'spray';
+  | 'spray'
+  // Voidcore. 'void-vortex' draws the whole rotating assembly; 'pointer-strike'
+  // wires the stage's pointer into the same `focus` the RN overlay consumes,
+  // and adds a pulse slider. The only interactive preview.
+  | 'void-vortex'
+  | 'pointer-strike';
 
 export interface VariantPreview {
   scenery?: SceneryLayer[];

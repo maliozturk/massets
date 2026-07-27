@@ -58,6 +58,17 @@ owns this code.
   Everything runs on the native driver, so **only transform and opacity may be
   animated** — animating colour, width, height or borderRadius silently drops
   to the JS thread and stutters on a cheap phone.
+- **Live signal stays out of MassetValue.** `pulse` and `focus`
+  (`core/signal.tsx`) are transient host-pushed values on their own contexts.
+  Folding them into `MassetValue` would re-render every screen calling
+  `useMasset()` on every frame of a reaction. Only `voidcore` reads them; a
+  pack that ignores them costs nothing.
+- **SVG filters are available and are the quality lever.** `react-native-svg`
+  ships the full primitive set on both SDK 54 and 57 (verified). The voidcore
+  swirls use `feTurbulence` + `feDisplacementMap` so the bands read as dust
+  lanes rather than dashed circles, and bolts use stacked `feGaussianBlur` +
+  `feMerge` for real bloom. They are not free — keep `numOctaves` at 2 and
+  don't filter every layer.
 - **Rare effects stay rare.** Lightning and the shooting star use
   `restAfterMs` so they surprise rather than strobe. Don't turn them into
   metronomes, and don't add a third one to the same variant.
