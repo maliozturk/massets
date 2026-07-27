@@ -43,12 +43,21 @@ export type PreviewEffect =
   | 'shooting-star'
   | 'gumdrops'
   | 'lightning'
-  | 'rain-on-glass';
+  | 'rain-on-glass'
+  | 'mist'
+  | 'puddle-ripples'
+  | 'water-sheets'
+  | 'forked-lightning'
+  | 'spray';
 
 export interface VariantPreview {
   scenery?: SceneryLayer[];
   particle?: PreviewParticle;
   particleCount?: number;
+  /** Slant in degrees for falling particles. Defaults to a near-vertical drop. */
+  particleAngle?: number;
+  /** Multiplier on fall duration — below 1 is faster. Defaults to 1. */
+  particleSpeed?: number;
   /** Centre of the sun/moon, as a fraction of the stage. */
   celestial?: { x: number; y: number };
   /** Halo breathing. On by default — pass false for a dead sky. */

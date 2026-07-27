@@ -15,9 +15,10 @@ import type { PackPreview, PreviewParticle, VariantPreview } from '../core/previ
 import { THEME_COLOR_KEYS, radius as defaultRadius, spacing, type ThemeColors } from '../core/tokens';
 import { cartoonPreview } from '../packs/cartoon/preview';
 import { seasonsPreview } from '../packs/seasons/preview';
+import { stormyPreview } from '../packs/stormy/preview';
 
 // Every pack the showroom renders. One line per pack.
-const PACKS: PackPreview<string>[] = [seasonsPreview, cartoonPreview];
+const PACKS: PackPreview<string>[] = [seasonsPreview, stormyPreview, cartoonPreview];
 
 // --- Colour maths ----------------------------------------------------------
 
@@ -214,10 +215,15 @@ function particleField(packId: string, variant: string, preview: VariantPreview,
 
     switch (kind) {
       case 'rain': {
-        dur = (0.7 + rand() * 0.5) / depth;
-        drift = 3;
-        const h = (12 + rand() * 10) * depth;
-        shape = `width:${(1.2 + depth).toFixed(1)}px;height:${h.toFixed(1)}px;border-radius:1px;background:${color};`;
+        dur = ((0.7 + rand() * 0.5) / depth) * (preview.particleSpeed ?? 1);
+        // A slanted drop travels sideways too, or it reads as falling straight
+        // down wearing a tilted sprite.
+        const angle = preview.particleAngle ?? 4;
+        drift = -Math.tan((angle * Math.PI) / 180) * 520;
+        const h = (12 + rand() * 10) * depth * (angle > 20 ? 1.7 : 1);
+        shape = `width:${(1.2 + depth).toFixed(1)}px;height:${h.toFixed(
+          1
+        )}px;border-radius:1px;background:${color};rotate:${angle}deg;`;
         break;
       }
       case 'snow': {
@@ -330,6 +336,69 @@ function effectsHtml(preview: VariantPreview, key: string): string {
   }
 
   if (wanted.includes('shooting-star')) out.push('<div class="shooting-star"><i></i></div>');
+
+  if (wanted.includes('mist')) {
+    const bands = [
+      { y: 32, h: 58, dur: 8.2, delay: 0 },
+      { y: 50, h: 84, dur: 10.4, delay: 1.6 },
+      { y: 68, h: 66, dur: 9.1, delay: 3.2 },
+    ]
+      .map((b) => `<i style="top:${b.y}%;height:${b.h}px;animation-duration:${b.dur}s;animation-delay:-${b.delay}s"></i>`)
+      .join('');
+    out.push(`<div class="mist">${bands}</div>`);
+  }
+
+  if (wanted.includes('puddle-ripples')) {
+    const rings = [
+      { x: 16, size: 54, dur: 2.6, delay: 0 },
+      { x: 42, size: 74, dur: 3.1, delay: 0.9 },
+      { x: 63, size: 46, dur: 2.4, delay: 1.8 },
+      { x: 85, size: 66, dur: 2.9, delay: 0.6 },
+    ]
+      .map(
+        (r) =>
+          `<i style="left:${r.x}%;width:${r.size}px;height:${(r.size * 0.34).toFixed(
+            1
+          )}px;animation-duration:${r.dur}s;animation-delay:-${r.delay}s"></i>`
+      )
+      .join('');
+    out.push(`<div class="ripples">${rings}</div>`);
+  }
+
+  if (wanted.includes('water-sheets')) {
+    const sheets = [
+      { x: 8, w: 3, dur: 2.1, delay: 0 },
+      { x: 23, w: 5, dur: 2.6, delay: 0.7 },
+      { x: 41, w: 3.5, dur: 1.9, delay: 1.5 },
+      { x: 58, w: 6, dur: 2.9, delay: 0.4 },
+      { x: 74, w: 3, dur: 2.3, delay: 1.9 },
+      { x: 90, w: 4.5, dur: 2.5, delay: 1.1 },
+    ]
+      .map((s) => `<i style="left:${s.x}%;width:${s.w}px;animation-duration:${s.dur}s;animation-delay:-${s.delay}s"></i>`)
+      .join('');
+    out.push(`<div class="sheets-down">${sheets}</div>`);
+  }
+
+  if (wanted.includes('forked-lightning')) {
+    // Two bolts on different clocks, so the pattern never feels metered.
+    const bolt = (x: number, dur: number, delay: number) =>
+      `<i style="left:${x}%;animation-duration:${dur}s;animation-delay:-${delay}s">` +
+      `<svg viewBox="0 0 110 300" preserveAspectRatio="none"><path d="M 66 0 L 30 128 L 60 122 L 22 300 L 78 132 L 48 138 L 88 0 Z" fill="var(--particle)" stroke="var(--celestial)" stroke-width="2"/></svg></i>`;
+    out.push(`<div class="bolts">${bolt(52, 10.2, 0)}${bolt(14, 16.4, 6.1)}<b></b></div>`);
+  }
+
+  if (wanted.includes('spray')) {
+    const streaks = [
+      { y: 18, len: 130, dur: 1.3, delay: 0 },
+      { y: 31, len: 90, dur: 1.0, delay: 0.5 },
+      { y: 47, len: 170, dur: 1.6, delay: 0.2 },
+      { y: 59, len: 110, dur: 1.15, delay: 0.9 },
+      { y: 72, len: 150, dur: 1.45, delay: 1.3 },
+    ]
+      .map((s) => `<i style="top:${s.y}%;width:${s.len}px;animation-duration:${s.dur}s;animation-delay:-${s.delay}s"></i>`)
+      .join('');
+    out.push(`<div class="spray">${streaks}</div>`);
+  }
 
   if (wanted.includes('gumdrops')) {
     const drops = [
@@ -674,6 +743,59 @@ ${themeBlocks}
     to   { transform: translateY(-9px) scale(0.96, 1.06); }
   }
 
+  /* Drizzle: mist drifting, rings spreading where drops land. */
+  .mist, .ripples, .sheets-down, .bolts, .spray { position: absolute; inset: 0; overflow: hidden; }
+  .mist i { position: absolute; left: -20%; width: 140%; display: block; border-radius: 999px; background: var(--celestial-glow); animation-name: drift; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; }
+  @keyframes drift {
+    from { opacity: 0.22; transform: translateX(-16%) scaleY(0.9); }
+    to   { opacity: 0.6; transform: translateX(16%) scaleY(1.15); }
+  }
+  .ripples i { position: absolute; bottom: 26px; display: block; border: 1.5px solid var(--particle); border-radius: 999px; opacity: 0; animation-name: spread; animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1); animation-iteration-count: infinite; }
+  @keyframes spread {
+    0%   { transform: scale(0.2); opacity: 0; }
+    15%  { opacity: 0.55; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  /* Downpour: water running down the pane in streams. */
+  .sheets-down i { position: absolute; top: 0; height: 50%; display: block; border-radius: 6px; background: var(--particle-alt); opacity: 0; animation-name: run; animation-timing-function: cubic-bezier(0.4, 0, 0.9, 0.6); animation-iteration-count: infinite; }
+  @keyframes run {
+    0%   { transform: translateY(-50%) scaleY(0.5); opacity: 0; }
+    10%  { opacity: 0.5; }
+    75%  { opacity: 0.35; }
+    100% { transform: translateY(460px) scaleY(1.25); opacity: 0; }
+  }
+
+  /* Thunder: forked bolts, plus the sky lighting up with them. */
+  .bolts i { position: absolute; top: 0; width: 110px; height: 46%; display: block; opacity: 0; animation-name: strike; animation-timing-function: linear; animation-iteration-count: infinite; }
+  .bolts i svg { width: 100%; height: 100%; }
+  .bolts b { position: absolute; inset: 0; background: var(--scenery-alt); opacity: 0; animation: skyflash 10.2s linear infinite; }
+  @keyframes strike {
+    0%, 100% { opacity: 0; }
+    0.6%  { opacity: 1; }
+    1.3%  { opacity: 0.15; }
+    2%    { opacity: 0.9; }
+    3%    { opacity: 0.1; }
+    4.2%  { opacity: 0; }
+  }
+  @keyframes skyflash {
+    0%, 100% { opacity: 0; }
+    0.6%  { opacity: 0.26; }
+    1.3%  { opacity: 0.03; }
+    2%    { opacity: 0.22; }
+    3%    { opacity: 0.04; }
+    4.2%  { opacity: 0; }
+  }
+
+  /* Tempest: spray blown flat across the view. */
+  .spray i { position: absolute; left: 0; height: 2px; display: block; border-radius: 2px; background: var(--particle-alt); opacity: 0; animation-name: blow; animation-timing-function: linear; animation-iteration-count: infinite; }
+  @keyframes blow {
+    0%   { transform: translate(110vw, 0) rotate(9deg); opacity: 0; }
+    12%  { opacity: 0.6; }
+    80%  { opacity: 0.45; }
+    100% { transform: translate(-180px, 44px) rotate(9deg); opacity: 0; }
+  }
+
   .lightning { background: var(--scenery-alt); opacity: 0; animation: flash 16.9s linear infinite; }
   @keyframes flash {
     0%, 100% { opacity: 0; }
@@ -789,8 +911,9 @@ ${themeBlocks}
 
   @media (prefers-reduced-motion: reduce) {
     .particles i, .glass b { animation: none; opacity: var(--peak, 0.6); }
-    .celestial.pulsing::after, .sway, .vine, .shafts i, .gumdrops i { animation: none; }
-    .shooting-star i, .lightning { animation: none; opacity: 0; }
+    .celestial.pulsing::after, .sway, .vine, .shafts i, .gumdrops i, .mist i { animation: none; }
+    .shooting-star i, .lightning, .bolts i, .bolts b { animation: none; opacity: 0; }
+    .ripples i, .sheets-down i, .spray i { animation: none; opacity: 0.3; }
   }
 </style>
 </head>

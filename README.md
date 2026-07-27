@@ -42,9 +42,14 @@ MASSETS/
 | Pack | Variants | Dark | Ambience | Notes |
 |---|---|---|---|---|
 | `seasons` | rain · snow · blossom · meadow | rain | yes | Opens on the season matching the real month |
+| `stormy` | drizzle · downpour · thunder · tempest | all but drizzle | no | One storm at four intensities; builds through the day |
 | `cartoon` | jungle · ocean · space · candy | space | no | Rounder shapes, snappier motion; rotates by day of month |
 
-`cartoon` needs no `expo-audio` — it ships no ambience.
+Only `seasons` ships ambience, so `expo-audio` is optional for the other two.
+`stormy` is the escalation of `seasons`' calm `rain`: `intensity()` grades the
+rain denser, faster and more slanted at each stage, and every stage owns a
+motion the others lack — drifting mist and puddle rings, water running down
+the glass, forked lightning, then spray driven flat by the wind.
 
 ## Using it in an app
 
