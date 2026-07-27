@@ -1,0 +1,43 @@
+{
+  "name": "massets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared theme store for the android_apps family — palettes, tokens, primitives, living backgrounds and ambient audio, consumed as a git submodule.",
+  "scripts": {
+    "kontrol": "tsc --noEmit",
+    "showroom": "tsc tools/showroom.ts --outDir .showroom --module commonjs --target es2020 --esModuleInterop --skipLibCheck --types node && node .showroom/tools/showroom.js"
+  },
+  "//devDependencies": "Pinned to the SDK 54 versions on purpose. MASSETS must run on both SDK 54 and 57, so it type-checks against the OLDER of the two — anything that exists only on 57 fails here, which is the point.",
+  "devDependencies": {
+    "@expo-google-fonts/jetbrains-mono": "^0.4.1",
+    "@expo-google-fonts/manrope": "^0.4.2",
+    "@expo-google-fonts/space-grotesk": "^0.4.1",
+    "@types/node": "^22.20.1",
+    "@types/react": "~19.1.10",
+    "expo": "~54.0.0",
+    "expo-audio": "~1.1.1",
+    "expo-font": "~14.0.12",
+    "expo-linear-gradient": "~15.0.8",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-svg": "15.12.1",
+    "typescript": "~5.9.2"
+  },
+  "//peerDependencies": "What a consuming app must install. Always with `npx expo install <pkg>` so each app gets versions matching its own SDK — never copy the dev pins above.",
+  "peerDependencies": {
+    "@expo-google-fonts/jetbrains-mono": "*",
+    "@expo-google-fonts/manrope": "*",
+    "@expo-google-fonts/space-grotesk": "*",
+    "expo-audio": "*",
+    "expo-font": "*",
+    "expo-linear-gradient": "*",
+    "react": ">=19.0.0",
+    "react-native": ">=0.79.0",
+    "react-native-svg": ">=15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expo-audio": {
+      "optional": true
+    }
+  }
+}
