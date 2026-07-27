@@ -282,13 +282,71 @@ function glassDrops(seedText: string): string {
 function sceneryHtml(preview: VariantPreview, colors: ThemeColors): string {
   if (!preview.scenery?.length) return '';
   return preview.scenery
-    .map(
-      (layer) =>
-        `<div class="scenery scenery-${layer.anchor}"><svg viewBox="0 0 ${layer.width ?? 400} ${
-          layer.height
-        }" preserveAspectRatio="none" style="height:${layer.height}px">${layer.svg(colors)}</svg></div>`
-    )
+    .map((layer) => {
+      const inner = `<svg viewBox="0 0 ${layer.width ?? 400} ${layer.height}" preserveAspectRatio="none" style="height:${layer.height}px">${layer.svg(
+        colors
+      )}</svg>`;
+      if (!layer.sway) return `<div class="scenery scenery-${layer.anchor}">${inner}</div>`;
+      // Hinged on the anchored edge, matching pivotRotate() in the RN overlay.
+      return `<div class="scenery scenery-${layer.anchor}"><div class="sway" style="--sway:${layer.sway}deg;--sway-origin:${
+        layer.anchor === 'top' ? 'top center' : 'bottom center'
+      };animation-duration:${layer.swaySeconds ?? 5}s;animation-delay:-${layer.swayDelay ?? 0}s">${inner}</div></div>`;
+    })
     .join('');
+}
+
+/** The named moving parts a world can ask for, beyond scenery and particles. */
+function effectsHtml(preview: VariantPreview, key: string): string {
+  const wanted = preview.effects ?? [];
+  const out: string[] = [];
+
+  if (wanted.includes('rain-on-glass')) out.push(`<div class="glass">${glassDrops(key)}</div>`);
+  if (wanted.includes('lightning')) out.push('<div class="lightning"></div>');
+
+  if (wanted.includes('vines')) {
+    const vines = [
+      { x: 13, len: 150, dur: 3.6, delay: 0, deg: 3.4 },
+      { x: 44, len: 208, dur: 4.7, delay: 0.7, deg: 2.6 },
+      { x: 71, len: 128, dur: 4.1, delay: 1.5, deg: 3.9 },
+      { x: 90, len: 178, dur: 5.3, delay: 0.4, deg: 2.2 },
+    ]
+      .map(
+        (v) =>
+          `<div class="vine" style="left:${v.x}%;--sway:${v.deg}deg;animation-duration:${v.dur}s;animation-delay:-${v.delay}s"><i style="height:${v.len}px"></i><b></b></div>`
+      )
+      .join('');
+    out.push(`<div class="vines">${vines}</div>`);
+  }
+
+  if (wanted.includes('light-shafts')) {
+    const shafts = [
+      { x: 18, w: 54, dur: 5.2, delay: 0 },
+      { x: 46, w: 82, dur: 6.8, delay: 1.2 },
+      { x: 78, w: 46, dur: 5.9, delay: 2.4 },
+    ]
+      .map((s) => `<i style="left:${s.x}%;width:${s.w}px;animation-duration:${s.dur}s;animation-delay:-${s.delay}s"></i>`)
+      .join('');
+    out.push(`<div class="shafts">${shafts}</div>`);
+  }
+
+  if (wanted.includes('shooting-star')) out.push('<div class="shooting-star"><i></i></div>');
+
+  if (wanted.includes('gumdrops')) {
+    const drops = [
+      { x: 13, size: 26, dur: 1.5, delay: 0 },
+      { x: 37, size: 22, dur: 1.8, delay: 0.38 },
+      { x: 62, size: 28, dur: 1.65, delay: 0.76 },
+      { x: 85, size: 20, dur: 2.0, delay: 0.22 },
+    ]
+      .map(
+        (g) =>
+          `<i style="left:${g.x}%;width:${g.size}px;height:${g.size * 0.9}px;border-radius:${g.size}px ${g.size}px 5px 5px;animation-duration:${g.dur}s;animation-delay:-${g.delay}s"></i>`
+      )
+      .join('');
+    out.push(`<div class="gumdrops">${drops}</div>`);
+  }
+
+  return out.join('');
 }
 
 // --- Audit -----------------------------------------------------------------
@@ -358,10 +416,10 @@ function variantPanel(pack: PackPreview<string>, variant: string): string {
       <div class="split">
         <div class="stage" style="--cel-x:${(cel.x * 100).toFixed(1)}%;--cel-y:${(cel.y * 100).toFixed(1)}%">
           <div class="sky"></div>
-          <div class="celestial"></div>
+          <div class="celestial${preview.celestialPulse === false ? '' : ' pulsing'}"></div>
           ${sceneryHtml(preview, colors)}
+          ${effectsHtml(preview, key)}
           <div class="particles">${particleField(pack.id, variant, preview, colors)}</div>
-          ${preview.glass ? `<div class="glass">${glassDrops(key)}</div>` : ''}
           <div class="stage-caption">Living background — CSS approximation</div>
         </div>
 
@@ -573,10 +631,58 @@ ${themeBlocks}
     width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%;
     background: radial-gradient(circle, var(--celestial) 0 18%, var(--celestial-glow) 32%, transparent 68%);
   }
+  /* The halo breathes; the disc never does. */
+  .celestial.pulsing::after { animation: breathe 4.6s ease-in-out infinite alternate; }
+  @keyframes breathe {
+    from { transform: scale(1); opacity: 0.74; }
+    to   { transform: scale(1.13); opacity: 1; }
+  }
+
   .scenery { position: absolute; left: 0; right: 0; }
   .scenery-top { top: 0; }
   .scenery-bottom { bottom: 0; }
   .scenery svg { display: block; width: 100%; }
+  .sway { transform-origin: var(--sway-origin); animation-name: sway; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; }
+  @keyframes sway {
+    from { transform: rotate(calc(var(--sway) * -1)); }
+    to   { transform: rotate(var(--sway)); }
+  }
+
+  /* --- Named world effects --- */
+  .vines, .shafts, .gumdrops, .shooting-star, .lightning { position: absolute; inset: 0; overflow: hidden; }
+  .vine { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; transform-origin: top center; animation-name: sway; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; }
+  .vine i { display: block; width: 4px; border-radius: 4px; background: var(--scenery); }
+  .vine b { display: block; width: 13px; height: 9px; border-radius: 9px; background: var(--scenery-alt); }
+
+  .shafts i { position: absolute; top: -40px; height: 72%; display: block; background: var(--celestial-glow); border-radius: 0 0 40px 40px; transform: skewX(9deg); animation-name: shaft; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; }
+  @keyframes shaft {
+    from { opacity: 0.18; transform: translateX(-14px) skewX(9deg) scaleY(0.94); }
+    to   { opacity: 0.55; transform: translateX(14px) skewX(9deg) scaleY(1.06); }
+  }
+
+  .shooting-star i { position: absolute; top: 10%; left: 0; width: 90px; height: 3px; border-radius: 3px; background: var(--particle); opacity: 0; animation: shoot 9.3s linear infinite; }
+  @keyframes shoot {
+    0%    { transform: translate(-70px, 0) rotate(21deg) scaleX(0.3); opacity: 0; }
+    1.5%  { opacity: 0.95; }
+    10%   { transform: translate(86%, 34%) rotate(21deg) scaleX(0.85); opacity: 0; }
+    100%  { transform: translate(86%, 34%) rotate(21deg) scaleX(0.85); opacity: 0; }
+  }
+
+  .gumdrops i { position: absolute; bottom: 44px; display: block; background: var(--scenery-alt); transform-origin: bottom center; animation-name: hop; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate; }
+  @keyframes hop {
+    from { transform: translateY(0) scale(1.08, 0.88); }
+    to   { transform: translateY(-9px) scale(0.96, 1.06); }
+  }
+
+  .lightning { background: var(--scenery-alt); opacity: 0; animation: flash 16.9s linear infinite; }
+  @keyframes flash {
+    0%, 100% { opacity: 0; }
+    0.4%  { opacity: 0.17; }
+    0.8%  { opacity: 0.02; }
+    1.3%  { opacity: 0.21; }
+    1.9%  { opacity: 0.03; }
+    2.6%  { opacity: 0; }
+  }
 
   .particles i { position: absolute; top: -60px; display: block; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0; }
   .particles i[style*='twinkle'] { top: auto; }
@@ -683,6 +789,8 @@ ${themeBlocks}
 
   @media (prefers-reduced-motion: reduce) {
     .particles i, .glass b { animation: none; opacity: var(--peak, 0.6); }
+    .celestial.pulsing::after, .sway, .vine, .shafts i, .gumdrops i { animation: none; }
+    .shooting-star i, .lightning { animation: none; opacity: 0; }
   }
 </style>
 </head>

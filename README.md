@@ -18,6 +18,7 @@ MASSETS/
     icons.tsx             19 hand-drawn 24px stroke icons
     FadeIn.tsx            the calm reveal
     fonts.ts              fontsToLoad for expo-font
+    animation.ts          useLoop / pivotRotate — the shared motion vocabulary
     preview.ts            what a pack tells the showroom (pure, Node-readable)
   packs/
     seasons/              Rain · Snow · Blossom · Meadow
@@ -171,6 +172,21 @@ export const duskPack = definePack<Dusk>({
   Ambience: DuskSound,               // optional
 });
 ```
+
+**Make it live.** A background that only drops particles reads as wallpaper.
+Build motion from `core/animation.ts`:
+
+```ts
+const breath = useLoop({ duration: 4200 });                       // 0→1→0, a sway or pulse
+const trip   = useLoop({ duration: 1100, reverse: false,          // 0→1, snap back
+                         restAfterMs: 8200 });                    // ...and then wait
+<Animated.View style={{ transform: pivotRotate(rotate, h, 'top') }} />  // hinge on an edge
+```
+
+Native driver everywhere, so **transform and opacity only** — animating colour,
+width or borderRadius drops to the JS thread and stutters. Give each variant a
+motion the others lack; the four cartoon worlds have swinging vines, sweeping
+light shafts, a rare shooting star and bouncing gumdrops respectively.
 
 `Background` and `Ambience` are optional — a pack with no scenery just needs
 colours, and then it needs no `expo-linear-gradient` or `expo-audio` either.

@@ -49,6 +49,18 @@ owns this code.
   factory argument. Typography is deliberately NOT overridable — the user
   ruled that out when the cartoon pack was designed. Don't add a `fonts` slot
   without asking.
+- **Themes are living, not static.** This is the user's explicit standard. A
+  pack's background must have moving parts beyond falling particles — at
+  minimum the celestial halo breathes and anything that grows sways. Each
+  variant should own at least one motion the others don't have, or the four
+  read as one scene recoloured. Build them from `core/animation.ts`
+  (`useLoop`, `pivotRotate`) rather than re-deriving Animated boilerplate.
+  Everything runs on the native driver, so **only transform and opacity may be
+  animated** — animating colour, width, height or borderRadius silently drops
+  to the JS thread and stutters on a cheap phone.
+- **Rare effects stay rare.** Lightning and the shooting star use
+  `restAfterMs` so they surprise rather than strobe. Don't turn them into
+  metronomes, and don't add a third one to the same variant.
 - **Every pack ships a pure `preview.ts`.** The showroom generator runs in
   Node and cannot import a pack's `index.ts` (React components). The preview is
   a second, deliberate description of the scenery — see the header of

@@ -52,11 +52,12 @@ export const seasonsPreview = definePreview<Season>({
   defaultNote: 'Opens on the season matching the real month.',
   variantPreview: {
     rain: {
+      // A city skyline doesn't sway — its life is the weather and the storm.
       scenery: [{ svg: skyline, height: 120, anchor: 'bottom' }],
       particle: 'rain',
       particleCount: 40,
       celestial: { x: 0.78, y: 0.1 },
-      glass: true,
+      effects: ['rain-on-glass', 'lightning'],
     },
     snow: {
       scenery: [{ svg: snowdrifts, height: 110, anchor: 'bottom' }],
@@ -65,13 +66,13 @@ export const seasonsPreview = definePreview<Season>({
       celestial: { x: 0.74, y: 0.12 },
     },
     blossom: {
-      scenery: [{ svg: cherryBranch, height: 150, anchor: 'top' }],
+      scenery: [{ svg: cherryBranch, height: 150, anchor: 'top', sway: 0.8, swaySeconds: 5.2 }],
       particle: 'leaf',
       particleCount: 16,
       celestial: { x: 0.24, y: 0.2 },
     },
     meadow: {
-      scenery: [{ svg: grassField, height: 90, anchor: 'bottom' }],
+      scenery: [{ svg: grassField, height: 90, anchor: 'bottom', sway: 1.1, swaySeconds: 3.9 }],
       particle: 'leaf',
       particleCount: 14,
       celestial: { x: 0.72, y: 0.16 },

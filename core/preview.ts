@@ -24,7 +24,26 @@ export interface SceneryLayer {
   /** Width of the viewBox. Defaults to 400. */
   width?: number;
   anchor: 'top' | 'bottom';
+  /** Sway amplitude in degrees, hinged on `anchor`. Omit for a still layer. */
+  sway?: number;
+  /** Seconds for one sway leg. Defaults to 5. */
+  swaySeconds?: number;
+  /** Sway phase offset in seconds, so stacked layers don't move as one slab. */
+  swayDelay?: number;
 }
+
+/**
+ * Named moving parts a world can have beyond its particles. Each maps to a
+ * block of CSS in the generator; a pack asks for them by name rather than
+ * shipping markup, so the two stay in step.
+ */
+export type PreviewEffect =
+  | 'vines'
+  | 'light-shafts'
+  | 'shooting-star'
+  | 'gumdrops'
+  | 'lightning'
+  | 'rain-on-glass';
 
 export interface VariantPreview {
   scenery?: SceneryLayer[];
@@ -32,8 +51,9 @@ export interface VariantPreview {
   particleCount?: number;
   /** Centre of the sun/moon, as a fraction of the stage. */
   celestial?: { x: number; y: number };
-  /** Draw beads of water on the glass over everything (rain). */
-  glass?: boolean;
+  /** Halo breathing. On by default — pass false for a dead sky. */
+  celestialPulse?: boolean;
+  effects?: PreviewEffect[];
 }
 
 /** Everything the showroom needs to render one pack, with no runtime imports. */

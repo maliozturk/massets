@@ -12,6 +12,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { Animated, Dimensions, Easing, StyleSheet, View, type ViewStyle } from 'react-native';
 import Svg, { Circle, Line, Path, Rect } from 'react-native-svg';
 
+import { pivotRotate, useLoop } from '../../core/animation';
 import { useMasset } from '../../core/provider';
 import type { ThemeColors } from '../../core/tokens';
 import type { Season } from './seasons';
@@ -366,16 +367,22 @@ const CELESTIAL: Record<Season, { x: number; y: number; r: number }> = {
   meadow: { x: 0.72, y: 0.16, r: 30 },
 };
 
+/** The sun and moon breathe — a slow swell in the halo, never in the disc. */
 function CelestialBody({ season, colors }: { season: Season; colors: ThemeColors }) {
   const { x, y, r } = CELESTIAL[season];
   const cx = x * SCREEN_W;
   const cy = y * SCREEN_H;
+  const breath = useLoop({ duration: season === 'rain' ? 6200 : 4600 });
+  const haloScale = breath.interpolate({ inputRange: [0, 1], outputRange: [1, 1.12] });
+  const haloOpacity = breath.interpolate({ inputRange: [0, 1], outputRange: [0.72, 1] });
 
   if (season === 'rain') {
-    // Crescent moon with a faint halo.
+    // Crescent moon with a faint halo, dimming and swelling behind the cloud.
     return (
       <>
-        <View style={[styles.celestial, glowRing(cx, cy, r * 2.6, colors.celestialGlow)]} />
+        <Animated.View
+          style={[styles.celestial, glowRing(cx, cy, r * 2.6, colors.celestialGlow), { opacity: haloOpacity, transform: [{ scale: haloScale }] }]}
+        />
         <Svg style={[styles.celestial, { left: cx - r, top: cy - r }]} width={r * 2} height={r * 2} viewBox="0 0 48 48">
           <Path d="M 33 4 A 20 20 0 1 0 44 27 A 16 16 0 0 1 33 4 Z" fill={colors.celestial} />
         </Svg>
@@ -387,11 +394,58 @@ function CelestialBody({ season, colors }: { season: Season; colors: ThemeColors
   return (
     <>
       {[4.6, 3.4, 2.4, 1.7, 1.25].map((k, i) => (
-        <View key={i} style={[styles.celestial, glowRing(cx, cy, r * k, colors.celestialGlow)]} />
+        <Animated.View
+          key={i}
+          style={[styles.celestial, glowRing(cx, cy, r * k, colors.celestialGlow), { opacity: haloOpacity, transform: [{ scale: haloScale }] }]}
+        />
       ))}
       <View style={[styles.celestial, glowRing(cx, cy, r, colors.celestial)]} />
       <View style={[styles.celestial, glowRing(cx, cy, r * 0.62, colors.surface)]} />
     </>
+  );
+}
+
+/** Wraps a scenery layer in a slow sway rooted at the edge it grows from. */
+function Swaying({
+  children,
+  height,
+  pivot,
+  degrees,
+  duration,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  height: number;
+  pivot: 'top' | 'bottom';
+  degrees: number;
+  duration: number;
+  delay?: number;
+}) {
+  const progress = useLoop({ duration, delay });
+  const rotate = progress.interpolate({ inputRange: [0, 1], outputRange: [`${-degrees}deg`, `${degrees}deg`] });
+  return <Animated.View style={{ transform: pivotRotate(rotate, height, pivot) }}>{children}</Animated.View>;
+}
+
+/**
+ * Distant lightning over the rainy city: a double flash, then a long wait.
+ * Rare on purpose — a storm you notice, not a strobe.
+ */
+function Lightning({ colors }: { colors: ThemeColors }) {
+  const progress = useLoop({ duration: 900, reverse: false, delay: 4000, restAfterMs: 12000, easing: Easing.linear });
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        StyleSheet.absoluteFill,
+        {
+          backgroundColor: colors.sceneryAlt,
+          opacity: progress.interpolate({
+            inputRange: [0, 0.07, 0.14, 0.22, 0.32, 0.44, 1],
+            outputRange: [0, 0.17, 0.02, 0.21, 0.03, 0, 0],
+          }),
+        },
+      ]}
+    />
   );
 }
 
@@ -407,6 +461,7 @@ function SeasonScenery({ season, colors }: { season: Season; colors: ThemeColors
   if (season === 'blossom') {
     return (
       <View style={styles.sceneryTop}>
+        <Swaying height={150} pivot="top" degrees={0.8} duration={5200}>
         <Svg width="100%" height={150} viewBox={`0 0 ${w} 150`} preserveAspectRatio="none">
           <Path
             d="M 400 6 C 330 14 280 30 236 62 M 400 6 C 344 34 318 52 296 88 M 316 40 C 300 58 292 74 288 96 M 260 48 C 250 62 246 74 244 88"
@@ -423,6 +478,7 @@ function SeasonScenery({ season, colors }: { season: Season; colors: ThemeColors
             <Circle key={i} cx={cx} cy={cy} r={r} fill={colors.sceneryAlt} />
           ))}
         </Svg>
+        </Swaying>
       </View>
     );
   }
@@ -436,14 +492,17 @@ function SeasonScenery({ season, colors }: { season: Season; colors: ThemeColors
     }).join(' ');
     return (
       <View style={styles.sceneryBottom}>
-        <Svg width="100%" height={90} viewBox={`0 0 ${w} 90`} preserveAspectRatio="none">
-          <Path d={blades} stroke={colors.scenery} strokeWidth={3} strokeLinecap="round" fill="none" />
-          {[
-            [38, 42], [102, 34], [178, 46], [251, 36], [322, 44], [376, 38],
-          ].map(([cx, cy], i) => (
-            <Circle key={i} cx={cx} cy={cy} r={4.5} fill={i % 2 === 0 ? colors.sceneryAlt : colors.particle} />
-          ))}
-        </Svg>
+        {/* Grass is rooted, so it bends from the bottom. */}
+        <Swaying height={90} pivot="bottom" degrees={1.1} duration={3900}>
+          <Svg width="100%" height={90} viewBox={`0 0 ${w} 90`} preserveAspectRatio="none">
+            <Path d={blades} stroke={colors.scenery} strokeWidth={3} strokeLinecap="round" fill="none" />
+            {[
+              [38, 42], [102, 34], [178, 46], [251, 36], [322, 44], [376, 38],
+            ].map(([cx, cy], i) => (
+              <Circle key={i} cx={cx} cy={cy} r={4.5} fill={i % 2 === 0 ? colors.sceneryAlt : colors.particle} />
+            ))}
+          </Svg>
+        </Swaying>
       </View>
     );
   }
@@ -494,6 +553,7 @@ export function WeatherOverlay() {
         <Particle key={`${season}-${i}`} season={season} spec={spec} colors={colors} />
       ))}
       {season === 'rain' && <RainOnGlass colors={colors} />}
+      {season === 'rain' && <Lightning key="lightning" colors={colors} />}
     </View>
   );
 }

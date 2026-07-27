@@ -30,14 +30,10 @@ const planet = (c: ThemeColors) =>
     .map(([cx, cy, r]) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c.sceneryAlt}" opacity="0.5"/>`)
     .join('');
 
+// The gumdrops that used to sit here are now the 'gumdrops' effect — they
+// bounce, so they can't live inside a static SVG layer.
 const candyHills = (c: ThemeColors) =>
   `<path d="M 0 116 L 0 78 Q 66 40 132 78 Q 200 38 268 78 Q 334 42 400 76 L 400 116 Z" fill="${c.scenery}"/>` +
-  [[54, 70], [150, 68], [246, 70], [340, 66]]
-    .map(
-      ([cx, cy]) =>
-        `<path d="M ${cx - 13} ${cy + 13} Q ${cx - 13} ${cy - 11} ${cx} ${cy - 11} Q ${cx + 13} ${cy - 11} ${cx + 13} ${cy + 13} Z" fill="${c.sceneryAlt}"/>`
-    )
-    .join('') +
   `<rect x="0" y="104" width="400" height="12" fill="${c.sceneryAlt}" opacity="0.5"/>`;
 
 export const cartoonPreview = definePreview<World>({
@@ -53,30 +49,35 @@ export const cartoonPreview = definePreview<World>({
   variantPreview: {
     jungle: {
       scenery: [
-        { svg: canopy, height: 130, anchor: 'top' },
-        { svg: undergrowth, height: 92, anchor: 'bottom' },
+        { svg: canopy, height: 130, anchor: 'top', sway: 0.9, swaySeconds: 4.6 },
+        // Counter-phase, so floor and canopy never move as one slab.
+        { svg: undergrowth, height: 92, anchor: 'bottom', sway: 0.7, swaySeconds: 5.8, swayDelay: 0.9 },
       ],
       particle: 'leaf',
       particleCount: 16,
       celestial: { x: 0.76, y: 0.11 },
+      effects: ['vines'],
     },
     ocean: {
-      scenery: [{ svg: seabed, height: 124, anchor: 'bottom' }],
+      scenery: [{ svg: seabed, height: 124, anchor: 'bottom', sway: 0.6, swaySeconds: 5.2 }],
       particle: 'bubble',
       particleCount: 22,
       celestial: { x: 0.5, y: 0.06 },
+      effects: ['light-shafts'],
     },
     space: {
       scenery: [{ svg: planet, height: 130, anchor: 'bottom' }],
       particle: 'star',
       particleCount: 46,
       celestial: { x: 0.24, y: 0.13 },
+      effects: ['shooting-star'],
     },
     candy: {
       scenery: [{ svg: candyHills, height: 116, anchor: 'bottom' }],
       particle: 'sprinkle',
       particleCount: 20,
       celestial: { x: 0.74, y: 0.13 },
+      effects: ['gumdrops'],
     },
   },
 });
