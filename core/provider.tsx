@@ -12,7 +12,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import { StyleSheet } from 'react-native';
 
 import type { Locale, MassetStorage, ThemePack, VariantLabel } from './pack';
-import type { ThemeColors } from './tokens';
+import { defaultPackTokens, motion, radius, spacing, type PackTokens, type ThemeColors } from './tokens';
 import { makeTypography, type Typography } from './typography';
 
 export interface MassetValue<V extends string = string> {
@@ -26,6 +26,8 @@ export interface MassetValue<V extends string = string> {
   colors: ThemeColors;
   /** Text styles built from `colors`. */
   typography: Typography;
+  /** Spacing / radius / motion for this pack — its overrides merged over the defaults. */
+  tokens: PackTokens;
   /** True when the active variant is a dark one — drives StatusBar style. */
   isDark: boolean;
   /** Display strings for every variant, in the active locale. */
@@ -110,6 +112,17 @@ export function MassetProvider<V extends string>({
     };
   }, [pack, storage, keys.variant, keys.sound, defaultSoundEnabled]);
 
+  // A pack that overrides nothing reuses the shared default object, so its
+  // identity stays stable and useMassetStyles doesn't rebuild every render.
+  const tokens = useMemo<PackTokens>(() => {
+    if (!pack.radius && !pack.motion) return defaultPackTokens;
+    return {
+      spacing,
+      radius: { ...radius, ...pack.radius },
+      motion: { ...motion, ...pack.motion },
+    };
+  }, [pack.radius, pack.motion]);
+
   const value = useMemo<MassetValue<V> | null>(() => {
     if (variant === null) return null;
     const colors = pack.palettes[variant];
@@ -129,6 +142,7 @@ export function MassetProvider<V extends string>({
       },
       colors,
       typography: makeTypography(colors),
+      tokens,
       isDark: pack.darkVariants.has(variant),
       labels,
       locale,
@@ -138,7 +152,7 @@ export function MassetProvider<V extends string>({
         void storage.setItem(keys.sound, enabled ? '1' : '0').catch(() => {});
       },
     };
-  }, [pack, variant, locale, labelOverrides, soundEnabled, storage, keys.variant, keys.sound]);
+  }, [pack, variant, locale, labelOverrides, soundEnabled, storage, keys.variant, keys.sound, tokens]);
 
   if (!value) return <>{fallback}</>;
   // The variant union is erased crossing the context boundary — React context
@@ -163,10 +177,16 @@ export function useMasset<V extends string = string>(): MassetValue<V> {
  * Memoized StyleSheet built from the active palette. Keep the factory at module
  * scope so its identity is stable — an inline arrow rebuilds the sheet every
  * render.
+ *
+ * The factory may take a second argument to pick up the pack's own roundness
+ * and timings; a factory declared as `(colors) => …` is still valid and simply
+ * ignores it, which is why adding this did not touch a single existing caller.
  */
-export function useMassetStyles<T extends StyleSheet.NamedStyles<T>>(factory: (colors: ThemeColors) => T): T {
-  const { colors } = useMasset();
-  return useMemo(() => factory(colors), [factory, colors]);
+export function useMassetStyles<T extends StyleSheet.NamedStyles<T>>(
+  factory: (colors: ThemeColors, tokens: PackTokens) => T
+): T {
+  const { colors, tokens } = useMasset();
+  return useMemo(() => factory(colors, tokens), [factory, colors, tokens]);
 }
 
 /**

@@ -5,7 +5,7 @@
 
 import type { ComponentType } from 'react';
 
-import type { ThemeColors } from './tokens';
+import type { MotionScale, RadiusScale, ThemeColors } from './tokens';
 
 /** Locales MASSETS ships label sets for. Packs may add their own via `labels`. */
 export type Locale = 'en' | 'tr';
@@ -53,6 +53,14 @@ export interface ThemePack<V extends string = string> {
   defaultVariant(now: Date): V;
   /** Runtime guard, used to validate whatever came back out of storage. */
   isVariant(value: unknown): value is V;
+  /**
+   * Roundness, if this pack's shapes differ from the default 10/14/20/26.
+   * Partial — anything omitted keeps the core value. This is what separates a
+   * pack with its own *feel* from a pack that is only a recolour.
+   */
+  radius?: Partial<RadiusScale>;
+  /** Animation timings, if this pack moves differently. Partial, as above. */
+  motion?: Partial<MotionScale>;
   /**
    * Full-bleed animated background for the active variant. Renders behind
    * transparent screens; must set `pointerEvents="none"`. Omit for a pack with

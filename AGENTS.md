@@ -43,16 +43,35 @@ owns this code.
 - **The token contract is total.** Adding a key to `ThemeColors` means adding
   it to `THEME_COLOR_KEYS` (a type-level assertion in `core/tokens.ts` fails
   the build otherwise) and to every pack's palettes.
+- **A pack may override roundness and motion, nothing else.** `radius` and
+  `motion` on `ThemePack` are optional and partial; the provider merges them
+  over the core defaults and hands the result to `useMassetStyles` as a second
+  factory argument. Typography is deliberately NOT overridable — the user
+  ruled that out when the cartoon pack was designed. Don't add a `fonts` slot
+  without asking.
+- **Every pack ships a pure `preview.ts`.** The showroom generator runs in
+  Node and cannot import a pack's `index.ts` (React components). The preview is
+  a second, deliberate description of the scenery — see the header of
+  `core/preview.ts` for why. Register it in the `PACKS` array in
+  `tools/showroom.ts`.
 
 ## Known state
 
-The seasons palettes carry **22 WCAG AA contrast failures** across the four
-variants — visible in the showroom's audit table. These are inherited from
+The **seasons** palettes carry **22 WCAG AA contrast failures** across their
+four variants — visible in the showroom's audit table. These are inherited from
 research_vault's original design and were left untouched on purpose: the user
 chose those colours deliberately and likes them. Most are the intentionally
 quiet ones (11px `textTertiary` eyebrows, small mono state pills) plus
 `onAccent` on `accent` in the three light variants. Don't "fix" them
 unprompted — raise it and let the user decide.
+
+The **cartoon** palettes pass all 13 checks in all four worlds, and were built
+that way against the audit. Keep them clean: run `npm run showroom` after any
+edit to them.
+
+The cartoon pack was scoped in a design interview where the user twice pushed
+back on questions about typefaces, characters and who the app is for — the
+brief is **colour and environment only**. It ships no fonts and no characters.
 
 ## Commands
 

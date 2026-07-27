@@ -127,6 +127,24 @@ export const motion = {
   shakeDurationMs: 360,
 } as const;
 
+// Mutable-number views of the scales above. A pack may override roundness and
+// timing — the two things that carry a pack's *feel* rather than its colour —
+// without restating the whole scale. Spacing is exposed for completeness but
+// nothing overrides it today.
+export type SpacingScale = { [K in keyof typeof spacing]: number };
+export type RadiusScale = { [K in keyof typeof radius]: number };
+export type MotionScale = { [K in keyof typeof motion]: number };
+
+/** The resolved scales for the active pack: its overrides merged over the defaults. */
+export interface PackTokens {
+  spacing: SpacingScale;
+  radius: RadiusScale;
+  motion: MotionScale;
+}
+
+/** The defaults, used by any pack that overrides nothing. */
+export const defaultPackTokens: PackTokens = { spacing, radius, motion };
+
 /**
  * Font family names as registered by `expo-font`. The app must load them via
  * `useFonts(fontsToLoad)` from `core/fonts` before rendering.

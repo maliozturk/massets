@@ -1,6 +1,18 @@
 // Public surface of the pack-agnostic core.
 
-export { fontFamily, motion, radius, spacing, THEME_COLOR_KEYS, type ThemeColors } from './tokens';
+export {
+  defaultPackTokens,
+  fontFamily,
+  motion,
+  radius,
+  spacing,
+  THEME_COLOR_KEYS,
+  type MotionScale,
+  type PackTokens,
+  type RadiusScale,
+  type SpacingScale,
+  type ThemeColors,
+} from './tokens';
 export { makeTypography, type Typography } from './typography';
 export {
   definePack,

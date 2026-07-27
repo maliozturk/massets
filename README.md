@@ -18,6 +18,7 @@ MASSETS/
     icons.tsx             19 hand-drawn 24px stroke icons
     FadeIn.tsx            the calm reveal
     fonts.ts              fontsToLoad for expo-font
+    preview.ts            what a pack tells the showroom (pure, Node-readable)
   packs/
     seasons/              Rain · Snow · Blossom · Meadow
       palettes.ts           the four palettes
@@ -25,9 +26,24 @@ MASSETS/
       WeatherOverlay.tsx    sky, sun/moon, scenery, particles, rain-on-glass
       AmbientSound.tsx      per-season looping ambience
       assets/sounds/        the four loops
+      preview.ts            showroom descriptor
+    cartoon/              Jungle · Ocean · Space · Candy
+      palettes.ts           four bright worlds, Space is the dark one
+      worlds.ts             variant model, day-rotating default, EN/TR labels
+      CartoonOverlay.tsx    per-world sky, scenery and particles
+      preview.ts            showroom descriptor
   showroom/index.html   generated preview — see below
   tools/showroom.ts     the generator
 ```
+
+### The packs
+
+| Pack | Variants | Dark | Ambience | Notes |
+|---|---|---|---|---|
+| `seasons` | rain · snow · blossom · meadow | rain | yes | Opens on the season matching the real month |
+| `cartoon` | jungle · ocean · space · candy | space | no | Rounder shapes, snappier motion; rotates by day of month |
+
+`cartoon` needs no `expo-audio` — it ships no ambience.
 
 ## Using it in an app
 
@@ -157,10 +173,44 @@ export const duskPack = definePack<Dusk>({
 ```
 
 `Background` and `Ambience` are optional — a pack with no scenery just needs
-colours, and then it needs no `react-native-svg` / `expo-linear-gradient` /
-`expo-audio` either. Point its environment tokens at its own grounds.
+colours, and then it needs no `expo-linear-gradient` or `expo-audio` either.
+Point its environment tokens at its own grounds. (`react-native-svg` is still
+required regardless: the icon set is SVG.)
 
-Then add it to `tools/showroom.ts` and run `npm run showroom` to review it.
+**Shape and motion are optional too.** A pack that wants its own feel rather
+than just its own colours can override roundness and timings; anything omitted
+keeps the core value, so the seasons pack is unaffected:
+
+```ts
+  radius: { sm: 16, md: 22, lg: 30, xl: 38 },   // cartoon: near-capsule
+  motion: { revealDurationMs: 240 },            // and snappier
+```
+
+Primitives read these through `useMassetStyles((colors, { radius }) => …)`. A
+factory declared as `(colors) => …` is still valid and simply ignores the
+second argument.
+
+### Showing it in the showroom
+
+The generator runs in **Node**, so it can never import your pack's `index.ts` —
+that pulls in React components. Each pack therefore ships a pure `preview.ts`
+describing the same worlds as plain data and string-returning functions:
+
+```ts
+export const duskPreview = definePreview<Dusk>({
+  id: 'dusk', title: 'Dusk', blurb: '…',
+  variants: DUSKS, palettes: {…}, darkVariants: ['indigo'], labels: DUSK_LABELS,
+  radius: { lg: 30 },
+  variantPreview: {
+    ember: { scenery: [{ svg: (c) => `<path … fill="${c.scenery}"/>`, height: 120, anchor: 'bottom' }],
+             particle: 'leaf', particleCount: 16, celestial: { x: 0.7, y: 0.12 } },
+    …
+  },
+});
+```
+
+Add it to the `PACKS` array at the top of `tools/showroom.ts` — one line — then
+`npm run showroom`.
 
 ## Compatibility
 

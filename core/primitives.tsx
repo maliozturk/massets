@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 import { useMasset, useMassetStyles } from './provider';
-import { fontFamily, radius, spacing, type ThemeColors } from './tokens';
+import { fontFamily, spacing, type PackTokens, type ThemeColors } from './tokens';
 
 /** Raised panel on the ground. */
 export function Card({ children, style }: { children: ReactNode; style?: StyleProp<ViewStyle> }) {
@@ -128,7 +128,9 @@ export function IconButton({
   );
 }
 
-const makeStyles = (colors: ThemeColors) =>
+// Roundness comes from the pack, not the module: a cartoon pack asks for
+// near-pill shapes, the seasons pack keeps the default 10/14/20.
+const makeStyles = (colors: ThemeColors, { radius }: PackTokens) =>
   StyleSheet.create({
     card: {
       borderRadius: radius.lg,

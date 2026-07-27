@@ -13,11 +13,12 @@
     --display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
     --body: 'Manrope', 'Segoe UI', system-ui, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
-    --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+    --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 26px;
+    --r-pill: 999px;
     --s-sm: 8px; --s-md: 12px; --s-lg: 16px; --s-xl: 24px;
   }
 
-    [data-variant='rain'] {
+    [data-variant='seasons-rain'] {
       --bg: #10161F;
       --bg-deep: #0B111A;
       --surface: #161E2A;
@@ -51,7 +52,7 @@
       --particle: rgba(143,198,236,0.4);
       --particle-alt: rgba(143,198,236,0.2);
     }
-    [data-variant='snow'] {
+    [data-variant='seasons-snow'] {
       --bg: #EFF4FA;
       --bg-deep: #E4EBF4;
       --surface: #FFFFFF;
@@ -85,7 +86,7 @@
       --particle: rgba(255,255,255,0.95);
       --particle-alt: rgba(176,196,222,0.7);
     }
-    [data-variant='blossom'] {
+    [data-variant='seasons-blossom'] {
       --bg: #FBF3F0;
       --bg-deep: #F6EAE7;
       --surface: #FFFFFF;
@@ -119,7 +120,7 @@
       --particle: rgba(232,142,171,0.85);
       --particle-alt: rgba(244,186,203,0.7);
     }
-    [data-variant='meadow'] {
+    [data-variant='seasons-meadow'] {
       --bg: #F4F8EC;
       --bg-deep: #EAF2DE;
       --surface: #FFFFFF;
@@ -153,24 +154,171 @@
       --particle: rgba(110,158,86,0.65);
       --particle-alt: rgba(146,186,120,0.55);
     }
+    [data-variant='cartoon-jungle'] {
+      --bg: #F2FAEA;
+      --bg-deep: #E4F2D6;
+      --surface: #FFFFFF;
+      --surface-raised: #F9FDF4;
+      --surface-sunken: #EAF4DD;
+      --surface-border: rgba(23,51,26,0.12);
+      --surface-border-strong: rgba(23,51,26,0.22);
+      --text-primary: #17331A;
+      --text-secondary: #3B5A3C;
+      --text-tertiary: #5A7357;
+      --accent: #1E7A3C;
+      --accent-bright: #14602D;
+      --accent-dim: rgba(30,122,60,0.14);
+      --accent-border: rgba(30,122,60,0.45);
+      --on-accent: #FFFFFF;
+      --patina: #0F6E52;
+      --patina-dim: rgba(15,110,82,0.14);
+      --kindling: #8A5200;
+      --kindling-dim: rgba(138,82,0,0.14);
+      --kindling-border: rgba(138,82,0,0.45);
+      --ember: #B3261E;
+      --ember-dim: rgba(179,38,30,0.12);
+      --shadow: rgba(40,70,30,0.28);
+      --overlay: rgba(228,242,214,0.85);
+      --sky-top: #B7E4F0;
+      --sky-bottom: #F2FAEA;
+      --scenery: rgba(22,80,40,0.85);
+      --scenery-alt: rgba(90,180,90,0.9);
+      --celestial: rgba(255,214,102,0.95);
+      --celestial-glow: rgba(255,214,102,0.35);
+      --particle: rgba(74,150,64,0.8);
+      --particle-alt: rgba(140,200,110,0.65);
+    }
+    [data-variant='cartoon-ocean'] {
+      --bg: #EAF7FB;
+      --bg-deep: #D8EEF6;
+      --surface: #FFFFFF;
+      --surface-raised: #F6FCFE;
+      --surface-sunken: #E1F1F8;
+      --surface-border: rgba(12,47,63,0.12);
+      --surface-border-strong: rgba(12,47,63,0.22);
+      --text-primary: #0C2F3F;
+      --text-secondary: #31556A;
+      --text-tertiary: #4E7285;
+      --accent: #0B6E96;
+      --accent-bright: #075673;
+      --accent-dim: rgba(11,110,150,0.14);
+      --accent-border: rgba(11,110,150,0.45);
+      --on-accent: #FFFFFF;
+      --patina: #0A7059;
+      --patina-dim: rgba(10,112,89,0.14);
+      --kindling: #8A5200;
+      --kindling-dim: rgba(138,82,0,0.14);
+      --kindling-border: rgba(138,82,0,0.45);
+      --ember: #B3261E;
+      --ember-dim: rgba(179,38,30,0.12);
+      --shadow: rgba(20,70,95,0.28);
+      --overlay: rgba(216,238,246,0.85);
+      --sky-top: #BDEAF7;
+      --sky-bottom: #EAF7FB;
+      --scenery: rgba(12,80,110,0.75);
+      --scenery-alt: rgba(90,200,220,0.8);
+      --celestial: rgba(255,244,196,0.9);
+      --celestial-glow: rgba(180,240,255,0.35);
+      --particle: rgba(255,255,255,0.85);
+      --particle-alt: rgba(150,220,240,0.7);
+    }
+    [data-variant='cartoon-space'] {
+      --bg: #141033;
+      --bg-deep: #0D0A24;
+      --surface: #1E1947;
+      --surface-raised: #272057;
+      --surface-sunken: #171238;
+      --surface-border: rgba(230,225,255,0.13);
+      --surface-border-strong: rgba(230,225,255,0.24);
+      --text-primary: #F2EFFF;
+      --text-secondary: #B7AFE0;
+      --text-tertiary: #9089C0;
+      --accent: #7FB3FF;
+      --accent-bright: #A9CCFF;
+      --accent-dim: rgba(127,179,255,0.18);
+      --accent-border: rgba(127,179,255,0.45);
+      --on-accent: #0D0A24;
+      --patina: #4FD6A8;
+      --patina-dim: rgba(79,214,168,0.18);
+      --kindling: #FFC24D;
+      --kindling-dim: rgba(255,194,77,0.18);
+      --kindling-border: rgba(255,194,77,0.5);
+      --ember: #FF8A7A;
+      --ember-dim: rgba(255,138,122,0.16);
+      --shadow: rgba(0,0,0,0.55);
+      --overlay: rgba(13,10,36,0.8);
+      --sky-top: #0A0820;
+      --sky-bottom: #241C55;
+      --scenery: rgba(60,45,120,0.9);
+      --scenery-alt: rgba(160,140,255,0.55);
+      --celestial: rgba(255,250,230,0.95);
+      --celestial-glow: rgba(200,190,255,0.18);
+      --particle: rgba(255,255,255,0.9);
+      --particle-alt: rgba(190,180,255,0.7);
+    }
+    [data-variant='cartoon-candy'] {
+      --bg: #FFF2F7;
+      --bg-deep: #FDE4EE;
+      --surface: #FFFFFF;
+      --surface-raised: #FFF9FC;
+      --surface-sunken: #FCE9F1;
+      --surface-border: rgba(62,20,48,0.12);
+      --surface-border-strong: rgba(62,20,48,0.22);
+      --text-primary: #3E1430;
+      --text-secondary: #67314F;
+      --text-tertiary: #8E5A78;
+      --accent: #C2185B;
+      --accent-bright: #9C1149;
+      --accent-dim: rgba(194,24,91,0.12);
+      --accent-border: rgba(194,24,91,0.45);
+      --on-accent: #FFFFFF;
+      --patina: #0F6E52;
+      --patina-dim: rgba(15,110,82,0.14);
+      --kindling: #8A5200;
+      --kindling-dim: rgba(138,82,0,0.14);
+      --kindling-border: rgba(138,82,0,0.45);
+      --ember: #B3261E;
+      --ember-dim: rgba(179,38,30,0.12);
+      --shadow: rgba(140,60,100,0.28);
+      --overlay: rgba(253,228,238,0.85);
+      --sky-top: #FFD9EA;
+      --sky-bottom: #FFF2F7;
+      --scenery: rgba(120,40,90,0.55);
+      --scenery-alt: rgba(255,150,200,0.85);
+      --celestial: rgba(255,206,128,0.95);
+      --celestial-glow: rgba(255,200,150,0.35);
+      --particle: rgba(230,90,150,0.85);
+      --particle-alt: rgba(170,130,245,0.7);
+    }
 
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: var(--body);
-    background: #0d0f14;
-    color: #e8e6e1;
-    -webkit-font-smoothing: antialiased;
-  }
-
+  body { margin: 0; font-family: var(--body); background: #0d0f14; color: #e8e6e1; -webkit-font-smoothing: antialiased; }
   .shell { max-width: 1180px; margin: 0 auto; padding: 32px 20px 96px; }
 
-  .masthead { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; margin-bottom: 8px; }
+  .masthead { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; }
   .masthead h1 { font-family: var(--display); font-size: 30px; letter-spacing: -0.5px; margin: 0; }
-  .masthead p { margin: 6px 0 0; color: #8b93a1; font-size: 13.5px; max-width: 60ch; line-height: 1.55; }
-  .regen { font-family: var(--mono); font-size: 11.5px; color: #6f7787; background: #161a22; border: 1px solid #232936; padding: 8px 12px; border-radius: var(--r-sm); white-space: nowrap; }
+  .masthead p { margin: 6px 0 0; color: #8b93a1; font-size: 13.5px; max-width: 62ch; line-height: 1.55; }
+  .regen { font-family: var(--mono); font-size: 11.5px; color: #6f7787; background: #161a22; border: 1px solid #232936; padding: 8px 12px; border-radius: 10px; white-space: nowrap; }
 
-  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+  /* Pack selector — the outer level of navigation. */
+  .pack-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 22px; border-bottom: 1px solid #1c212b; padding-bottom: 18px; }
+  .pack-tab { font-family: var(--display); font-weight: 700; font-size: 15px; padding: 11px 20px; border-radius: 12px; cursor: pointer; background: #141821; color: #98a0ae; border: 1px solid #262c39; display: inline-flex; align-items: baseline; gap: 8px; }
+  .pack-tab small { font-family: var(--mono); font-size: 10.5px; color: #5d6472; }
+  .pack-tab:hover { color: #d7dbe2; }
+  .pack-tab[aria-selected='true'] { background: #e8e6e1; color: #11141a; border-color: #e8e6e1; }
+  .pack-tab[aria-selected='true'] small { color: #4b515e; }
+
+  .pack[hidden] { display: none; }
+  .pack-head { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start; }
+  .pack-title { font-family: var(--display); font-size: 22px; margin: 0; }
+  .pack-blurb { margin: 6px 0 0; color: #8b93a1; font-size: 13.5px; max-width: 62ch; }
+  .pack-note { margin: 4px 0 0; color: #6f7787; font-size: 12.5px; font-style: italic; }
+  .pack-stats { display: flex; gap: 16px; font-size: 12px; color: #6f7787; font-family: var(--mono); }
+  .pack-stats b { color: #c9cedb; font-size: 14px; }
+  .pack-stats .good b { color: #55be9a; }
+  .pack-stats .bad b { color: #e2604a; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 22px 0 8px; }
   .strip-card { border-radius: var(--r-md); overflow: hidden; border: 1px solid #232936; background: var(--surface); }
   .strip-sky { height: 54px; background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom)); }
   .strip-body { padding: 10px 12px 12px; }
@@ -178,20 +326,14 @@
   .strip-dots { display: flex; gap: 6px; }
   .strip-dots span { width: 16px; height: 16px; border-radius: 50%; border: 1px solid var(--surface-border); }
 
-  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 20px; position: sticky; top: 0; z-index: 5; background: #0d0f14; padding: 12px 0; border-bottom: 1px solid #1c212b; }
-  .tab {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--body); font-weight: 700; font-size: 13.5px;
-    padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer;
-    background: #161a22; color: #98a0ae; border: 1px solid #262c39;
-  }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 20px; position: sticky; top: 0; z-index: 5; background: #0d0f14; padding: 12px 0; border-bottom: 1px solid #1c212b; }
+  .tab { display: inline-flex; align-items: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: 13.5px; padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer; background: #161a22; color: #98a0ae; border: 1px solid #262c39; }
   .tab:hover { color: #d7dbe2; }
   .tab-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
   .tab[aria-selected='true'] { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent-bright); }
 
   .panel[hidden] { display: none; }
   .panel { background: var(--bg); border: 1px solid var(--surface-border-strong); border-radius: var(--r-lg); padding: var(--s-xl); color: var(--text-primary); }
-
   .panel-head { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
   .panel-head h2 { font-family: var(--display); font-size: 26px; margin: 6px 0 4px; letter-spacing: -0.3px; }
   .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-tertiary); margin: 0; }
@@ -208,23 +350,20 @@
 
   /* --- Living background preview --- */
   .stage { position: relative; overflow: hidden; border-radius: var(--r-lg); min-height: 420px; border: 1px solid var(--surface-border); }
-  .sky, .celestial, .scenery, .particles, .glass { position: absolute; inset: 0; }
+  .sky, .celestial, .particles, .glass { position: absolute; inset: 0; }
   .sky { background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom)); }
   .celestial::after {
-    content: ''; position: absolute; width: 150px; height: 150px; border-radius: 50%;
-    background: radial-gradient(circle, var(--celestial) 0 18%, var(--celestial-glow) 30%, transparent 68%);
+    content: ''; position: absolute; left: var(--cel-x); top: var(--cel-y);
+    width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%;
+    background: radial-gradient(circle, var(--celestial) 0 18%, var(--celestial-glow) 32%, transparent 68%);
   }
-  .stage[data-season='rain'] .celestial::after { right: 12%; top: 8%; }
-  .stage[data-season='snow'] .celestial::after { right: 16%; top: 8%; }
-  .stage[data-season='blossom'] .celestial::after { left: 10%; top: 14%; }
-  .stage[data-season='meadow'] .celestial::after { right: 14%; top: 10%; }
-  .scenery { display: flex; align-items: flex-end; }
-  .scenery svg { width: 100%; height: 120px; }
-  .scenery svg.scenery-top { align-self: flex-start; height: 150px; }
-  .stage[data-season='blossom'] .scenery { align-items: flex-start; }
+  .scenery { position: absolute; left: 0; right: 0; }
+  .scenery-top { top: 0; }
+  .scenery-bottom { bottom: 0; }
+  .scenery svg { display: block; width: 100%; }
 
-  .particles i { position: absolute; top: -60px; display: block; animation-name: fall; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0; }
-  .particles[data-kind='leaf'] i { animation-name: fall-spin; }
+  .particles i { position: absolute; top: -60px; display: block; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0; }
+  .particles i[style*='twinkle'] { top: auto; }
   @keyframes fall {
     0% { transform: translate3d(0, -60px, 0); opacity: 0; }
     6% { opacity: var(--peak); }
@@ -235,8 +374,20 @@
     0% { transform: translate3d(0, -60px, 0) rotate(0deg); opacity: 0; }
     6% { opacity: var(--peak); }
     88% { opacity: var(--peak); }
-    100% { transform: translate3d(var(--drift), 480px, 0) rotate(300deg); opacity: 0; }
+    100% { transform: translate3d(var(--drift), 480px, 0) rotate(320deg); opacity: 0; }
   }
+  @keyframes rise {
+    0% { transform: translate3d(0, 460px, 0); opacity: 0; }
+    8% { opacity: var(--peak); }
+    86% { opacity: var(--peak); }
+    100% { transform: translate3d(var(--drift), -60px, 0); opacity: 0; }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: calc(var(--peak) * 0.25); transform: scale(0.7); }
+    50% { opacity: var(--peak); transform: scale(1.15); }
+  }
+  .particles i { animation-timing-function: linear; }
+  .particles i[style*='twinkle'] { animation-timing-function: ease-in-out; animation-direction: alternate; }
 
   .glass b { position: absolute; display: block; border-radius: 50%; background: var(--particle-alt); animation: bead 9s linear infinite; opacity: 0; }
   .glass b::after { content: ''; position: absolute; left: 18%; top: 14%; width: 34%; height: 34%; border-radius: 50%; background: var(--particle); }
@@ -324,13 +475,32 @@
     <header class="masthead">
       <div>
         <h1>MASSETS · Showroom</h1>
-        <p>Every variant of the <strong>seasons</strong> pack, rendered from the real palette source. Use it to design a new pack: check the contrast audit before shipping, and watch the living background react to the environment tokens.</p>
+        <p>2 packs, 8 variants, rendered from the real palette sources. Use it to design a new pack: check the contrast audit before shipping, and watch the living background react to the environment tokens.</p>
       </div>
       <div class="regen">npm run showroom</div>
     </header>
 
-    <div class="strip">
-        <div class="strip-card" data-variant="rain">
+    <nav class="pack-tabs" role="tablist">
+        <button class="pack-tab" data-packtab="seasons">Seasons<small>4</small></button>
+        <button class="pack-tab" data-packtab="cartoon">Cartoon<small>4</small></button>
+    </nav>
+
+    <section class="pack" data-pack="seasons" hidden style="--r-sm:10px;--r-md:14px;--r-lg:20px;--r-xl:26px">
+      <div class="pack-head">
+        <div>
+          <h2 class="pack-title">Seasons</h2>
+          <p class="pack-blurb">Four weather-grounded worlds. Rain is the dark one; the rest are daylight.</p>
+          <p class="pack-note">Opens on the season matching the real month.</p>
+        </div>
+        <div class="pack-stats">
+          <span><b>4</b> variants</span>
+          <span class="bad"><b>22</b> contrast failures</span>
+          <span><b>20px</b> card radius</span>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="strip-card" data-variant="seasons-rain">
           <div class="strip-sky"></div>
           <div class="strip-body">
             <p class="strip-name">Rain</p>
@@ -339,7 +509,7 @@
             </div>
           </div>
         </div>
-        <div class="strip-card" data-variant="snow">
+        <div class="strip-card" data-variant="seasons-snow">
           <div class="strip-sky"></div>
           <div class="strip-body">
             <p class="strip-name">Snow</p>
@@ -348,7 +518,7 @@
             </div>
           </div>
         </div>
-        <div class="strip-card" data-variant="blossom">
+        <div class="strip-card" data-variant="seasons-blossom">
           <div class="strip-sky"></div>
           <div class="strip-body">
             <p class="strip-name">Spring · Blossom</p>
@@ -357,7 +527,7 @@
             </div>
           </div>
         </div>
-        <div class="strip-card" data-variant="meadow">
+        <div class="strip-card" data-variant="seasons-meadow">
           <div class="strip-sky"></div>
           <div class="strip-body">
             <p class="strip-name">Spring · Meadow</p>
@@ -366,16 +536,16 @@
             </div>
           </div>
         </div>
-    </div>
+      </div>
 
-    <nav class="tabs" role="tablist">
-        <button class="tab" data-tab="rain" data-variant="rain"><span class="tab-dot"></span>Rain</button>
-        <button class="tab" data-tab="snow" data-variant="snow"><span class="tab-dot"></span>Snow</button>
-        <button class="tab" data-tab="blossom" data-variant="blossom"><span class="tab-dot"></span>Spring · Blossom</button>
-        <button class="tab" data-tab="meadow" data-variant="meadow"><span class="tab-dot"></span>Spring · Meadow</button>
-    </nav>
+      <nav class="tabs" role="tablist">
+        <button class="tab" data-tab="seasons-rain" data-variant="seasons-rain"><span class="tab-dot"></span>Rain</button>
+        <button class="tab" data-tab="seasons-snow" data-variant="seasons-snow"><span class="tab-dot"></span>Snow</button>
+        <button class="tab" data-tab="seasons-blossom" data-variant="seasons-blossom"><span class="tab-dot"></span>Spring · Blossom</button>
+        <button class="tab" data-tab="seasons-meadow" data-variant="seasons-meadow"><span class="tab-dot"></span>Spring · Meadow</button>
+      </nav>
 
-    <article class="panel" data-panel="rain" data-variant="rain" hidden>
+      <article class="panel" data-panel="seasons-rain" data-variant="seasons-rain" hidden>
       <header class="panel-head">
         <div>
           <p class="eyebrow">DARK VARIANT</p>
@@ -390,13 +560,13 @@
       </header>
 
       <div class="split">
-        <div class="stage" data-season="rain">
+        <div class="stage" style="--cel-x:78.0%;--cel-y:10.0%">
           <div class="sky"></div>
           <div class="celestial"></div>
-          <div class="scenery"><svg viewBox="0 0 400 120" preserveAspectRatio="none"><path d="M 0 120 L 0 70 L 34 70 L 34 44 L 62 44 L 62 78 L 96 78 L 96 30 L 130 30 L 130 66 L 158 66 L 158 52 L 196 52 L 196 82 L 232 82 L 232 24 L 262 24 L 262 60 L 300 60 L 300 44 L 330 44 L 330 74 L 368 74 L 368 56 L 400 56 L 400 120 Z" fill="rgba(4,8,15,0.6)"/><rect x="104" y="40" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="116" y="54" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="240" y="34" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="252" y="48" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="270" y="68" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="40" y="54" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="308" y="52" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="338" y="82" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="170" y="60" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/></svg></div>
-          <div class="particles" data-kind="rain"><i style="left:27.82%;width:1.9px;height:14.6px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.53s;animation-delay:-6.26s;--drift:3.0px;--peak:0.83"></i><i style="left:87.87%;width:2.2px;height:21.1px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:0.83s;animation-delay:-1.35s;--drift:3.0px;--peak:0.97"></i><i style="left:11.75%;width:2.1px;height:16.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.04s;animation-delay:-0.19s;--drift:3.0px;--peak:0.91"></i><i style="left:57.50%;width:1.8px;height:11.3px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.81s;animation-delay:-2.74s;--drift:3.0px;--peak:0.76"></i><i style="left:23.05%;width:1.8px;height:10.6px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.41s;animation-delay:-4.11s;--drift:3.0px;--peak:0.71"></i><i style="left:78.42%;width:2.0px;height:16.1px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.18s;animation-delay:-3.37s;--drift:3.0px;--peak:0.86"></i><i style="left:24.08%;width:1.9px;height:15.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.14s;animation-delay:-2.08s;--drift:3.0px;--peak:0.83"></i><i style="left:29.76%;width:1.8px;height:8.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.34s;animation-delay:-0.88s;--drift:3.0px;--peak:0.72"></i><i style="left:36.91%;width:2.2px;height:16.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.20s;animation-delay:-1.48s;--drift:3.0px;--peak:0.98"></i><i style="left:70.90%;width:1.9px;height:15.4px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.05s;animation-delay:-5.90s;--drift:3.0px;--peak:0.82"></i><i style="left:92.80%;width:2.1px;height:11.9px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:0.82s;animation-delay:-0.92s;--drift:3.0px;--peak:0.94"></i><i style="left:98.85%;width:1.9px;height:14.9px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.69s;animation-delay:-7.50s;--drift:3.0px;--peak:0.79"></i><i style="left:68.92%;width:1.9px;height:14.5px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.35s;animation-delay:-6.73s;--drift:3.0px;--peak:0.81"></i><i style="left:40.29%;width:2.1px;height:17.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.19s;animation-delay:-0.07s;--drift:3.0px;--peak:0.90"></i><i style="left:47.89%;width:1.9px;height:11.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.68s;animation-delay:-0.01s;--drift:3.0px;--peak:0.81"></i><i style="left:89.45%;width:1.8px;height:11.8px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.28s;animation-delay:-7.10s;--drift:3.0px;--peak:0.73"></i><i style="left:4.05%;width:1.9px;height:9.2px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.39s;animation-delay:-1.27s;--drift:3.0px;--peak:0.78"></i><i style="left:78.52%;width:2.2px;height:16.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.01s;animation-delay:-2.59s;--drift:3.0px;--peak:0.98"></i><i style="left:9.02%;width:1.8px;height:7.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.90s;animation-delay:-0.22s;--drift:3.0px;--peak:0.73"></i><i style="left:36.80%;width:1.8px;height:9.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.25s;animation-delay:-7.36s;--drift:3.0px;--peak:0.72"></i><i style="left:94.30%;width:2.0px;height:17.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.15s;animation-delay:-2.74s;--drift:3.0px;--peak:0.88"></i><i style="left:82.64%;width:2.0px;height:11.5px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.19s;animation-delay:-4.90s;--drift:3.0px;--peak:0.89"></i><i style="left:78.27%;width:2.1px;height:13.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:0.79s;animation-delay:-1.52s;--drift:3.0px;--peak:0.95"></i><i style="left:75.12%;width:2.0px;height:11.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.00s;animation-delay:-4.01s;--drift:3.0px;--peak:0.84"></i><i style="left:78.18%;width:1.8px;height:12.7px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.33s;animation-delay:-5.59s;--drift:3.0px;--peak:0.77"></i><i style="left:82.71%;width:2.0px;height:12.1px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.27s;animation-delay:-6.52s;--drift:3.0px;--peak:0.87"></i><i style="left:18.41%;width:1.8px;height:9.5px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.27s;animation-delay:-5.64s;--drift:3.0px;--peak:0.76"></i><i style="left:87.67%;width:2.0px;height:10.6px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.35s;animation-delay:-5.69s;--drift:3.0px;--peak:0.85"></i><i style="left:11.74%;width:2.1px;height:12.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:0.82s;animation-delay:-4.79s;--drift:3.0px;--peak:0.96"></i><i style="left:50.27%;width:2.2px;height:20.7px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:0.87s;animation-delay:-0.48s;--drift:3.0px;--peak:0.97"></i><i style="left:55.12%;width:2.1px;height:12.3px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.22s;animation-delay:-7.74s;--drift:3.0px;--peak:0.96"></i><i style="left:47.85%;width:1.8px;height:6.8px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.82s;animation-delay:-6.41s;--drift:3.0px;--peak:0.71"></i><i style="left:33.09%;width:2.0px;height:13.3px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.31s;animation-delay:-4.99s;--drift:3.0px;--peak:0.88"></i><i style="left:2.29%;width:1.9px;height:10.9px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.00s;animation-delay:-1.92s;--drift:3.0px;--peak:0.83"></i><i style="left:99.88%;width:1.9px;height:9.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.07s;animation-delay:-3.05s;--drift:3.0px;--peak:0.82"></i><i style="left:12.19%;width:2.0px;height:11.1px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.37s;animation-delay:-2.44s;--drift:3.0px;--peak:0.88"></i><i style="left:1.00%;width:2.0px;height:15.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:0.89s;animation-delay:-2.93s;--drift:3.0px;--peak:0.90"></i><i style="left:13.46%;width:2.0px;height:15.0px;border-radius:1px;background:rgba(143,198,236,0.2);animation-duration:1.09s;animation-delay:-5.05s;--drift:3.0px;--peak:0.84"></i><i style="left:80.53%;width:1.8px;height:9.3px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.63s;animation-delay:-6.03s;--drift:3.0px;--peak:0.73"></i><i style="left:9.05%;width:1.9px;height:13.6px;border-radius:1px;background:rgba(143,198,236,0.4);animation-duration:1.49s;animation-delay:-0.53s;--drift:3.0px;--peak:0.78"></i></div>
-          <div class="glass"><b style="left:77.0%;top:41.9%;width:5.6px;height:7.0px;animation-delay:-6.2s"></b><b style="left:78.2%;top:4.8%;width:4.0px;height:5.0px;animation-delay:-0.9s"></b><b style="left:64.7%;top:29.6%;width:6.4px;height:8.0px;animation-delay:-0.6s"></b><b style="left:69.8%;top:21.7%;width:6.0px;height:7.5px;animation-delay:-1.7s"></b><b style="left:73.5%;top:38.4%;width:6.7px;height:8.4px;animation-delay:-2.5s"></b><b style="left:73.1%;top:30.7%;width:7.3px;height:9.2px;animation-delay:-7.0s"></b><b style="left:50.7%;top:22.3%;width:9.8px;height:12.3px;animation-delay:-8.7s"></b><b style="left:45.0%;top:52.2%;width:5.3px;height:6.6px;animation-delay:-3.5s"></b><b style="left:25.3%;top:52.4%;width:5.8px;height:7.2px;animation-delay:-3.5s"></b><b style="left:20.7%;top:61.2%;width:9.4px;height:11.8px;animation-delay:-4.4s"></b><b style="left:67.5%;top:57.1%;width:7.6px;height:9.5px;animation-delay:-2.5s"></b><b style="left:73.7%;top:35.8%;width:7.6px;height:9.4px;animation-delay:-1.4s"></b><b style="left:62.5%;top:73.3%;width:4.1px;height:5.2px;animation-delay:-4.9s"></b><b style="left:69.4%;top:61.5%;width:5.8px;height:7.2px;animation-delay:-4.5s"></b></div>
-          <div class="stage-caption">Living background — CSS approximation of WeatherOverlay.tsx</div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 120" preserveAspectRatio="none" style="height:120px"><path d="M 0 120 L 0 70 L 34 70 L 34 44 L 62 44 L 62 78 L 96 78 L 96 30 L 130 30 L 130 66 L 158 66 L 158 52 L 196 52 L 196 82 L 232 82 L 232 24 L 262 24 L 262 60 L 300 60 L 300 44 L 330 44 L 330 74 L 368 74 L 368 56 L 400 56 L 400 120 Z" fill="rgba(4,8,15,0.6)"/><rect x="104" y="40" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="116" y="54" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="240" y="34" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="252" y="48" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="270" y="68" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="40" y="54" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="308" y="52" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="338" y="82" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/><rect x="170" y="60" width="5" height="7" rx="1" fill="rgba(143,198,236,0.28)"/></svg></div>
+          <div class="particles"><i style="left:25.03%;width:2.1px;height:15.9px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:0.82s;animation-delay:-7.65s;--drift:3.0px;--peak:0.95"></i><i style="left:92.73%;width:2.1px;height:11.5px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:0.87s;animation-delay:-7.02s;--drift:3.0px;--peak:0.97"></i><i style="left:99.76%;width:1.8px;height:8.7px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.59s;animation-delay:-1.71s;--drift:3.0px;--peak:0.78"></i><i style="left:51.05%;width:1.8px;height:7.5px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.29s;animation-delay:-1.30s;--drift:3.0px;--peak:0.76"></i><i style="left:48.95%;width:1.9px;height:16.4px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.53s;animation-delay:-3.81s;--drift:3.0px;--peak:0.85"></i><i style="left:26.20%;width:1.9px;height:10.1px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:0.97s;animation-delay:-5.69s;--drift:3.0px;--peak:0.84"></i><i style="left:48.04%;width:2.2px;height:21.3px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.06s;animation-delay:-3.05s;--drift:3.0px;--peak:1.00"></i><i style="left:56.29%;width:1.9px;height:10.7px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.06s;animation-delay:-0.47s;--drift:3.0px;--peak:0.81"></i><i style="left:68.18%;width:1.9px;height:9.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.05s;animation-delay:-7.36s;--drift:3.0px;--peak:0.83"></i><i style="left:91.98%;width:1.9px;height:9.8px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.40s;animation-delay:-5.07s;--drift:3.0px;--peak:0.84"></i><i style="left:13.64%;width:1.9px;height:16.0px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.36s;animation-delay:-5.29s;--drift:3.0px;--peak:0.85"></i><i style="left:24.54%;width:2.0px;height:13.1px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.32s;animation-delay:-5.11s;--drift:3.0px;--peak:0.90"></i><i style="left:48.02%;width:1.8px;height:11.0px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.60s;animation-delay:-7.33s;--drift:3.0px;--peak:0.79"></i><i style="left:41.91%;width:1.8px;height:7.9px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.82s;animation-delay:-4.72s;--drift:3.0px;--peak:0.78"></i><i style="left:21.83%;width:2.1px;height:11.9px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:0.93s;animation-delay:-4.92s;--drift:3.0px;--peak:0.95"></i><i style="left:2.94%;width:2.0px;height:14.6px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.34s;animation-delay:-0.46s;--drift:3.0px;--peak:0.89"></i><i style="left:66.39%;width:2.0px;height:13.8px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.35s;animation-delay:-3.20s;--drift:3.0px;--peak:0.88"></i><i style="left:22.80%;width:2.0px;height:16.7px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.40s;animation-delay:-2.07s;--drift:3.0px;--peak:0.88"></i><i style="left:31.04%;width:1.9px;height:11.7px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.10s;animation-delay:-2.37s;--drift:3.0px;--peak:0.82"></i><i style="left:76.38%;width:2.1px;height:16.5px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:0.91s;animation-delay:-5.47s;--drift:3.0px;--peak:0.95"></i><i style="left:39.74%;width:2.1px;height:13.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.27s;animation-delay:-4.50s;--drift:3.0px;--peak:0.93"></i><i style="left:74.74%;width:1.8px;height:10.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.65s;animation-delay:-4.07s;--drift:3.0px;--peak:0.74"></i><i style="left:65.02%;width:2.0px;height:16.8px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.25s;animation-delay:-1.25s;--drift:3.0px;--peak:0.88"></i><i style="left:67.98%;width:2.1px;height:14.5px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.02s;animation-delay:-7.78s;--drift:3.0px;--peak:0.94"></i><i style="left:75.34%;width:2.0px;height:12.5px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.18s;animation-delay:-1.09s;--drift:3.0px;--peak:0.89"></i><i style="left:37.05%;width:2.0px;height:15.0px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.38s;animation-delay:-7.31s;--drift:3.0px;--peak:0.86"></i><i style="left:96.46%;width:1.8px;height:9.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.27s;animation-delay:-4.61s;--drift:3.0px;--peak:0.76"></i><i style="left:84.26%;width:2.2px;height:15.6px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:0.96s;animation-delay:-2.09s;--drift:3.0px;--peak:1.00"></i><i style="left:0.89%;width:2.1px;height:17.4px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.04s;animation-delay:-0.16s;--drift:3.0px;--peak:0.95"></i><i style="left:19.02%;width:2.0px;height:15.8px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.22s;animation-delay:-0.71s;--drift:3.0px;--peak:0.86"></i><i style="left:93.65%;width:2.0px;height:15.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.16s;animation-delay:-7.61s;--drift:3.0px;--peak:0.91"></i><i style="left:36.87%;width:2.0px;height:14.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.27s;animation-delay:-7.70s;--drift:3.0px;--peak:0.88"></i><i style="left:70.00%;width:1.9px;height:12.6px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:1.11s;animation-delay:-2.53s;--drift:3.0px;--peak:0.83"></i><i style="left:68.55%;width:1.9px;height:11.3px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.14s;animation-delay:-5.01s;--drift:3.0px;--peak:0.79"></i><i style="left:97.27%;width:2.2px;height:17.2px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:0.86s;animation-delay:-7.85s;--drift:3.0px;--peak:0.97"></i><i style="left:11.36%;width:1.8px;height:9.9px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.93s;animation-delay:-3.58s;--drift:3.0px;--peak:0.74"></i><i style="left:18.12%;width:1.8px;height:13.1px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.50s;animation-delay:-5.18s;--drift:3.0px;--peak:0.77"></i><i style="left:33.62%;width:2.1px;height:12.1px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:0.80s;animation-delay:-2.98s;--drift:3.0px;--peak:0.97"></i><i style="left:59.88%;width:1.9px;height:8.6px;border-radius:1px;background:rgba(143,198,236,0.2);animation-name:fall;animation-duration:1.04s;animation-delay:-7.83s;--drift:3.0px;--peak:0.83"></i><i style="left:21.32%;width:1.8px;height:10.4px;border-radius:1px;background:rgba(143,198,236,0.4);animation-name:fall;animation-duration:2.00s;animation-delay:-3.72s;--drift:3.0px;--peak:0.73"></i></div>
+          <div class="glass"><b style="left:89.9%;top:70.9%;width:5.5px;height:6.9px;animation-delay:-7.4s"></b><b style="left:13.3%;top:40.7%;width:4.2px;height:5.3px;animation-delay:-8.3s"></b><b style="left:83.8%;top:66.0%;width:7.7px;height:9.6px;animation-delay:-4.9s"></b><b style="left:4.3%;top:73.8%;width:5.6px;height:7.0px;animation-delay:-3.7s"></b><b style="left:20.4%;top:37.5%;width:5.3px;height:6.6px;animation-delay:-5.5s"></b><b style="left:50.0%;top:45.1%;width:5.0px;height:6.2px;animation-delay:-1.5s"></b><b style="left:18.4%;top:15.8%;width:4.8px;height:6.0px;animation-delay:-0.3s"></b><b style="left:35.2%;top:37.3%;width:6.9px;height:8.7px;animation-delay:-3.9s"></b><b style="left:84.2%;top:74.0%;width:5.5px;height:6.8px;animation-delay:-2.4s"></b><b style="left:68.4%;top:33.6%;width:5.7px;height:7.1px;animation-delay:-2.9s"></b><b style="left:17.9%;top:37.6%;width:4.2px;height:5.3px;animation-delay:-2.7s"></b><b style="left:94.7%;top:53.5%;width:6.3px;height:7.9px;animation-delay:-6.5s"></b><b style="left:54.8%;top:16.6%;width:9.6px;height:12.0px;animation-delay:-0.5s"></b><b style="left:55.2%;top:8.7%;width:5.9px;height:7.4px;animation-delay:-3.1s"></b></div>
+          <div class="stage-caption">Living background — CSS approximation</div>
         </div>
 
         <div class="mock">
@@ -429,16 +599,16 @@
             <p class="t-hero">Hero 30</p>
             <p class="t-title">Title 22</p>
             <p class="t-subtitle">Subtitle 16</p>
-            <p class="t-body">Body 15 — Manrope regular, the workhorse.</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
             <p class="t-caption">Caption 12.5 — supporting detail.</p>
-            <p class="t-mono">mono 12 — JetBrains, stamps and serials</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
           </div>
         </div>
       </div>
 
       <section class="group">
         <h3>Contrast audit</h3>
-        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A new pack that fails here will be unreadable on a phone in daylight.</p>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
         <table class="audit">
           <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
           <tbody>
@@ -705,7 +875,7 @@
       </div>
     </article>
 
-    <article class="panel" data-panel="snow" data-variant="snow" hidden>
+    <article class="panel" data-panel="seasons-snow" data-variant="seasons-snow" hidden>
       <header class="panel-head">
         <div>
           <p class="eyebrow">LIGHT VARIANT</p>
@@ -720,13 +890,13 @@
       </header>
 
       <div class="split">
-        <div class="stage" data-season="snow">
+        <div class="stage" style="--cel-x:74.0%;--cel-y:12.0%">
           <div class="sky"></div>
           <div class="celestial"></div>
-          <div class="scenery"><svg viewBox="0 0 400 110" preserveAspectRatio="none"><path d="M 60 62 L 76 26 L 92 62 Z M 68 46 L 76 30 L 84 46 Z" fill="rgba(148,173,204,0.45)"/><path d="M 322 58 L 336 30 L 350 58 Z" fill="rgba(148,173,204,0.45)"/><path d="M 0 84 Q 100 44 200 74 T 400 64 L 400 110 L 0 110 Z" fill="rgba(148,173,204,0.45)"/><path d="M 0 92 Q 120 62 240 88 T 400 82 L 400 110 L 0 110 Z" fill="#FFFFFF"/></svg></div>
-          <div class="particles" data-kind="snow"><i style="left:51.12%;width:8.2px;height:8.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:13.43s;animation-delay:-7.66s;--drift:20.6px;--peak:0.88"></i><i style="left:56.56%;width:7.2px;height:7.2px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:10.79s;animation-delay:-3.78s;--drift:22.8px;--peak:0.86"></i><i style="left:0.33%;width:6.9px;height:6.9px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:13.78s;animation-delay:-6.44s;--drift:-37.4px;--peak:0.83"></i><i style="left:25.31%;width:10.4px;height:10.4px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:8.52s;animation-delay:-1.88s;--drift:-25.4px;--peak:0.97"></i><i style="left:98.62%;width:9.2px;height:9.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:10.16s;animation-delay:-6.85s;--drift:7.7px;--peak:0.93"></i><i style="left:95.57%;width:6.2px;height:6.2px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:12.26s;animation-delay:-6.36s;--drift:-2.7px;--peak:0.84"></i><i style="left:56.60%;width:5.9px;height:5.9px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:16.56s;animation-delay:-2.87s;--drift:-37.3px;--peak:0.79"></i><i style="left:59.70%;width:5.2px;height:5.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:17.77s;animation-delay:-2.57s;--drift:34.6px;--peak:0.85"></i><i style="left:53.16%;width:5.5px;height:5.5px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:18.35s;animation-delay:-7.04s;--drift:23.9px;--peak:0.76"></i><i style="left:23.24%;width:7.7px;height:7.7px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:14.91s;animation-delay:-5.32s;--drift:11.0px;--peak:0.93"></i><i style="left:82.54%;width:4.9px;height:4.9px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:11.02s;animation-delay:-1.79s;--drift:34.5px;--peak:0.89"></i><i style="left:25.59%;width:4.2px;height:4.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:24.20s;animation-delay:-5.92s;--drift:13.7px;--peak:0.72"></i><i style="left:55.29%;width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:12.95s;animation-delay:-7.96s;--drift:-27.6px;--peak:0.90"></i><i style="left:89.96%;width:5.3px;height:5.3px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:11.51s;animation-delay:-7.81s;--drift:25.7px;--peak:1.00"></i><i style="left:0.47%;width:7.6px;height:7.6px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:11.40s;animation-delay:-7.90s;--drift:-0.1px;--peak:0.94"></i><i style="left:68.69%;width:8.9px;height:8.9px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:10.60s;animation-delay:-2.63s;--drift:31.4px;--peak:0.97"></i><i style="left:72.29%;width:5.6px;height:5.6px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:13.87s;animation-delay:-5.71s;--drift:17.5px;--peak:0.99"></i><i style="left:67.34%;width:5.8px;height:5.8px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:22.73s;animation-delay:-4.08s;--drift:34.5px;--peak:0.71"></i><i style="left:72.50%;width:8.9px;height:8.9px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:16.31s;animation-delay:-5.49s;--drift:31.3px;--peak:0.90"></i><i style="left:87.25%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:13.79s;animation-delay:-3.80s;--drift:17.1px;--peak:0.82"></i><i style="left:47.30%;width:7.1px;height:7.1px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:11.43s;animation-delay:-5.24s;--drift:-5.9px;--peak:0.84"></i><i style="left:48.98%;width:3.3px;height:3.3px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:15.61s;animation-delay:-4.71s;--drift:-13.4px;--peak:0.78"></i><i style="left:11.41%;width:8.0px;height:8.0px;border-radius:50%;background:rgba(255,255,255,0.95);animation-duration:18.24s;animation-delay:-4.43s;--drift:-27.2px;--peak:0.81"></i><i style="left:46.13%;width:7.6px;height:7.6px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:15.92s;animation-delay:-5.22s;--drift:19.3px;--peak:0.82"></i><i style="left:24.21%;width:3.7px;height:3.7px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:15.00s;animation-delay:-6.07s;--drift:-11.1px;--peak:0.77"></i><i style="left:45.11%;width:4.6px;height:4.6px;border-radius:50%;background:rgba(176,196,222,0.7);animation-duration:14.83s;animation-delay:-5.05s;--drift:8.0px;--peak:0.95"></i></div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 110" preserveAspectRatio="none" style="height:110px"><path d="M 60 62 L 76 26 L 92 62 Z M 68 46 L 76 30 L 84 46 Z" fill="rgba(148,173,204,0.45)"/><path d="M 322 58 L 336 30 L 350 58 Z" fill="rgba(148,173,204,0.45)"/><path d="M 0 84 Q 100 44 200 74 T 400 64 L 400 110 L 0 110 Z" fill="rgba(148,173,204,0.45)"/><path d="M 0 92 Q 120 62 240 88 T 400 82 L 400 110 L 0 110 Z" fill="#FFFFFF"/></svg></div>
+          <div class="particles"><i style="left:71.01%;width:5.2px;height:5.2px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:23.03s;animation-delay:-7.40s;--drift:25.2px;--peak:0.75"></i><i style="left:22.65%;width:5.8px;height:5.8px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:14.63s;animation-delay:-7.17s;--drift:25.3px;--peak:0.80"></i><i style="left:13.52%;width:6.2px;height:6.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:13.80s;animation-delay:-0.52s;--drift:9.7px;--peak:0.96"></i><i style="left:25.10%;width:4.5px;height:4.5px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:13.76s;animation-delay:-4.65s;--drift:25.2px;--peak:0.81"></i><i style="left:30.49%;width:3.5px;height:3.5px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:17.06s;animation-delay:-4.00s;--drift:-20.0px;--peak:0.75"></i><i style="left:59.33%;width:6.2px;height:6.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:12.11s;animation-delay:-6.67s;--drift:-29.6px;--peak:0.90"></i><i style="left:68.95%;width:5.4px;height:5.4px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:18.68s;animation-delay:-5.49s;--drift:-39.0px;--peak:0.84"></i><i style="left:71.07%;width:3.6px;height:3.6px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:16.44s;animation-delay:-0.97s;--drift:-7.1px;--peak:0.87"></i><i style="left:62.32%;width:4.6px;height:4.6px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:18.55s;animation-delay:-5.26s;--drift:32.9px;--peak:0.80"></i><i style="left:27.17%;width:2.4px;height:2.4px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:14.52s;animation-delay:-6.83s;--drift:-10.5px;--peak:0.75"></i><i style="left:57.20%;width:7.7px;height:7.7px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:11.93s;animation-delay:-3.58s;--drift:1.5px;--peak:0.87"></i><i style="left:35.22%;width:6.6px;height:6.6px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:14.67s;animation-delay:-5.66s;--drift:17.6px;--peak:0.96"></i><i style="left:56.74%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:13.76s;animation-delay:-1.60s;--drift:11.0px;--peak:0.78"></i><i style="left:49.56%;width:8.0px;height:8.0px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:9.73s;animation-delay:-5.97s;--drift:-19.7px;--peak:0.96"></i><i style="left:58.93%;width:7.1px;height:7.1px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:21.27s;animation-delay:-6.50s;--drift:-30.3px;--peak:0.76"></i><i style="left:54.40%;width:4.0px;height:4.0px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:14.47s;animation-delay:-7.46s;--drift:-4.0px;--peak:0.74"></i><i style="left:67.01%;width:5.4px;height:5.4px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:21.97s;animation-delay:-3.98s;--drift:33.8px;--peak:0.74"></i><i style="left:70.58%;width:7.6px;height:7.6px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:14.46s;animation-delay:-2.72s;--drift:15.9px;--peak:0.95"></i><i style="left:29.03%;width:5.7px;height:5.7px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:22.39s;animation-delay:-2.03s;--drift:-38.3px;--peak:0.76"></i><i style="left:17.85%;width:7.6px;height:7.6px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:15.51s;animation-delay:-3.57s;--drift:21.3px;--peak:0.94"></i><i style="left:94.66%;width:4.1px;height:4.1px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:16.11s;animation-delay:-4.29s;--drift:29.1px;--peak:0.76"></i><i style="left:33.33%;width:2.9px;height:2.9px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:14.72s;animation-delay:-0.15s;--drift:4.7px;--peak:0.76"></i><i style="left:56.81%;width:7.0px;height:7.0px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:15.93s;animation-delay:-3.79s;--drift:-37.2px;--peak:0.83"></i><i style="left:14.13%;width:5.8px;height:5.8px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:15.89s;animation-delay:-3.56s;--drift:-8.3px;--peak:0.80"></i><i style="left:19.29%;width:5.6px;height:5.6px;border-radius:50%;background:rgba(255,255,255,0.95);animation-name:fall;animation-duration:13.23s;animation-delay:-5.11s;--drift:32.9px;--peak:0.78"></i><i style="left:29.94%;width:8.1px;height:8.1px;border-radius:50%;background:rgba(176,196,222,0.7);animation-name:fall;animation-duration:13.03s;animation-delay:-3.88s;--drift:7.3px;--peak:0.92"></i></div>
           
-          <div class="stage-caption">Living background — CSS approximation of WeatherOverlay.tsx</div>
+          <div class="stage-caption">Living background — CSS approximation</div>
         </div>
 
         <div class="mock">
@@ -759,16 +929,16 @@
             <p class="t-hero">Hero 30</p>
             <p class="t-title">Title 22</p>
             <p class="t-subtitle">Subtitle 16</p>
-            <p class="t-body">Body 15 — Manrope regular, the workhorse.</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
             <p class="t-caption">Caption 12.5 — supporting detail.</p>
-            <p class="t-mono">mono 12 — JetBrains, stamps and serials</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
           </div>
         </div>
       </div>
 
       <section class="group">
         <h3>Contrast audit</h3>
-        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A new pack that fails here will be unreadable on a phone in daylight.</p>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
         <table class="audit">
           <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
           <tbody>
@@ -1035,7 +1205,7 @@
       </div>
     </article>
 
-    <article class="panel" data-panel="blossom" data-variant="blossom" hidden>
+    <article class="panel" data-panel="seasons-blossom" data-variant="seasons-blossom" hidden>
       <header class="panel-head">
         <div>
           <p class="eyebrow">LIGHT VARIANT</p>
@@ -1050,13 +1220,13 @@
       </header>
 
       <div class="split">
-        <div class="stage" data-season="blossom">
+        <div class="stage" style="--cel-x:24.0%;--cel-y:20.0%">
           <div class="sky"></div>
           <div class="celestial"></div>
-          <div class="scenery"><svg viewBox="0 0 400 150" preserveAspectRatio="none" class="scenery-top"><path d="M 400 6 C 330 14 280 30 236 62 M 400 6 C 344 34 318 52 296 88 M 316 40 C 300 58 292 74 288 96 M 260 48 C 250 62 246 74 244 88" stroke="rgba(124,77,61,0.6)" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="236" cy="62" r="11" fill="rgba(232,142,171,0.75)"/><circle cx="252" cy="52" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="270" cy="44" r="10" fill="rgba(232,142,171,0.75)"/><circle cx="296" cy="88" r="10" fill="rgba(232,142,171,0.75)"/><circle cx="306" cy="74" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="288" cy="96" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="318" cy="56" r="9" fill="rgba(232,142,171,0.75)"/><circle cx="244" cy="88" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="252" cy="76" r="6" fill="rgba(232,142,171,0.75)"/><circle cx="340" cy="36" r="9" fill="rgba(232,142,171,0.75)"/><circle cx="356" cy="26" r="7" fill="rgba(232,142,171,0.75)"/><circle cx="280" cy="58" r="7" fill="rgba(232,142,171,0.75)"/></svg></div>
-          <div class="particles" data-kind="leaf"><i style="left:5.38%;width:5.6px;height:3.7px;border-radius:5.6px 2px 5.6px 2px;background:rgba(244,186,203,0.7);animation-duration:19.07s;animation-delay:-6.50s;--drift:32.9px;--peak:0.75"></i><i style="left:90.62%;width:9.7px;height:6.4px;border-radius:9.7px 2px 9.7px 2px;background:rgba(232,142,171,0.85);animation-duration:8.97s;animation-delay:-0.38s;--drift:-6.2px;--peak:0.90"></i><i style="left:38.86%;width:8.9px;height:5.9px;border-radius:8.9px 2px 8.9px 2px;background:rgba(244,186,203,0.7);animation-duration:11.62s;animation-delay:-3.30s;--drift:19.3px;--peak:0.84"></i><i style="left:87.20%;width:7.8px;height:5.2px;border-radius:7.8px 2px 7.8px 2px;background:rgba(244,186,203,0.7);animation-duration:10.70s;animation-delay:-4.61s;--drift:14.1px;--peak:0.94"></i><i style="left:25.79%;width:7.5px;height:5.0px;border-radius:7.5px 2px 7.5px 2px;background:rgba(232,142,171,0.85);animation-duration:9.76s;animation-delay:-3.28s;--drift:35.1px;--peak:0.82"></i><i style="left:6.88%;width:7.4px;height:4.9px;border-radius:7.4px 2px 7.4px 2px;background:rgba(244,186,203,0.7);animation-duration:17.88s;animation-delay:-1.34s;--drift:-25.6px;--peak:0.75"></i><i style="left:40.91%;width:8.9px;height:5.9px;border-radius:8.9px 2px 8.9px 2px;background:rgba(244,186,203,0.7);animation-duration:10.57s;animation-delay:-0.17s;--drift:-17.9px;--peak:0.84"></i><i style="left:54.98%;width:6.6px;height:4.4px;border-radius:6.6px 2px 6.6px 2px;background:rgba(232,142,171,0.85);animation-duration:21.20s;animation-delay:-4.54s;--drift:18.1px;--peak:0.71"></i><i style="left:58.77%;width:6.1px;height:4.0px;border-radius:6.1px 2px 6.1px 2px;background:rgba(244,186,203,0.7);animation-duration:10.45s;animation-delay:-7.61s;--drift:29.4px;--peak:0.82"></i><i style="left:80.67%;width:8.4px;height:5.5px;border-radius:8.4px 2px 8.4px 2px;background:rgba(232,142,171,0.85);animation-duration:12.87s;animation-delay:-1.36s;--drift:-23.0px;--peak:0.93"></i><i style="left:27.41%;width:9.2px;height:6.1px;border-radius:9.2px 2px 9.2px 2px;background:rgba(244,186,203,0.7);animation-duration:14.58s;animation-delay:-6.12s;--drift:20.1px;--peak:0.87"></i><i style="left:32.66%;width:9.0px;height:5.9px;border-radius:9.0px 2px 9.0px 2px;background:rgba(232,142,171,0.85);animation-duration:10.77s;animation-delay:-1.23s;--drift:20.9px;--peak:0.91"></i><i style="left:61.16%;width:8.7px;height:5.7px;border-radius:8.7px 2px 8.7px 2px;background:rgba(232,142,171,0.85);animation-duration:9.46s;animation-delay:-3.38s;--drift:0.6px;--peak:0.84"></i><i style="left:87.01%;width:9.8px;height:6.4px;border-radius:9.8px 2px 9.8px 2px;background:rgba(232,142,171,0.85);animation-duration:12.30s;animation-delay:-6.77s;--drift:15.8px;--peak:0.82"></i><i style="left:44.94%;width:10.8px;height:7.2px;border-radius:10.8px 2px 10.8px 2px;background:rgba(232,142,171,0.85);animation-duration:11.34s;animation-delay:-1.47s;--drift:-19.7px;--peak:0.87"></i><i style="left:38.45%;width:11.2px;height:7.4px;border-radius:11.2px 2px 11.2px 2px;background:rgba(232,142,171,0.85);animation-duration:12.96s;animation-delay:-3.33s;--drift:-1.8px;--peak:0.89"></i></div>
+          <div class="scenery scenery-top"><svg viewBox="0 0 400 150" preserveAspectRatio="none" style="height:150px"><path d="M 400 6 C 330 14 280 30 236 62 M 400 6 C 344 34 318 52 296 88 M 316 40 C 300 58 292 74 288 96 M 260 48 C 250 62 246 74 244 88" stroke="rgba(124,77,61,0.6)" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="236" cy="62" r="11" fill="rgba(232,142,171,0.75)"/><circle cx="252" cy="52" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="270" cy="44" r="10" fill="rgba(232,142,171,0.75)"/><circle cx="296" cy="88" r="10" fill="rgba(232,142,171,0.75)"/><circle cx="306" cy="74" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="288" cy="96" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="318" cy="56" r="9" fill="rgba(232,142,171,0.75)"/><circle cx="244" cy="88" r="8" fill="rgba(232,142,171,0.75)"/><circle cx="252" cy="76" r="6" fill="rgba(232,142,171,0.75)"/><circle cx="340" cy="36" r="9" fill="rgba(232,142,171,0.75)"/><circle cx="356" cy="26" r="7" fill="rgba(232,142,171,0.75)"/><circle cx="280" cy="58" r="7" fill="rgba(232,142,171,0.75)"/></svg></div>
+          <div class="particles"><i style="left:75.26%;width:10.5px;height:6.5px;background:rgba(232,142,171,0.85);border-radius:10.5px 2px 10.5px 2px;animation-name:fall-spin;animation-duration:10.87s;animation-delay:-7.67s;--drift:-74.0px;--peak:0.82"></i><i style="left:82.18%;width:6.3px;height:3.9px;background:rgba(232,142,171,0.85);border-radius:6.3px 2px 6.3px 2px;animation-name:fall-spin;animation-duration:19.48s;animation-delay:-6.45s;--drift:40.7px;--peak:0.75"></i><i style="left:75.53%;width:9.3px;height:5.8px;background:rgba(244,186,203,0.7);border-radius:9.3px 2px 9.3px 2px;animation-name:fall-spin;animation-duration:9.36s;animation-delay:-5.79s;--drift:-17.5px;--peak:0.91"></i><i style="left:29.25%;width:12.4px;height:7.7px;background:rgba(244,186,203,0.7);border-radius:12.4px 2px 12.4px 2px;animation-name:fall-spin;animation-duration:12.90s;animation-delay:-0.16s;--drift:-2.7px;--peak:0.85"></i><i style="left:58.85%;width:8.8px;height:5.4px;background:rgba(232,142,171,0.85);border-radius:8.8px 2px 8.8px 2px;animation-name:fall-spin;animation-duration:14.02s;animation-delay:-1.12s;--drift:-33.7px;--peak:0.84"></i><i style="left:76.61%;width:8.4px;height:5.2px;background:rgba(232,142,171,0.85);border-radius:8.4px 2px 8.4px 2px;animation-name:fall-spin;animation-duration:18.12s;animation-delay:-1.20s;--drift:-31.2px;--peak:0.76"></i><i style="left:18.60%;width:9.8px;height:6.0px;background:rgba(244,186,203,0.7);border-radius:9.8px 2px 9.8px 2px;animation-name:fall-spin;animation-duration:12.80s;animation-delay:-3.07s;--drift:63.6px;--peak:0.77"></i><i style="left:67.01%;width:10.0px;height:6.2px;background:rgba(232,142,171,0.85);border-radius:10.0px 2px 10.0px 2px;animation-name:fall-spin;animation-duration:15.98s;animation-delay:-7.68s;--drift:-21.0px;--peak:0.82"></i><i style="left:92.21%;width:11.1px;height:6.9px;background:rgba(244,186,203,0.7);border-radius:11.1px 2px 11.1px 2px;animation-name:fall-spin;animation-duration:11.51s;animation-delay:-4.08s;--drift:67.3px;--peak:0.88"></i><i style="left:48.06%;width:14.4px;height:8.9px;background:rgba(232,142,171,0.85);border-radius:14.4px 2px 14.4px 2px;animation-name:fall-spin;animation-duration:11.29s;animation-delay:-3.27s;--drift:20.5px;--peak:0.99"></i><i style="left:3.20%;width:11.5px;height:7.1px;background:rgba(244,186,203,0.7);border-radius:11.5px 2px 11.5px 2px;animation-name:fall-spin;animation-duration:16.59s;animation-delay:-3.78s;--drift:-8.8px;--peak:0.81"></i><i style="left:78.68%;width:11.4px;height:7.1px;background:rgba(232,142,171,0.85);border-radius:11.4px 2px 11.4px 2px;animation-name:fall-spin;animation-duration:8.55s;animation-delay:-4.20s;--drift:-49.1px;--peak:0.90"></i><i style="left:73.81%;width:15.3px;height:9.5px;background:rgba(244,186,203,0.7);border-radius:15.3px 2px 15.3px 2px;animation-name:fall-spin;animation-duration:11.04s;animation-delay:-6.41s;--drift:31.3px;--peak:0.95"></i><i style="left:51.15%;width:9.2px;height:5.7px;background:rgba(244,186,203,0.7);border-radius:9.2px 2px 9.2px 2px;animation-name:fall-spin;animation-duration:13.82s;animation-delay:-5.86s;--drift:1.5px;--peak:0.82"></i><i style="left:87.72%;width:13.6px;height:8.4px;background:rgba(232,142,171,0.85);border-radius:13.6px 2px 13.6px 2px;animation-name:fall-spin;animation-duration:12.21s;animation-delay:-5.60s;--drift:-13.9px;--peak:0.93"></i><i style="left:29.89%;width:10.2px;height:6.3px;background:rgba(232,142,171,0.85);border-radius:10.2px 2px 10.2px 2px;animation-name:fall-spin;animation-duration:9.21s;animation-delay:-1.86s;--drift:-27.2px;--peak:0.92"></i></div>
           
-          <div class="stage-caption">Living background — CSS approximation of WeatherOverlay.tsx</div>
+          <div class="stage-caption">Living background — CSS approximation</div>
         </div>
 
         <div class="mock">
@@ -1089,16 +1259,16 @@
             <p class="t-hero">Hero 30</p>
             <p class="t-title">Title 22</p>
             <p class="t-subtitle">Subtitle 16</p>
-            <p class="t-body">Body 15 — Manrope regular, the workhorse.</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
             <p class="t-caption">Caption 12.5 — supporting detail.</p>
-            <p class="t-mono">mono 12 — JetBrains, stamps and serials</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
           </div>
         </div>
       </div>
 
       <section class="group">
         <h3>Contrast audit</h3>
-        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A new pack that fails here will be unreadable on a phone in daylight.</p>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
         <table class="audit">
           <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
           <tbody>
@@ -1365,10 +1535,10 @@
       </div>
     </article>
 
-    <article class="panel" data-panel="meadow" data-variant="meadow" hidden>
+    <article class="panel" data-panel="seasons-meadow" data-variant="seasons-meadow" hidden>
       <header class="panel-head">
         <div>
-          <p class="eyebrow">LIGHT VARIANT · DEFAULT THIS MONTH</p>
+          <p class="eyebrow">LIGHT VARIANT</p>
           <h2>Spring · Meadow</h2>
           <p class="blurb">Golden field, floating leaves. Light theme.</p>
           <p class="blurb blurb-tr">TR — İlkbahar · Çayır · Altın rengi kır, uçuşan yapraklar. Açık tema.</p>
@@ -1380,13 +1550,13 @@
       </header>
 
       <div class="split">
-        <div class="stage" data-season="meadow">
+        <div class="stage" style="--cel-x:72.0%;--cel-y:16.0%">
           <div class="sky"></div>
           <div class="celestial"></div>
-          <div class="scenery"><svg viewBox="0 0 400 90" preserveAspectRatio="none"><path d="M 4 90 Q 0.7999999999999998 74.4 -4 64 M 19.5 90 Q 17.1 70.2 13.5 57 M 35 90 Q 33.4 66 31 50 M 50.5 90 Q 49.7 61.8 48.5 43 M 66 90 Q 66 57.6 66 36 M 81.5 90 Q 82.3 71.4 83.5 59 M 97 90 Q 98.6 67.2 101 52 M 112.5 90 Q 114.9 63 118.5 45 M 128 90 Q 131.2 58.8 136 38 M 143.5 90 Q 140.7 72.6 136.5 61 M 159 90 Q 157 68.4 154 54 M 174.5 90 Q 173.3 64.2 171.5 47 M 190 90 Q 189.6 60 189 40 M 205.5 90 Q 205.9 73.8 206.5 63 M 221 90 Q 222.2 69.6 224 56 M 236.5 90 Q 238.5 65.4 241.5 49 M 252 90 Q 254.8 61.2 259 42 M 267.5 90 Q 264.3 57 259.5 35 M 283 90 Q 280.6 70.8 277 58 M 298.5 90 Q 296.9 66.6 294.5 51 M 314 90 Q 313.2 62.400000000000006 312 44 M 329.5 90 Q 329.5 58.2 329.5 37 M 345 90 Q 345.8 72 347 60 M 360.5 90 Q 362.1 67.8 364.5 53 M 376 90 Q 378.4 63.6 382 46 M 391.5 90 Q 394.7 59.400000000000006 399.5 39" stroke="rgba(94,140,70,0.5)" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="38" cy="42" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="102" cy="34" r="4.5" fill="rgba(110,158,86,0.65)"/><circle cx="178" cy="46" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="251" cy="36" r="4.5" fill="rgba(110,158,86,0.65)"/><circle cx="322" cy="44" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="376" cy="38" r="4.5" fill="rgba(110,158,86,0.65)"/></svg></div>
-          <div class="particles" data-kind="leaf"><i style="left:35.39%;width:7.6px;height:5.0px;border-radius:7.6px 2px 7.6px 2px;background:rgba(146,186,120,0.55);animation-duration:8.59s;animation-delay:-4.07s;--drift:21.5px;--peak:0.96"></i><i style="left:39.27%;width:8.3px;height:5.5px;border-radius:8.3px 2px 8.3px 2px;background:rgba(110,158,86,0.65);animation-duration:14.39s;animation-delay:-0.24s;--drift:30.0px;--peak:0.82"></i><i style="left:49.93%;width:8.6px;height:5.7px;border-radius:8.6px 2px 8.6px 2px;background:rgba(146,186,120,0.55);animation-duration:10.83s;animation-delay:-0.62s;--drift:16.9px;--peak:0.90"></i><i style="left:20.16%;width:6.6px;height:4.3px;border-radius:6.6px 2px 6.6px 2px;background:rgba(110,158,86,0.65);animation-duration:11.07s;animation-delay:-6.04s;--drift:32.2px;--peak:0.83"></i><i style="left:35.08%;width:5.8px;height:3.8px;border-radius:5.8px 2px 5.8px 2px;background:rgba(146,186,120,0.55);animation-duration:14.15s;animation-delay:-1.72s;--drift:6.9px;--peak:0.74"></i><i style="left:83.98%;width:10.5px;height:7.0px;border-radius:10.5px 2px 10.5px 2px;background:rgba(146,186,120,0.55);animation-duration:13.32s;animation-delay:-0.66s;--drift:15.5px;--peak:0.89"></i><i style="left:38.67%;width:6.1px;height:4.0px;border-radius:6.1px 2px 6.1px 2px;background:rgba(110,158,86,0.65);animation-duration:16.16s;animation-delay:-2.99s;--drift:5.5px;--peak:0.71"></i><i style="left:2.87%;width:9.7px;height:6.4px;border-radius:9.7px 2px 9.7px 2px;background:rgba(110,158,86,0.65);animation-duration:12.76s;animation-delay:-3.14s;--drift:-24.8px;--peak:0.85"></i><i style="left:58.19%;width:7.5px;height:4.9px;border-radius:7.5px 2px 7.5px 2px;background:rgba(110,158,86,0.65);animation-duration:9.25s;animation-delay:-5.32s;--drift:-19.1px;--peak:0.95"></i><i style="left:73.13%;width:8.3px;height:5.5px;border-radius:8.3px 2px 8.3px 2px;background:rgba(110,158,86,0.65);animation-duration:17.72s;animation-delay:-4.41s;--drift:16.4px;--peak:0.75"></i><i style="left:2.00%;width:9.4px;height:6.2px;border-radius:9.4px 2px 9.4px 2px;background:rgba(110,158,86,0.65);animation-duration:14.16s;animation-delay:-7.20s;--drift:-39.2px;--peak:0.84"></i><i style="left:92.93%;width:11.3px;height:7.4px;border-radius:11.3px 2px 11.3px 2px;background:rgba(146,186,120,0.55);animation-duration:8.73s;animation-delay:-5.86s;--drift:17.6px;--peak:0.97"></i><i style="left:97.85%;width:6.5px;height:4.3px;border-radius:6.5px 2px 6.5px 2px;background:rgba(110,158,86,0.65);animation-duration:11.14s;animation-delay:-1.54s;--drift:25.2px;--peak:0.87"></i><i style="left:39.77%;width:7.5px;height:4.9px;border-radius:7.5px 2px 7.5px 2px;background:rgba(110,158,86,0.65);animation-duration:10.48s;animation-delay:-0.57s;--drift:36.6px;--peak:0.93"></i><i style="left:39.20%;width:9.6px;height:6.4px;border-radius:9.6px 2px 9.6px 2px;background:rgba(110,158,86,0.65);animation-duration:13.05s;animation-delay:-7.05s;--drift:-4.4px;--peak:0.92"></i><i style="left:80.95%;width:10.6px;height:7.0px;border-radius:10.6px 2px 10.6px 2px;background:rgba(110,158,86,0.65);animation-duration:11.72s;animation-delay:-5.13s;--drift:-3.8px;--peak:0.89"></i></div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 90" preserveAspectRatio="none" style="height:90px"><path d="M 4 90 Q 0.7999999999999998 74.4 -4 64 M 19.5 90 Q 17.1 70.2 13.5 57 M 35 90 Q 33.4 66 31 50 M 50.5 90 Q 49.7 61.8 48.5 43 M 66 90 Q 66 57.6 66 36 M 81.5 90 Q 82.3 71.4 83.5 59 M 97 90 Q 98.6 67.2 101 52 M 112.5 90 Q 114.9 63 118.5 45 M 128 90 Q 131.2 58.8 136 38 M 143.5 90 Q 140.7 72.6 136.5 61 M 159 90 Q 157 68.4 154 54 M 174.5 90 Q 173.3 64.2 171.5 47 M 190 90 Q 189.6 60 189 40 M 205.5 90 Q 205.9 73.8 206.5 63 M 221 90 Q 222.2 69.6 224 56 M 236.5 90 Q 238.5 65.4 241.5 49 M 252 90 Q 254.8 61.2 259 42 M 267.5 90 Q 264.3 57 259.5 35 M 283 90 Q 280.6 70.8 277 58 M 298.5 90 Q 296.9 66.6 294.5 51 M 314 90 Q 313.2 62.400000000000006 312 44 M 329.5 90 Q 329.5 58.2 329.5 37 M 345 90 Q 345.8 72 347 60 M 360.5 90 Q 362.1 67.8 364.5 53 M 376 90 Q 378.4 63.6 382 46 M 391.5 90 Q 394.7 59.400000000000006 399.5 39" stroke="rgba(94,140,70,0.5)" stroke-width="3" stroke-linecap="round" fill="none"/><circle cx="38" cy="42" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="102" cy="34" r="4.5" fill="rgba(110,158,86,0.65)"/><circle cx="178" cy="46" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="251" cy="36" r="4.5" fill="rgba(110,158,86,0.65)"/><circle cx="322" cy="44" r="4.5" fill="rgba(56,100,42,0.4)"/><circle cx="376" cy="38" r="4.5" fill="rgba(110,158,86,0.65)"/></svg></div>
+          <div class="particles"><i style="left:53.08%;width:10.7px;height:6.6px;background:rgba(110,158,86,0.65);border-radius:10.7px 2px 10.7px 2px;animation-name:fall-spin;animation-duration:8.90s;animation-delay:-7.81s;--drift:-26.7px;--peak:1.00"></i><i style="left:50.57%;width:14.0px;height:8.7px;background:rgba(110,158,86,0.65);border-radius:14.0px 2px 14.0px 2px;animation-name:fall-spin;animation-duration:7.74s;animation-delay:-3.09s;--drift:-48.1px;--peak:0.97"></i><i style="left:18.37%;width:12.6px;height:7.8px;background:rgba(110,158,86,0.65);border-radius:12.6px 2px 12.6px 2px;animation-name:fall-spin;animation-duration:13.14s;animation-delay:-2.53s;--drift:59.3px;--peak:0.90"></i><i style="left:95.69%;width:7.4px;height:4.6px;background:rgba(110,158,86,0.65);border-radius:7.4px 2px 7.4px 2px;animation-name:fall-spin;animation-duration:15.49s;animation-delay:-0.50s;--drift:-43.0px;--peak:0.75"></i><i style="left:23.40%;width:8.9px;height:5.5px;background:rgba(110,158,86,0.65);border-radius:8.9px 2px 8.9px 2px;animation-name:fall-spin;animation-duration:13.83s;animation-delay:-3.95s;--drift:-52.6px;--peak:0.81"></i><i style="left:6.06%;width:15.2px;height:9.4px;background:rgba(146,186,120,0.55);border-radius:15.2px 2px 15.2px 2px;animation-name:fall-spin;animation-duration:8.69s;animation-delay:-6.12s;--drift:44.9px;--peak:0.95"></i><i style="left:88.02%;width:9.2px;height:5.7px;background:rgba(110,158,86,0.65);border-radius:9.2px 2px 9.2px 2px;animation-name:fall-spin;animation-duration:16.77s;animation-delay:-3.71s;--drift:-39.4px;--peak:0.77"></i><i style="left:29.14%;width:11.2px;height:7.0px;background:rgba(146,186,120,0.55);border-radius:11.2px 2px 11.2px 2px;animation-name:fall-spin;animation-duration:10.82s;animation-delay:-6.97s;--drift:25.0px;--peak:0.94"></i><i style="left:23.19%;width:9.5px;height:5.9px;background:rgba(110,158,86,0.65);border-radius:9.5px 2px 9.5px 2px;animation-name:fall-spin;animation-duration:14.66s;animation-delay:-0.18s;--drift:-28.4px;--peak:0.84"></i><i style="left:59.64%;width:8.2px;height:5.1px;background:rgba(110,158,86,0.65);border-radius:8.2px 2px 8.2px 2px;animation-name:fall-spin;animation-duration:14.26s;animation-delay:-3.91s;--drift:47.6px;--peak:0.85"></i><i style="left:21.30%;width:9.1px;height:5.7px;background:rgba(110,158,86,0.65);border-radius:9.1px 2px 9.1px 2px;animation-name:fall-spin;animation-duration:8.73s;animation-delay:-0.53s;--drift:66.5px;--peak:0.89"></i><i style="left:1.70%;width:13.6px;height:8.4px;background:rgba(146,186,120,0.55);border-radius:13.6px 2px 13.6px 2px;animation-name:fall-spin;animation-duration:11.47s;animation-delay:-7.80s;--drift:-71.3px;--peak:0.96"></i><i style="left:29.72%;width:12.7px;height:7.9px;background:rgba(110,158,86,0.65);border-radius:12.7px 2px 12.7px 2px;animation-name:fall-spin;animation-duration:7.26s;animation-delay:-4.53s;--drift:-1.3px;--peak:0.98"></i><i style="left:61.61%;width:11.7px;height:7.3px;background:rgba(110,158,86,0.65);border-radius:11.7px 2px 11.7px 2px;animation-name:fall-spin;animation-duration:13.11s;animation-delay:-4.82s;--drift:54.6px;--peak:0.90"></i></div>
           
-          <div class="stage-caption">Living background — CSS approximation of WeatherOverlay.tsx</div>
+          <div class="stage-caption">Living background — CSS approximation</div>
         </div>
 
         <div class="mock">
@@ -1419,16 +1589,16 @@
             <p class="t-hero">Hero 30</p>
             <p class="t-title">Title 22</p>
             <p class="t-subtitle">Subtitle 16</p>
-            <p class="t-body">Body 15 — Manrope regular, the workhorse.</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
             <p class="t-caption">Caption 12.5 — supporting detail.</p>
-            <p class="t-mono">mono 12 — JetBrains, stamps and serials</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
           </div>
         </div>
       </div>
 
       <section class="group">
         <h3>Contrast audit</h3>
-        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A new pack that fails here will be unreadable on a phone in daylight.</p>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
         <table class="audit">
           <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
           <tbody>
@@ -1694,30 +1864,1446 @@
         </section>
       </div>
     </article>
+    </section>
+
+    <section class="pack" data-pack="cartoon" hidden style="--r-sm:16px;--r-md:22px;--r-lg:30px;--r-xl:38px">
+      <div class="pack-head">
+        <div>
+          <h2 class="pack-title">Cartoon</h2>
+          <p class="pack-blurb">Four bright worlds for children. Saturated, flat, high contrast — Space is the dark one.</p>
+          <p class="pack-note">Rotates by day of the month, so the same world is not always waiting.</p>
+        </div>
+        <div class="pack-stats">
+          <span><b>4</b> variants</span>
+          <span class="good"><b>0</b> contrast failures</span>
+          <span><b>30px</b> card radius</span>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="strip-card" data-variant="cartoon-jungle">
+          <div class="strip-sky"></div>
+          <div class="strip-body">
+            <p class="strip-name">Jungle</p>
+            <div class="strip-dots">
+              <span title="accent" style="background:#1E7A3C"></span><span title="patina" style="background:#0F6E52"></span><span title="kindling" style="background:#8A5200"></span><span title="ember" style="background:#B3261E"></span><span title="textPrimary" style="background:#17331A"></span>
+            </div>
+          </div>
+        </div>
+        <div class="strip-card" data-variant="cartoon-ocean">
+          <div class="strip-sky"></div>
+          <div class="strip-body">
+            <p class="strip-name">Ocean</p>
+            <div class="strip-dots">
+              <span title="accent" style="background:#0B6E96"></span><span title="patina" style="background:#0A7059"></span><span title="kindling" style="background:#8A5200"></span><span title="ember" style="background:#B3261E"></span><span title="textPrimary" style="background:#0C2F3F"></span>
+            </div>
+          </div>
+        </div>
+        <div class="strip-card" data-variant="cartoon-space">
+          <div class="strip-sky"></div>
+          <div class="strip-body">
+            <p class="strip-name">Space</p>
+            <div class="strip-dots">
+              <span title="accent" style="background:#7FB3FF"></span><span title="patina" style="background:#4FD6A8"></span><span title="kindling" style="background:#FFC24D"></span><span title="ember" style="background:#FF8A7A"></span><span title="textPrimary" style="background:#F2EFFF"></span>
+            </div>
+          </div>
+        </div>
+        <div class="strip-card" data-variant="cartoon-candy">
+          <div class="strip-sky"></div>
+          <div class="strip-body">
+            <p class="strip-name">Candy</p>
+            <div class="strip-dots">
+              <span title="accent" style="background:#C2185B"></span><span title="patina" style="background:#0F6E52"></span><span title="kindling" style="background:#8A5200"></span><span title="ember" style="background:#B3261E"></span><span title="textPrimary" style="background:#3E1430"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab" data-tab="cartoon-jungle" data-variant="cartoon-jungle"><span class="tab-dot"></span>Jungle</button>
+        <button class="tab" data-tab="cartoon-ocean" data-variant="cartoon-ocean"><span class="tab-dot"></span>Ocean</button>
+        <button class="tab" data-tab="cartoon-space" data-variant="cartoon-space"><span class="tab-dot"></span>Space</button>
+        <button class="tab" data-tab="cartoon-candy" data-variant="cartoon-candy"><span class="tab-dot"></span>Candy</button>
+      </nav>
+
+      <article class="panel" data-panel="cartoon-jungle" data-variant="cartoon-jungle" hidden>
+      <header class="panel-head">
+        <div>
+          <p class="eyebrow">LIGHT VARIANT</p>
+          <h2>Jungle</h2>
+          <p class="blurb">Green canopy, spinning leaves, warm sun.</p>
+          <p class="blurb blurb-tr">TR — Orman · Yeşil çatı, dönen yapraklar, ılık güneş.</p>
+        </div>
+        <div class="audit-badge ">
+          <strong>All clear</strong>
+          <small>13 WCAG checks</small>
+        </div>
+      </header>
+
+      <div class="split">
+        <div class="stage" style="--cel-x:76.0%;--cel-y:11.0%">
+          <div class="sky"></div>
+          <div class="celestial"></div>
+          <div class="scenery scenery-top"><svg viewBox="0 0 400 130" preserveAspectRatio="none" style="height:130px"><path d="M 0 0 L 400 0 L 400 44 Q 372 78 344 46 Q 316 86 286 50 Q 258 92 228 52 Q 198 84 170 48 Q 140 88 112 50 Q 84 80 56 46 Q 28 76 0 42 Z" fill="rgba(22,80,40,0.85)"/><ellipse cx="42" cy="60" rx="17" ry="10" fill="rgba(90,180,90,0.9)" opacity="0.8"/><ellipse cx="128" cy="66" rx="17" ry="10" fill="rgba(90,180,90,0.9)" opacity="0.8"/><ellipse cx="214" cy="64" rx="17" ry="10" fill="rgba(90,180,90,0.9)" opacity="0.8"/><ellipse cx="300" cy="62" rx="17" ry="10" fill="rgba(90,180,90,0.9)" opacity="0.8"/><ellipse cx="368" cy="56" rx="17" ry="10" fill="rgba(90,180,90,0.9)" opacity="0.8"/></svg></div><div class="scenery scenery-bottom"><svg viewBox="0 0 400 92" preserveAspectRatio="none" style="height:92px"><path d="M 0 92 L 0 58 Q 40 22 80 58 Q 120 20 160 58 Q 200 24 240 58 Q 280 18 320 58 Q 360 26 400 58 L 400 92 Z" fill="rgba(22,80,40,0.85)"/><circle cx="62" cy="50" r="7" fill="rgba(90,180,90,0.9)"/><circle cx="186" cy="48" r="7" fill="rgba(90,180,90,0.9)"/><circle cx="306" cy="52" r="7" fill="rgba(90,180,90,0.9)"/></svg></div>
+          <div class="particles"><i style="left:53.88%;width:14.3px;height:8.8px;background:rgba(74,150,64,0.8);border-radius:14.3px 2px 14.3px 2px;animation-name:fall-spin;animation-duration:11.58s;animation-delay:-5.04s;--drift:14.6px;--peak:0.91"></i><i style="left:49.36%;width:14.2px;height:8.8px;background:rgba(140,200,110,0.65);border-radius:14.2px 2px 14.2px 2px;animation-name:fall-spin;animation-duration:7.85s;animation-delay:-3.60s;--drift:-4.9px;--peak:0.98"></i><i style="left:59.57%;width:12.7px;height:7.9px;background:rgba(74,150,64,0.8);border-radius:12.7px 2px 12.7px 2px;animation-name:fall-spin;animation-duration:7.77s;animation-delay:-4.45s;--drift:46.2px;--peak:0.95"></i><i style="left:85.64%;width:11.6px;height:7.2px;background:rgba(74,150,64,0.8);border-radius:11.6px 2px 11.6px 2px;animation-name:fall-spin;animation-duration:10.66s;animation-delay:-0.86s;--drift:-5.8px;--peak:0.84"></i><i style="left:91.54%;width:11.9px;height:7.4px;background:rgba(140,200,110,0.65);border-radius:11.9px 2px 11.9px 2px;animation-name:fall-spin;animation-duration:10.46s;animation-delay:-1.53s;--drift:9.3px;--peak:0.89"></i><i style="left:93.40%;width:14.3px;height:8.8px;background:rgba(74,150,64,0.8);border-radius:14.3px 2px 14.3px 2px;animation-name:fall-spin;animation-duration:8.30s;animation-delay:-0.96s;--drift:67.0px;--peak:0.97"></i><i style="left:19.30%;width:14.4px;height:8.9px;background:rgba(74,150,64,0.8);border-radius:14.4px 2px 14.4px 2px;animation-name:fall-spin;animation-duration:9.95s;animation-delay:-4.68s;--drift:5.1px;--peak:0.99"></i><i style="left:26.77%;width:10.7px;height:6.7px;background:rgba(140,200,110,0.65);border-radius:10.7px 2px 10.7px 2px;animation-name:fall-spin;animation-duration:9.42s;animation-delay:-7.39s;--drift:70.2px;--peak:0.96"></i><i style="left:24.78%;width:11.0px;height:6.8px;background:rgba(74,150,64,0.8);border-radius:11.0px 2px 11.0px 2px;animation-name:fall-spin;animation-duration:7.32s;animation-delay:-1.02s;--drift:26.4px;--peak:0.99"></i><i style="left:0.50%;width:9.7px;height:6.0px;background:rgba(140,200,110,0.65);border-radius:9.7px 2px 9.7px 2px;animation-name:fall-spin;animation-duration:14.78s;animation-delay:-2.34s;--drift:-62.3px;--peak:0.80"></i><i style="left:90.00%;width:9.7px;height:6.0px;background:rgba(74,150,64,0.8);border-radius:9.7px 2px 9.7px 2px;animation-name:fall-spin;animation-duration:14.04s;animation-delay:-3.95s;--drift:-15.5px;--peak:0.87"></i><i style="left:17.35%;width:11.0px;height:6.8px;background:rgba(140,200,110,0.65);border-radius:11.0px 2px 11.0px 2px;animation-name:fall-spin;animation-duration:8.55s;animation-delay:-1.62s;--drift:71.8px;--peak:0.99"></i><i style="left:80.69%;width:13.9px;height:8.6px;background:rgba(140,200,110,0.65);border-radius:13.9px 2px 13.9px 2px;animation-name:fall-spin;animation-duration:9.47s;animation-delay:-1.54s;--drift:1.6px;--peak:0.99"></i><i style="left:84.73%;width:11.7px;height:7.2px;background:rgba(140,200,110,0.65);border-radius:11.7px 2px 11.7px 2px;animation-name:fall-spin;animation-duration:12.89s;animation-delay:-2.26s;--drift:-2.6px;--peak:0.86"></i><i style="left:68.83%;width:15.6px;height:9.7px;background:rgba(74,150,64,0.8);border-radius:15.6px 2px 15.6px 2px;animation-name:fall-spin;animation-duration:11.46s;animation-delay:-7.90s;--drift:15.3px;--peak:0.96"></i><i style="left:43.97%;width:12.0px;height:7.5px;background:rgba(74,150,64,0.8);border-radius:12.0px 2px 12.0px 2px;animation-name:fall-spin;animation-duration:8.32s;animation-delay:-2.35s;--drift:-56.4px;--peak:0.95"></i></div>
+          
+          <div class="stage-caption">Living background — CSS approximation</div>
+        </div>
+
+        <div class="mock">
+          <div class="mock-card">
+            <p class="m-eyebrow">SPECIMEN · 004</p>
+            <h4 class="m-title">A card on this palette</h4>
+            <p class="m-body">Body text at 15px with a 23px line height, the way <code>typography.body</code> renders it on a Card.</p>
+            <p class="m-caption">Caption text — 12.5px, textSecondary.</p>
+            <div class="m-row">
+              <button class="btn primary">Primary</button>
+              <button class="btn secondary">Secondary</button>
+            </div>
+            <div class="m-row">
+              <button class="btn ghost">Ghost</button>
+              <button class="btn danger">Danger</button>
+            </div>
+            <div class="m-row">
+              <span class="m-chip active">Active chip</span>
+              <span class="m-chip">Idle chip</span>
+            </div>
+            <div class="m-row">
+              <span class="m-pill accent">OPEN</span>
+              <span class="m-pill kindling">IN PROGRESS</span>
+              <span class="m-pill patina">DONE</span>
+            </div>
+          </div>
+
+          <div class="mock-card type-card">
+            <p class="m-eyebrow">TYPE SPECIMEN</p>
+            <p class="t-hero">Hero 30</p>
+            <p class="t-title">Title 22</p>
+            <p class="t-subtitle">Subtitle 16</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
+            <p class="t-caption">Caption 12.5 — supporting detail.</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="group">
+        <h3>Contrast audit</h3>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
+        <table class="audit">
+          <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
+          <tbody>
+<tr class="pass">
+        <td class="audit-label">Body text on page<span class="audit-note">typography.body, 15px</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#F2FAEA"><b style="color:#17331A">Ag</b></span></span></td>
+        <td class="audit-ratio">12.88<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Body text on card<span class="audit-note">typography.body on Card</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#FFFFFF"><b style="color:#17331A">Ag</b></span></span></td>
+        <td class="audit-ratio">13.77<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Caption on card<span class="audit-note">typography.caption, 12.5px</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#FFFFFF"><b style="color:#3B5A3C">Ag</b></span></span></td>
+        <td class="audit-ratio">7.74<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Eyebrow on card<span class="audit-note">typography.eyebrow, 11px — the quietest legible ink</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#FFFFFF"><b style="color:#5A7357">Ag</b></span></span></td>
+        <td class="audit-ratio">5.22<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Title on page<span class="audit-note">typography.title, 22px bold</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#F2FAEA"><b style="color:#17331A">Ag</b></span></span></td>
+        <td class="audit-ratio">12.88<small>:1</small></td>
+        <td class="audit-min">needs 3</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Primary button label<span class="audit-note">Button variant=&quot;primary&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#1E7A3C"><b style="color:#FFFFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">5.38<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Accent eyebrow on card<span class="audit-note">typography.eyebrowAccent, 11px</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#FFFFFF"><b style="color:#1E7A3C">Ag</b></span></span></td>
+        <td class="audit-ratio">5.38<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Active chip label<span class="audit-note">Chip active, 13px</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(30,122,60,0.14)"><b style="color:#14602D">Ag</b></span></span></td>
+        <td class="audit-ratio">6.32<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Danger button label<span class="audit-note">Button variant=&quot;danger&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(179,38,30,0.12)"><b style="color:#B3261E">Ag</b></span></span></td>
+        <td class="audit-ratio">5.37<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Settled state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(15,110,82,0.14)"><b style="color:#0F6E52">Ag</b></span></span></td>
+        <td class="audit-ratio">5.07<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">In-between state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(138,82,0,0.14)"><b style="color:#8A5200">Ag</b></span></span></td>
+        <td class="audit-ratio">5.20<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Secondary button label<span class="audit-note">Button variant=&quot;secondary&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#F9FDF4"><b style="color:#17331A">Ag</b></span></span></td>
+        <td class="audit-ratio">13.37<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Ghost button label<span class="audit-note">Button variant=&quot;ghost&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#F2FAEA"><span style="background:#F2FAEA"><b style="color:#3B5A3C">Ag</b></span></span></td>
+        <td class="audit-ratio">7.24<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="groups">
+        <section class="group">
+          <h3>Grounds &amp; panels</h3>
+          <p class="group-blurb">The stack a screen is built on, from page to hairline.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#F2FAEA"></span>
+              <span class="swatch-meta"><code>bg</code><small>#F2FAEA</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#E4F2D6"></span>
+              <span class="swatch-meta"><code>bgDeep</code><small>#E4F2D6</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>surface</code><small>#FFFFFF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#F9FDF4"></span>
+              <span class="swatch-meta"><code>surfaceRaised</code><small>#F9FDF4</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#EAF4DD"></span>
+              <span class="swatch-meta"><code>surfaceSunken</code><small>#EAF4DD</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(23,51,26,0.12)"></span>
+              <span class="swatch-meta"><code>surfaceBorder</code><small>rgba(23,51,26,0.12)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(23,51,26,0.22)"></span>
+              <span class="swatch-meta"><code>surfaceBorderStrong</code><small>rgba(23,51,26,0.22)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Ink</h3>
+          <p class="group-blurb">Three weights of text, loudest first.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#17331A"></span>
+              <span class="swatch-meta"><code>textPrimary</code><small>#17331A</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#3B5A3C"></span>
+              <span class="swatch-meta"><code>textSecondary</code><small>#3B5A3C</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#5A7357"></span>
+              <span class="swatch-meta"><code>textTertiary</code><small>#5A7357</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Accent</h3>
+          <p class="group-blurb">The pack's voice. onAccent must stay legible on accent.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#1E7A3C"></span>
+              <span class="swatch-meta"><code>accent</code><small>#1E7A3C</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#14602D"></span>
+              <span class="swatch-meta"><code>accentBright</code><small>#14602D</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(30,122,60,0.14)"></span>
+              <span class="swatch-meta"><code>accentDim</code><small>rgba(30,122,60,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(30,122,60,0.45)"></span>
+              <span class="swatch-meta"><code>accentBorder</code><small>rgba(30,122,60,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>onAccent</code><small>#FFFFFF</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Semantic states</h3>
+          <p class="group-blurb">Fixed meanings across every pack: settled, in-between, danger.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0F6E52"></span>
+              <span class="swatch-meta"><code>patina</code><small>#0F6E52</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(15,110,82,0.14)"></span>
+              <span class="swatch-meta"><code>patinaDim</code><small>rgba(15,110,82,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#8A5200"></span>
+              <span class="swatch-meta"><code>kindling</code><small>#8A5200</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.14)"></span>
+              <span class="swatch-meta"><code>kindlingDim</code><small>rgba(138,82,0,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.45)"></span>
+              <span class="swatch-meta"><code>kindlingBorder</code><small>rgba(138,82,0,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#B3261E"></span>
+              <span class="swatch-meta"><code>ember</code><small>#B3261E</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(179,38,30,0.12)"></span>
+              <span class="swatch-meta"><code>emberDim</code><small>rgba(179,38,30,0.12)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Depth</h3>
+          <p class="group-blurb">Shadow and modal scrim.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(40,70,30,0.28)"></span>
+              <span class="swatch-meta"><code>shadow</code><small>rgba(40,70,30,0.28)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(228,242,214,0.85)"></span>
+              <span class="swatch-meta"><code>overlay</code><small>rgba(228,242,214,0.85)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Environment</h3>
+          <p class="group-blurb">Drives the living background: sky, celestial body, scenery, particles.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#B7E4F0"></span>
+              <span class="swatch-meta"><code>skyTop</code><small>#B7E4F0</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#F2FAEA"></span>
+              <span class="swatch-meta"><code>skyBottom</code><small>#F2FAEA</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(22,80,40,0.85)"></span>
+              <span class="swatch-meta"><code>scenery</code><small>rgba(22,80,40,0.85)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(90,180,90,0.9)"></span>
+              <span class="swatch-meta"><code>sceneryAlt</code><small>rgba(90,180,90,0.9)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,214,102,0.95)"></span>
+              <span class="swatch-meta"><code>celestial</code><small>rgba(255,214,102,0.95)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,214,102,0.35)"></span>
+              <span class="swatch-meta"><code>celestialGlow</code><small>rgba(255,214,102,0.35)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(74,150,64,0.8)"></span>
+              <span class="swatch-meta"><code>particle</code><small>rgba(74,150,64,0.8)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(140,200,110,0.65)"></span>
+              <span class="swatch-meta"><code>particleAlt</code><small>rgba(140,200,110,0.65)</small></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="panel" data-panel="cartoon-ocean" data-variant="cartoon-ocean" hidden>
+      <header class="panel-head">
+        <div>
+          <p class="eyebrow">LIGHT VARIANT</p>
+          <h2>Ocean</h2>
+          <p class="blurb">Under the water with coral and rising bubbles.</p>
+          <p class="blurb blurb-tr">TR — Okyanus · Su altında mercanlar ve yükselen kabarcıklar.</p>
+        </div>
+        <div class="audit-badge ">
+          <strong>All clear</strong>
+          <small>13 WCAG checks</small>
+        </div>
+      </header>
+
+      <div class="split">
+        <div class="stage" style="--cel-x:50.0%;--cel-y:6.0%">
+          <div class="sky"></div>
+          <div class="celestial"></div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 124" preserveAspectRatio="none" style="height:124px"><path d="M 70 110 L 70 74 M 70 86 L 54 68 M 70 86 L 86 68 M 70 74 L 60 58 M 70 74 L 82 58" stroke="rgba(90,200,220,0.8)" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M 318 110 L 318 80 M 318 92 L 302 74 M 318 92 L 334 74" stroke="rgba(90,200,220,0.8)" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M 0 124 L 0 96 Q 70 74 140 98 Q 210 72 280 96 Q 340 78 400 98 L 400 124 Z" fill="rgba(12,80,110,0.75)"/><circle cx="168" cy="108" r="6" fill="rgba(90,200,220,0.8)" opacity="0.75"/><circle cx="232" cy="112" r="4.5" fill="rgba(90,200,220,0.8)" opacity="0.75"/><circle cx="96" cy="112" r="5" fill="rgba(90,200,220,0.8)" opacity="0.75"/></svg></div>
+          <div class="particles"><i style="left:69.35%;width:12.7px;height:12.7px;border-radius:50%;border:2.0px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:8.74s;animation-delay:-0.00s;--drift:-10.8px;--peak:0.96"></i><i style="left:5.54%;width:9.1px;height:9.1px;border-radius:50%;border:1.5px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:8.77s;animation-delay:-2.30s;--drift:-23.3px;--peak:0.88"></i><i style="left:21.45%;width:12.8px;height:12.8px;border-radius:50%;border:2.0px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:7.21s;animation-delay:-6.81s;--drift:-14.9px;--peak:0.95"></i><i style="left:56.83%;width:4.0px;height:4.0px;border-radius:50%;border:1.0px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:10.89s;animation-delay:-3.72s;--drift:18.8px;--peak:0.77"></i><i style="left:7.56%;width:11.4px;height:11.4px;border-radius:50%;border:1.8px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:8.74s;animation-delay:-3.88s;--drift:7.8px;--peak:1.00"></i><i style="left:22.64%;width:10.2px;height:10.2px;border-radius:50%;border:1.6px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:10.05s;animation-delay:-6.08s;--drift:10.9px;--peak:0.89"></i><i style="left:51.67%;width:12.1px;height:12.1px;border-radius:50%;border:1.9px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:6.63s;animation-delay:-2.84s;--drift:25.0px;--peak:0.97"></i><i style="left:54.10%;width:9.0px;height:9.0px;border-radius:50%;border:1.4px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:9.58s;animation-delay:-3.82s;--drift:17.4px;--peak:0.86"></i><i style="left:92.43%;width:11.3px;height:11.3px;border-radius:50%;border:1.8px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:9.13s;animation-delay:-0.10s;--drift:-11.2px;--peak:0.90"></i><i style="left:86.07%;width:9.1px;height:9.1px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:8.30s;animation-delay:-5.63s;--drift:-2.6px;--peak:0.99"></i><i style="left:34.24%;width:8.8px;height:8.8px;border-radius:50%;border:1.4px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:10.93s;animation-delay:-1.52s;--drift:26.8px;--peak:0.79"></i><i style="left:98.27%;width:9.8px;height:9.8px;border-radius:50%;border:1.6px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:6.81s;animation-delay:-3.45s;--drift:-24.1px;--peak:0.93"></i><i style="left:51.06%;width:7.9px;height:7.9px;border-radius:50%;border:1.3px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:7.94s;animation-delay:-5.47s;--drift:8.7px;--peak:0.93"></i><i style="left:76.25%;width:13.5px;height:13.5px;border-radius:50%;border:2.2px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:7.17s;animation-delay:-5.01s;--drift:-5.7px;--peak:0.99"></i><i style="left:7.27%;width:11.2px;height:11.2px;border-radius:50%;border:1.8px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:9.63s;animation-delay:-2.09s;--drift:5.8px;--peak:0.93"></i><i style="left:91.71%;width:10.6px;height:10.6px;border-radius:50%;border:1.7px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:9.45s;animation-delay:-5.42s;--drift:27.4px;--peak:0.93"></i><i style="left:46.95%;width:4.7px;height:4.7px;border-radius:50%;border:1.0px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:10.29s;animation-delay:-0.23s;--drift:-5.4px;--peak:0.74"></i><i style="left:40.19%;width:7.9px;height:7.9px;border-radius:50%;border:1.3px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:6.34s;animation-delay:-2.66s;--drift:22.5px;--peak:0.96"></i><i style="left:84.43%;width:10.3px;height:10.3px;border-radius:50%;border:1.6px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:10.08s;animation-delay:-6.35s;--drift:-5.3px;--peak:0.85"></i><i style="left:68.88%;width:5.8px;height:5.8px;border-radius:50%;border:1.0px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:6.42s;animation-delay:-3.30s;--drift:26.7px;--peak:0.90"></i><i style="left:62.94%;width:3.8px;height:3.8px;border-radius:50%;border:1.0px solid rgba(255,255,255,0.85);animation-name:rise;animation-duration:13.44s;animation-delay:-1.83s;--drift:-19.2px;--peak:0.75"></i><i style="left:95.35%;width:11.1px;height:11.1px;border-radius:50%;border:1.8px solid rgba(150,220,240,0.7);animation-name:rise;animation-duration:9.12s;animation-delay:-7.54s;--drift:7.5px;--peak:0.98"></i></div>
+          
+          <div class="stage-caption">Living background — CSS approximation</div>
+        </div>
+
+        <div class="mock">
+          <div class="mock-card">
+            <p class="m-eyebrow">SPECIMEN · 004</p>
+            <h4 class="m-title">A card on this palette</h4>
+            <p class="m-body">Body text at 15px with a 23px line height, the way <code>typography.body</code> renders it on a Card.</p>
+            <p class="m-caption">Caption text — 12.5px, textSecondary.</p>
+            <div class="m-row">
+              <button class="btn primary">Primary</button>
+              <button class="btn secondary">Secondary</button>
+            </div>
+            <div class="m-row">
+              <button class="btn ghost">Ghost</button>
+              <button class="btn danger">Danger</button>
+            </div>
+            <div class="m-row">
+              <span class="m-chip active">Active chip</span>
+              <span class="m-chip">Idle chip</span>
+            </div>
+            <div class="m-row">
+              <span class="m-pill accent">OPEN</span>
+              <span class="m-pill kindling">IN PROGRESS</span>
+              <span class="m-pill patina">DONE</span>
+            </div>
+          </div>
+
+          <div class="mock-card type-card">
+            <p class="m-eyebrow">TYPE SPECIMEN</p>
+            <p class="t-hero">Hero 30</p>
+            <p class="t-title">Title 22</p>
+            <p class="t-subtitle">Subtitle 16</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
+            <p class="t-caption">Caption 12.5 — supporting detail.</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="group">
+        <h3>Contrast audit</h3>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
+        <table class="audit">
+          <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
+          <tbody>
+<tr class="pass">
+        <td class="audit-label">Body text on page<span class="audit-note">typography.body, 15px</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#EAF7FB"><b style="color:#0C2F3F">Ag</b></span></span></td>
+        <td class="audit-ratio">12.85<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Body text on card<span class="audit-note">typography.body on Card</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#FFFFFF"><b style="color:#0C2F3F">Ag</b></span></span></td>
+        <td class="audit-ratio">14.06<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Caption on card<span class="audit-note">typography.caption, 12.5px</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#FFFFFF"><b style="color:#31556A">Ag</b></span></span></td>
+        <td class="audit-ratio">7.96<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Eyebrow on card<span class="audit-note">typography.eyebrow, 11px — the quietest legible ink</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#FFFFFF"><b style="color:#4E7285">Ag</b></span></span></td>
+        <td class="audit-ratio">5.16<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Title on page<span class="audit-note">typography.title, 22px bold</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#EAF7FB"><b style="color:#0C2F3F">Ag</b></span></span></td>
+        <td class="audit-ratio">12.85<small>:1</small></td>
+        <td class="audit-min">needs 3</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Primary button label<span class="audit-note">Button variant=&quot;primary&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#0B6E96"><b style="color:#FFFFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">5.70<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Accent eyebrow on card<span class="audit-note">typography.eyebrowAccent, 11px</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#FFFFFF"><b style="color:#0B6E96">Ag</b></span></span></td>
+        <td class="audit-ratio">5.70<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Active chip label<span class="audit-note">Chip active, 13px</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(11,110,150,0.14)"><b style="color:#075673">Ag</b></span></span></td>
+        <td class="audit-ratio">6.64<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Danger button label<span class="audit-note">Button variant=&quot;danger&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(179,38,30,0.12)"><b style="color:#B3261E">Ag</b></span></span></td>
+        <td class="audit-ratio">5.37<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Settled state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(10,112,89,0.14)"><b style="color:#0A7059">Ag</b></span></span></td>
+        <td class="audit-ratio">4.92<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">In-between state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(138,82,0,0.14)"><b style="color:#8A5200">Ag</b></span></span></td>
+        <td class="audit-ratio">5.20<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Secondary button label<span class="audit-note">Button variant=&quot;secondary&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#F6FCFE"><b style="color:#0C2F3F">Ag</b></span></span></td>
+        <td class="audit-ratio">13.57<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Ghost button label<span class="audit-note">Button variant=&quot;ghost&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#EAF7FB"><span style="background:#EAF7FB"><b style="color:#31556A">Ag</b></span></span></td>
+        <td class="audit-ratio">7.28<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="groups">
+        <section class="group">
+          <h3>Grounds &amp; panels</h3>
+          <p class="group-blurb">The stack a screen is built on, from page to hairline.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#EAF7FB"></span>
+              <span class="swatch-meta"><code>bg</code><small>#EAF7FB</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#D8EEF6"></span>
+              <span class="swatch-meta"><code>bgDeep</code><small>#D8EEF6</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>surface</code><small>#FFFFFF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#F6FCFE"></span>
+              <span class="swatch-meta"><code>surfaceRaised</code><small>#F6FCFE</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#E1F1F8"></span>
+              <span class="swatch-meta"><code>surfaceSunken</code><small>#E1F1F8</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(12,47,63,0.12)"></span>
+              <span class="swatch-meta"><code>surfaceBorder</code><small>rgba(12,47,63,0.12)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(12,47,63,0.22)"></span>
+              <span class="swatch-meta"><code>surfaceBorderStrong</code><small>rgba(12,47,63,0.22)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Ink</h3>
+          <p class="group-blurb">Three weights of text, loudest first.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0C2F3F"></span>
+              <span class="swatch-meta"><code>textPrimary</code><small>#0C2F3F</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#31556A"></span>
+              <span class="swatch-meta"><code>textSecondary</code><small>#31556A</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#4E7285"></span>
+              <span class="swatch-meta"><code>textTertiary</code><small>#4E7285</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Accent</h3>
+          <p class="group-blurb">The pack's voice. onAccent must stay legible on accent.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0B6E96"></span>
+              <span class="swatch-meta"><code>accent</code><small>#0B6E96</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#075673"></span>
+              <span class="swatch-meta"><code>accentBright</code><small>#075673</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(11,110,150,0.14)"></span>
+              <span class="swatch-meta"><code>accentDim</code><small>rgba(11,110,150,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(11,110,150,0.45)"></span>
+              <span class="swatch-meta"><code>accentBorder</code><small>rgba(11,110,150,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>onAccent</code><small>#FFFFFF</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Semantic states</h3>
+          <p class="group-blurb">Fixed meanings across every pack: settled, in-between, danger.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0A7059"></span>
+              <span class="swatch-meta"><code>patina</code><small>#0A7059</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(10,112,89,0.14)"></span>
+              <span class="swatch-meta"><code>patinaDim</code><small>rgba(10,112,89,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#8A5200"></span>
+              <span class="swatch-meta"><code>kindling</code><small>#8A5200</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.14)"></span>
+              <span class="swatch-meta"><code>kindlingDim</code><small>rgba(138,82,0,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.45)"></span>
+              <span class="swatch-meta"><code>kindlingBorder</code><small>rgba(138,82,0,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#B3261E"></span>
+              <span class="swatch-meta"><code>ember</code><small>#B3261E</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(179,38,30,0.12)"></span>
+              <span class="swatch-meta"><code>emberDim</code><small>rgba(179,38,30,0.12)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Depth</h3>
+          <p class="group-blurb">Shadow and modal scrim.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(20,70,95,0.28)"></span>
+              <span class="swatch-meta"><code>shadow</code><small>rgba(20,70,95,0.28)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(216,238,246,0.85)"></span>
+              <span class="swatch-meta"><code>overlay</code><small>rgba(216,238,246,0.85)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Environment</h3>
+          <p class="group-blurb">Drives the living background: sky, celestial body, scenery, particles.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#BDEAF7"></span>
+              <span class="swatch-meta"><code>skyTop</code><small>#BDEAF7</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#EAF7FB"></span>
+              <span class="swatch-meta"><code>skyBottom</code><small>#EAF7FB</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(12,80,110,0.75)"></span>
+              <span class="swatch-meta"><code>scenery</code><small>rgba(12,80,110,0.75)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(90,200,220,0.8)"></span>
+              <span class="swatch-meta"><code>sceneryAlt</code><small>rgba(90,200,220,0.8)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,244,196,0.9)"></span>
+              <span class="swatch-meta"><code>celestial</code><small>rgba(255,244,196,0.9)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(180,240,255,0.35)"></span>
+              <span class="swatch-meta"><code>celestialGlow</code><small>rgba(180,240,255,0.35)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,255,255,0.85)"></span>
+              <span class="swatch-meta"><code>particle</code><small>rgba(255,255,255,0.85)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(150,220,240,0.7)"></span>
+              <span class="swatch-meta"><code>particleAlt</code><small>rgba(150,220,240,0.7)</small></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="panel" data-panel="cartoon-space" data-variant="cartoon-space" hidden>
+      <header class="panel-head">
+        <div>
+          <p class="eyebrow">DARK VARIANT</p>
+          <h2>Space</h2>
+          <p class="blurb">Stars, a planet and a friendly moon. Dark theme.</p>
+          <p class="blurb blurb-tr">TR — Uzay · Yıldızlar, bir gezegen ve güler yüzlü ay. Koyu tema.</p>
+        </div>
+        <div class="audit-badge ">
+          <strong>All clear</strong>
+          <small>13 WCAG checks</small>
+        </div>
+      </header>
+
+      <div class="split">
+        <div class="stage" style="--cel-x:24.0%;--cel-y:13.0%">
+          <div class="sky"></div>
+          <div class="celestial"></div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 130" preserveAspectRatio="none" style="height:130px"><path d="M -40 130 Q 200 24 440 130 Z" fill="rgba(60,45,120,0.9)"/><circle cx="120" cy="86" r="11" fill="rgba(160,140,255,0.55)" opacity="0.5"/><circle cx="214" cy="70" r="8" fill="rgba(160,140,255,0.55)" opacity="0.5"/><circle cx="292" cy="92" r="13" fill="rgba(160,140,255,0.55)" opacity="0.5"/><circle cx="64" cy="112" r="7" fill="rgba(160,140,255,0.55)" opacity="0.5"/></svg></div>
+          <div class="particles"><i style="left:60.44%;top:25.58%;width:3.0px;height:3.0px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.66s;animation-delay:-0.71s;--drift:0.0px;--peak:0.82"></i><i style="left:0.97%;top:24.76%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:4.39s;animation-delay:-4.98s;--drift:0.0px;--peak:0.77"></i><i style="left:47.53%;top:23.72%;width:2.5px;height:2.5px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.26s;animation-delay:-7.86s;--drift:0.0px;--peak:0.84"></i><i style="left:68.37%;top:14.41%;width:1.9px;height:1.9px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:2.79s;animation-delay:-2.89s;--drift:0.0px;--peak:0.87"></i><i style="left:86.73%;top:81.08%;width:1.8px;height:1.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.65s;animation-delay:-7.90s;--drift:0.0px;--peak:0.79"></i><i style="left:99.96%;top:11.65%;width:3.0px;height:3.0px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.79s;animation-delay:-2.25s;--drift:0.0px;--peak:0.93"></i><i style="left:13.70%;top:33.72%;width:2.5px;height:2.5px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.73s;animation-delay:-0.59s;--drift:0.0px;--peak:0.79"></i><i style="left:23.61%;top:7.12%;width:4.1px;height:4.1px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.25s;animation-delay:-2.28s;--drift:0.0px;--peak:0.96"></i><i style="left:12.21%;top:65.37%;width:2.2px;height:2.2px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:2.48s;animation-delay:-5.90s;--drift:0.0px;--peak:0.98"></i><i style="left:33.58%;top:30.62%;width:3.9px;height:3.9px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.96s;animation-delay:-6.14s;--drift:0.0px;--peak:0.93"></i><i style="left:0.31%;top:16.30%;width:1.8px;height:1.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.19s;animation-delay:-6.05s;--drift:0.0px;--peak:0.85"></i><i style="left:31.92%;top:3.62%;width:2.9px;height:2.9px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.96s;animation-delay:-5.24s;--drift:0.0px;--peak:0.92"></i><i style="left:91.87%;top:58.79%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.65s;animation-delay:-7.35s;--drift:0.0px;--peak:0.79"></i><i style="left:88.54%;top:70.89%;width:1.9px;height:1.9px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.29s;animation-delay:-5.48s;--drift:0.0px;--peak:0.82"></i><i style="left:54.02%;top:34.67%;width:2.2px;height:2.2px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:6.07s;animation-delay:-0.75s;--drift:0.0px;--peak:0.77"></i><i style="left:88.86%;top:77.30%;width:2.8px;height:2.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.62s;animation-delay:-0.76s;--drift:0.0px;--peak:0.91"></i><i style="left:7.09%;top:12.93%;width:4.4px;height:4.4px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.82s;animation-delay:-2.10s;--drift:0.0px;--peak:0.96"></i><i style="left:28.44%;top:43.24%;width:2.3px;height:2.3px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.60s;animation-delay:-3.08s;--drift:0.0px;--peak:0.78"></i><i style="left:58.00%;top:20.90%;width:2.7px;height:2.7px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:5.44s;animation-delay:-0.82s;--drift:0.0px;--peak:0.78"></i><i style="left:49.66%;top:51.92%;width:4.4px;height:4.4px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.69s;animation-delay:-3.90s;--drift:0.0px;--peak:0.92"></i><i style="left:36.32%;top:5.68%;width:1.5px;height:1.5px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.69s;animation-delay:-6.14s;--drift:0.0px;--peak:0.73"></i><i style="left:37.57%;top:39.28%;width:1.7px;height:1.7px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.30s;animation-delay:-5.19s;--drift:0.0px;--peak:0.82"></i><i style="left:35.27%;top:4.18%;width:2.5px;height:2.5px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:2.45s;animation-delay:-5.25s;--drift:0.0px;--peak:0.89"></i><i style="left:26.84%;top:36.66%;width:3.8px;height:3.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.64s;animation-delay:-3.11s;--drift:0.0px;--peak:0.86"></i><i style="left:8.95%;top:20.37%;width:1.5px;height:1.5px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:5.05s;animation-delay:-1.66s;--drift:0.0px;--peak:0.80"></i><i style="left:86.44%;top:69.98%;width:3.1px;height:3.1px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:2.64s;animation-delay:-5.03s;--drift:0.0px;--peak:0.92"></i><i style="left:18.51%;top:48.53%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.99s;animation-delay:-5.13s;--drift:0.0px;--peak:0.89"></i><i style="left:3.99%;top:58.44%;width:3.2px;height:3.2px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.09s;animation-delay:-5.45s;--drift:0.0px;--peak:0.89"></i><i style="left:27.65%;top:58.60%;width:3.3px;height:3.3px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:2.20s;animation-delay:-7.59s;--drift:0.0px;--peak:0.91"></i><i style="left:92.35%;top:57.25%;width:2.7px;height:2.7px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.73s;animation-delay:-5.14s;--drift:0.0px;--peak:0.82"></i><i style="left:0.65%;top:33.96%;width:1.6px;height:1.6px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:5.18s;animation-delay:-1.44s;--drift:0.0px;--peak:0.79"></i><i style="left:0.27%;top:74.04%;width:3.6px;height:3.6px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.17s;animation-delay:-3.66s;--drift:0.0px;--peak:0.96"></i><i style="left:43.08%;top:31.28%;width:2.0px;height:2.0px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.88s;animation-delay:-0.27s;--drift:0.0px;--peak:0.94"></i><i style="left:46.59%;top:21.63%;width:4.8px;height:4.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.01s;animation-delay:-3.55s;--drift:0.0px;--peak:0.94"></i><i style="left:46.25%;top:19.93%;width:1.8px;height:1.8px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.33s;animation-delay:-7.10s;--drift:0.0px;--peak:0.81"></i><i style="left:60.53%;top:50.70%;width:3.7px;height:3.7px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:2.36s;animation-delay:-1.48s;--drift:0.0px;--peak:0.85"></i><i style="left:42.15%;top:25.82%;width:2.1px;height:2.1px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:4.41s;animation-delay:-5.98s;--drift:0.0px;--peak:0.74"></i><i style="left:48.06%;top:77.99%;width:2.1px;height:2.1px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.24s;animation-delay:-4.71s;--drift:0.0px;--peak:0.82"></i><i style="left:87.06%;top:3.15%;width:5.0px;height:5.0px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:2.06s;animation-delay:-4.21s;--drift:0.0px;--peak:0.96"></i><i style="left:53.41%;top:21.18%;width:3.7px;height:3.7px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.73s;animation-delay:-5.31s;--drift:0.0px;--peak:0.92"></i><i style="left:38.02%;top:34.50%;width:1.4px;height:1.4px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.95s;animation-delay:-6.75s;--drift:0.0px;--peak:0.73"></i><i style="left:59.25%;top:2.82%;width:1.6px;height:1.6px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.53s;animation-delay:-1.24s;--drift:0.0px;--peak:0.83"></i><i style="left:75.80%;top:61.05%;width:2.7px;height:2.7px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:2.94s;animation-delay:-0.18s;--drift:0.0px;--peak:0.97"></i><i style="left:5.26%;top:21.76%;width:3.4px;height:3.4px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:2.02s;animation-delay:-7.31s;--drift:0.0px;--peak:0.99"></i><i style="left:51.77%;top:41.66%;width:2.5px;height:2.5px;border-radius:50%;background:rgba(190,180,255,0.7);animation-name:twinkle;animation-duration:3.67s;animation-delay:-3.46s;--drift:0.0px;--peak:0.78"></i><i style="left:27.27%;top:69.92%;width:1.5px;height:1.5px;border-radius:50%;background:rgba(255,255,255,0.9);animation-name:twinkle;animation-duration:3.50s;animation-delay:-3.17s;--drift:0.0px;--peak:0.82"></i></div>
+          
+          <div class="stage-caption">Living background — CSS approximation</div>
+        </div>
+
+        <div class="mock">
+          <div class="mock-card">
+            <p class="m-eyebrow">SPECIMEN · 004</p>
+            <h4 class="m-title">A card on this palette</h4>
+            <p class="m-body">Body text at 15px with a 23px line height, the way <code>typography.body</code> renders it on a Card.</p>
+            <p class="m-caption">Caption text — 12.5px, textSecondary.</p>
+            <div class="m-row">
+              <button class="btn primary">Primary</button>
+              <button class="btn secondary">Secondary</button>
+            </div>
+            <div class="m-row">
+              <button class="btn ghost">Ghost</button>
+              <button class="btn danger">Danger</button>
+            </div>
+            <div class="m-row">
+              <span class="m-chip active">Active chip</span>
+              <span class="m-chip">Idle chip</span>
+            </div>
+            <div class="m-row">
+              <span class="m-pill accent">OPEN</span>
+              <span class="m-pill kindling">IN PROGRESS</span>
+              <span class="m-pill patina">DONE</span>
+            </div>
+          </div>
+
+          <div class="mock-card type-card">
+            <p class="m-eyebrow">TYPE SPECIMEN</p>
+            <p class="t-hero">Hero 30</p>
+            <p class="t-title">Title 22</p>
+            <p class="t-subtitle">Subtitle 16</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
+            <p class="t-caption">Caption 12.5 — supporting detail.</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="group">
+        <h3>Contrast audit</h3>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
+        <table class="audit">
+          <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
+          <tbody>
+<tr class="pass">
+        <td class="audit-label">Body text on page<span class="audit-note">typography.body, 15px</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#141033"><b style="color:#F2EFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">16.12<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Body text on card<span class="audit-note">typography.body on Card</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#1E1947"><b style="color:#F2EFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">14.45<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Caption on card<span class="audit-note">typography.caption, 12.5px</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#1E1947"><b style="color:#B7AFE0">Ag</b></span></span></td>
+        <td class="audit-ratio">7.95<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Eyebrow on card<span class="audit-note">typography.eyebrow, 11px — the quietest legible ink</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#1E1947"><b style="color:#9089C0">Ag</b></span></span></td>
+        <td class="audit-ratio">5.08<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Title on page<span class="audit-note">typography.title, 22px bold</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#141033"><b style="color:#F2EFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">16.12<small>:1</small></td>
+        <td class="audit-min">needs 3</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Primary button label<span class="audit-note">Button variant=&quot;primary&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#7FB3FF"><b style="color:#0D0A24">Ag</b></span></span></td>
+        <td class="audit-ratio">9.02<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Accent eyebrow on card<span class="audit-note">typography.eyebrowAccent, 11px</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#1E1947"><b style="color:#7FB3FF">Ag</b></span></span></td>
+        <td class="audit-ratio">7.62<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Active chip label<span class="audit-note">Chip active, 13px</span></td>
+        <td class="audit-swatch"><span style="background:#1E1947"><span style="background:rgba(127,179,255,0.18)"><b style="color:#A9CCFF">Ag</b></span></span></td>
+        <td class="audit-ratio">6.99<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Danger button label<span class="audit-note">Button variant=&quot;danger&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#1E1947"><span style="background:rgba(255,138,122,0.16)"><b style="color:#FF8A7A">Ag</b></span></span></td>
+        <td class="audit-ratio">5.42<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Settled state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#1E1947"><span style="background:rgba(79,214,168,0.18)"><b style="color:#4FD6A8">Ag</b></span></span></td>
+        <td class="audit-ratio">6.21<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">In-between state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#1E1947"><span style="background:rgba(255,194,77,0.18)"><b style="color:#FFC24D">Ag</b></span></span></td>
+        <td class="audit-ratio">6.84<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Secondary button label<span class="audit-note">Button variant=&quot;secondary&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#272057"><b style="color:#F2EFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">12.98<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Ghost button label<span class="audit-note">Button variant=&quot;ghost&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#141033"><span style="background:#141033"><b style="color:#B7AFE0">Ag</b></span></span></td>
+        <td class="audit-ratio">8.88<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="groups">
+        <section class="group">
+          <h3>Grounds &amp; panels</h3>
+          <p class="group-blurb">The stack a screen is built on, from page to hairline.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#141033"></span>
+              <span class="swatch-meta"><code>bg</code><small>#141033</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0D0A24"></span>
+              <span class="swatch-meta"><code>bgDeep</code><small>#0D0A24</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#1E1947"></span>
+              <span class="swatch-meta"><code>surface</code><small>#1E1947</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#272057"></span>
+              <span class="swatch-meta"><code>surfaceRaised</code><small>#272057</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#171238"></span>
+              <span class="swatch-meta"><code>surfaceSunken</code><small>#171238</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(230,225,255,0.13)"></span>
+              <span class="swatch-meta"><code>surfaceBorder</code><small>rgba(230,225,255,0.13)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(230,225,255,0.24)"></span>
+              <span class="swatch-meta"><code>surfaceBorderStrong</code><small>rgba(230,225,255,0.24)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Ink</h3>
+          <p class="group-blurb">Three weights of text, loudest first.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#F2EFFF"></span>
+              <span class="swatch-meta"><code>textPrimary</code><small>#F2EFFF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#B7AFE0"></span>
+              <span class="swatch-meta"><code>textSecondary</code><small>#B7AFE0</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#9089C0"></span>
+              <span class="swatch-meta"><code>textTertiary</code><small>#9089C0</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Accent</h3>
+          <p class="group-blurb">The pack's voice. onAccent must stay legible on accent.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#7FB3FF"></span>
+              <span class="swatch-meta"><code>accent</code><small>#7FB3FF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#A9CCFF"></span>
+              <span class="swatch-meta"><code>accentBright</code><small>#A9CCFF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(127,179,255,0.18)"></span>
+              <span class="swatch-meta"><code>accentDim</code><small>rgba(127,179,255,0.18)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(127,179,255,0.45)"></span>
+              <span class="swatch-meta"><code>accentBorder</code><small>rgba(127,179,255,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0D0A24"></span>
+              <span class="swatch-meta"><code>onAccent</code><small>#0D0A24</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Semantic states</h3>
+          <p class="group-blurb">Fixed meanings across every pack: settled, in-between, danger.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#4FD6A8"></span>
+              <span class="swatch-meta"><code>patina</code><small>#4FD6A8</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(79,214,168,0.18)"></span>
+              <span class="swatch-meta"><code>patinaDim</code><small>rgba(79,214,168,0.18)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFC24D"></span>
+              <span class="swatch-meta"><code>kindling</code><small>#FFC24D</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,194,77,0.18)"></span>
+              <span class="swatch-meta"><code>kindlingDim</code><small>rgba(255,194,77,0.18)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,194,77,0.5)"></span>
+              <span class="swatch-meta"><code>kindlingBorder</code><small>rgba(255,194,77,0.5)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FF8A7A"></span>
+              <span class="swatch-meta"><code>ember</code><small>#FF8A7A</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,138,122,0.16)"></span>
+              <span class="swatch-meta"><code>emberDim</code><small>rgba(255,138,122,0.16)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Depth</h3>
+          <p class="group-blurb">Shadow and modal scrim.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(0,0,0,0.55)"></span>
+              <span class="swatch-meta"><code>shadow</code><small>rgba(0,0,0,0.55)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(13,10,36,0.8)"></span>
+              <span class="swatch-meta"><code>overlay</code><small>rgba(13,10,36,0.8)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Environment</h3>
+          <p class="group-blurb">Drives the living background: sky, celestial body, scenery, particles.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0A0820"></span>
+              <span class="swatch-meta"><code>skyTop</code><small>#0A0820</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#241C55"></span>
+              <span class="swatch-meta"><code>skyBottom</code><small>#241C55</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(60,45,120,0.9)"></span>
+              <span class="swatch-meta"><code>scenery</code><small>rgba(60,45,120,0.9)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(160,140,255,0.55)"></span>
+              <span class="swatch-meta"><code>sceneryAlt</code><small>rgba(160,140,255,0.55)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,250,230,0.95)"></span>
+              <span class="swatch-meta"><code>celestial</code><small>rgba(255,250,230,0.95)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(200,190,255,0.18)"></span>
+              <span class="swatch-meta"><code>celestialGlow</code><small>rgba(200,190,255,0.18)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,255,255,0.9)"></span>
+              <span class="swatch-meta"><code>particle</code><small>rgba(255,255,255,0.9)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(190,180,255,0.7)"></span>
+              <span class="swatch-meta"><code>particleAlt</code><small>rgba(190,180,255,0.7)</small></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article class="panel" data-panel="cartoon-candy" data-variant="cartoon-candy" hidden>
+      <header class="panel-head">
+        <div>
+          <p class="eyebrow">LIGHT VARIANT</p>
+          <h2>Candy</h2>
+          <p class="blurb">Pink hills, gumdrops and falling sprinkles.</p>
+          <p class="blurb blurb-tr">TR — Şeker · Pembe tepeler, sakızlar ve yağan şekerler.</p>
+        </div>
+        <div class="audit-badge ">
+          <strong>All clear</strong>
+          <small>13 WCAG checks</small>
+        </div>
+      </header>
+
+      <div class="split">
+        <div class="stage" style="--cel-x:74.0%;--cel-y:13.0%">
+          <div class="sky"></div>
+          <div class="celestial"></div>
+          <div class="scenery scenery-bottom"><svg viewBox="0 0 400 116" preserveAspectRatio="none" style="height:116px"><path d="M 0 116 L 0 78 Q 66 40 132 78 Q 200 38 268 78 Q 334 42 400 76 L 400 116 Z" fill="rgba(120,40,90,0.55)"/><path d="M 41 83 Q 41 59 54 59 Q 67 59 67 83 Z" fill="rgba(255,150,200,0.85)"/><path d="M 137 81 Q 137 57 150 57 Q 163 57 163 81 Z" fill="rgba(255,150,200,0.85)"/><path d="M 233 83 Q 233 59 246 59 Q 259 59 259 83 Z" fill="rgba(255,150,200,0.85)"/><path d="M 327 79 Q 327 55 340 55 Q 353 55 353 79 Z" fill="rgba(255,150,200,0.85)"/><rect x="0" y="104" width="400" height="12" fill="rgba(255,150,200,0.85)" opacity="0.5"/></svg></div>
+          <div class="particles"><i style="left:24.54%;width:6.7px;height:2.8px;border-radius:6.7px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:11.31s;animation-delay:-0.68s;--drift:-44.9px;--peak:0.76"></i><i style="left:40.36%;width:7.3px;height:3.1px;border-radius:7.3px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:11.55s;animation-delay:-4.05s;--drift:47.8px;--peak:0.86"></i><i style="left:28.75%;width:6.4px;height:2.7px;border-radius:6.4px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:12.38s;animation-delay:-3.95s;--drift:-1.6px;--peak:0.75"></i><i style="left:92.63%;width:8.4px;height:3.5px;border-radius:8.4px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:8.06s;animation-delay:-4.04s;--drift:-18.5px;--peak:0.92"></i><i style="left:20.09%;width:8.0px;height:3.4px;border-radius:8.0px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:8.85s;animation-delay:-2.43s;--drift:42.5px;--peak:0.95"></i><i style="left:13.81%;width:6.8px;height:2.9px;border-radius:6.8px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:9.99s;animation-delay:-0.57s;--drift:10.2px;--peak:0.89"></i><i style="left:92.82%;width:5.7px;height:2.4px;border-radius:5.7px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:12.19s;animation-delay:-1.60s;--drift:-37.8px;--peak:0.78"></i><i style="left:49.84%;width:5.5px;height:2.3px;border-radius:5.5px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:9.02s;animation-delay:-2.79s;--drift:3.0px;--peak:0.79"></i><i style="left:78.85%;width:7.8px;height:3.3px;border-radius:7.8px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:7.45s;animation-delay:-1.76s;--drift:28.1px;--peak:0.99"></i><i style="left:26.77%;width:8.9px;height:3.7px;border-radius:8.9px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:9.41s;animation-delay:-5.53s;--drift:-38.1px;--peak:0.96"></i><i style="left:62.71%;width:5.6px;height:2.3px;border-radius:5.6px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:11.57s;animation-delay:-3.29s;--drift:-29.1px;--peak:0.80"></i><i style="left:84.56%;width:5.2px;height:2.2px;border-radius:5.2px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:10.25s;animation-delay:-5.27s;--drift:32.0px;--peak:0.74"></i><i style="left:71.64%;width:6.5px;height:2.7px;border-radius:6.5px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:7.34s;animation-delay:-1.82s;--drift:-49.3px;--peak:0.94"></i><i style="left:87.91%;width:11.1px;height:4.6px;border-radius:11.1px;background:rgba(230,90,150,0.85);animation-name:fall-spin;animation-duration:6.27s;animation-delay:-2.90s;--drift:1.3px;--peak:1.00"></i><i style="left:3.02%;width:5.7px;height:2.4px;border-radius:5.7px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:13.39s;animation-delay:-3.48s;--drift:-40.4px;--peak:0.80"></i><i style="left:20.93%;width:4.3px;height:1.8px;border-radius:4.3px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:11.82s;animation-delay:-7.71s;--drift:7.2px;--peak:0.73"></i><i style="left:86.93%;width:7.4px;height:3.1px;border-radius:7.4px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:9.34s;animation-delay:-4.31s;--drift:-3.5px;--peak:0.96"></i><i style="left:38.26%;width:11.3px;height:4.7px;border-radius:11.3px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:7.77s;animation-delay:-3.52s;--drift:14.0px;--peak:0.98"></i><i style="left:91.77%;width:6.2px;height:2.6px;border-radius:6.2px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:8.35s;animation-delay:-5.09s;--drift:48.5px;--peak:0.80"></i><i style="left:13.70%;width:7.1px;height:3.0px;border-radius:7.1px;background:rgba(170,130,245,0.7);animation-name:fall-spin;animation-duration:9.09s;animation-delay:-5.10s;--drift:-43.2px;--peak:0.86"></i></div>
+          
+          <div class="stage-caption">Living background — CSS approximation</div>
+        </div>
+
+        <div class="mock">
+          <div class="mock-card">
+            <p class="m-eyebrow">SPECIMEN · 004</p>
+            <h4 class="m-title">A card on this palette</h4>
+            <p class="m-body">Body text at 15px with a 23px line height, the way <code>typography.body</code> renders it on a Card.</p>
+            <p class="m-caption">Caption text — 12.5px, textSecondary.</p>
+            <div class="m-row">
+              <button class="btn primary">Primary</button>
+              <button class="btn secondary">Secondary</button>
+            </div>
+            <div class="m-row">
+              <button class="btn ghost">Ghost</button>
+              <button class="btn danger">Danger</button>
+            </div>
+            <div class="m-row">
+              <span class="m-chip active">Active chip</span>
+              <span class="m-chip">Idle chip</span>
+            </div>
+            <div class="m-row">
+              <span class="m-pill accent">OPEN</span>
+              <span class="m-pill kindling">IN PROGRESS</span>
+              <span class="m-pill patina">DONE</span>
+            </div>
+          </div>
+
+          <div class="mock-card type-card">
+            <p class="m-eyebrow">TYPE SPECIMEN</p>
+            <p class="t-hero">Hero 30</p>
+            <p class="t-title">Title 22</p>
+            <p class="t-subtitle">Subtitle 16</p>
+            <p class="t-body">Body 15 — the workhorse.</p>
+            <p class="t-caption">Caption 12.5 — supporting detail.</p>
+            <p class="t-mono">mono 12 — stamps and serials</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="group">
+        <h3>Contrast audit</h3>
+        <p class="group-blurb">Every pair flattened the way it actually stacks — tint over panel, text on top. A pack that fails here will be unreadable on a phone in daylight.</p>
+        <table class="audit">
+          <thead><tr><th>Pair</th><th></th><th>Ratio</th><th>Threshold</th><th></th></tr></thead>
+          <tbody>
+<tr class="pass">
+        <td class="audit-label">Body text on page<span class="audit-note">typography.body, 15px</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFF2F7"><b style="color:#3E1430">Ag</b></span></span></td>
+        <td class="audit-ratio">14.32<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Body text on card<span class="audit-note">typography.body on Card</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFFFFF"><b style="color:#3E1430">Ag</b></span></span></td>
+        <td class="audit-ratio">15.58<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Caption on card<span class="audit-note">typography.caption, 12.5px</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFFFFF"><b style="color:#67314F">Ag</b></span></span></td>
+        <td class="audit-ratio">9.86<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Eyebrow on card<span class="audit-note">typography.eyebrow, 11px — the quietest legible ink</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFFFFF"><b style="color:#8E5A78">Ag</b></span></span></td>
+        <td class="audit-ratio">5.41<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Title on page<span class="audit-note">typography.title, 22px bold</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFF2F7"><b style="color:#3E1430">Ag</b></span></span></td>
+        <td class="audit-ratio">14.32<small>:1</small></td>
+        <td class="audit-min">needs 3</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Primary button label<span class="audit-note">Button variant=&quot;primary&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#C2185B"><b style="color:#FFFFFF">Ag</b></span></span></td>
+        <td class="audit-ratio">5.87<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Accent eyebrow on card<span class="audit-note">typography.eyebrowAccent, 11px</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFFFFF"><b style="color:#C2185B">Ag</b></span></span></td>
+        <td class="audit-ratio">5.87<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Active chip label<span class="audit-note">Chip active, 13px</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(194,24,91,0.12)"><b style="color:#9C1149">Ag</b></span></span></td>
+        <td class="audit-ratio">6.64<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Danger button label<span class="audit-note">Button variant=&quot;danger&quot;, 15px bold</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(179,38,30,0.12)"><b style="color:#B3261E">Ag</b></span></span></td>
+        <td class="audit-ratio">5.37<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Settled state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(15,110,82,0.14)"><b style="color:#0F6E52">Ag</b></span></span></td>
+        <td class="audit-ratio">5.07<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">In-between state label<span class="audit-note">semantic pill, small mono</span></td>
+        <td class="audit-swatch"><span style="background:#FFFFFF"><span style="background:rgba(138,82,0,0.14)"><b style="color:#8A5200">Ag</b></span></span></td>
+        <td class="audit-ratio">5.20<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Secondary button label<span class="audit-note">Button variant=&quot;secondary&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFF9FC"><b style="color:#3E1430">Ag</b></span></span></td>
+        <td class="audit-ratio">15.00<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+<tr class="pass">
+        <td class="audit-label">Ghost button label<span class="audit-note">Button variant=&quot;ghost&quot;</span></td>
+        <td class="audit-swatch"><span style="background:#FFF2F7"><span style="background:#FFF2F7"><b style="color:#67314F">Ag</b></span></span></td>
+        <td class="audit-ratio">9.06<small>:1</small></td>
+        <td class="audit-min">needs 4.5</td>
+        <td class="audit-verdict">PASS</td>
+      </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="groups">
+        <section class="group">
+          <h3>Grounds &amp; panels</h3>
+          <p class="group-blurb">The stack a screen is built on, from page to hairline.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFF2F7"></span>
+              <span class="swatch-meta"><code>bg</code><small>#FFF2F7</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FDE4EE"></span>
+              <span class="swatch-meta"><code>bgDeep</code><small>#FDE4EE</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>surface</code><small>#FFFFFF</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFF9FC"></span>
+              <span class="swatch-meta"><code>surfaceRaised</code><small>#FFF9FC</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FCE9F1"></span>
+              <span class="swatch-meta"><code>surfaceSunken</code><small>#FCE9F1</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(62,20,48,0.12)"></span>
+              <span class="swatch-meta"><code>surfaceBorder</code><small>rgba(62,20,48,0.12)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(62,20,48,0.22)"></span>
+              <span class="swatch-meta"><code>surfaceBorderStrong</code><small>rgba(62,20,48,0.22)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Ink</h3>
+          <p class="group-blurb">Three weights of text, loudest first.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#3E1430"></span>
+              <span class="swatch-meta"><code>textPrimary</code><small>#3E1430</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#67314F"></span>
+              <span class="swatch-meta"><code>textSecondary</code><small>#67314F</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#8E5A78"></span>
+              <span class="swatch-meta"><code>textTertiary</code><small>#8E5A78</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Accent</h3>
+          <p class="group-blurb">The pack's voice. onAccent must stay legible on accent.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#C2185B"></span>
+              <span class="swatch-meta"><code>accent</code><small>#C2185B</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#9C1149"></span>
+              <span class="swatch-meta"><code>accentBright</code><small>#9C1149</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(194,24,91,0.12)"></span>
+              <span class="swatch-meta"><code>accentDim</code><small>rgba(194,24,91,0.12)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(194,24,91,0.45)"></span>
+              <span class="swatch-meta"><code>accentBorder</code><small>rgba(194,24,91,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFFFFF"></span>
+              <span class="swatch-meta"><code>onAccent</code><small>#FFFFFF</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Semantic states</h3>
+          <p class="group-blurb">Fixed meanings across every pack: settled, in-between, danger.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#0F6E52"></span>
+              <span class="swatch-meta"><code>patina</code><small>#0F6E52</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(15,110,82,0.14)"></span>
+              <span class="swatch-meta"><code>patinaDim</code><small>rgba(15,110,82,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#8A5200"></span>
+              <span class="swatch-meta"><code>kindling</code><small>#8A5200</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.14)"></span>
+              <span class="swatch-meta"><code>kindlingDim</code><small>rgba(138,82,0,0.14)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(138,82,0,0.45)"></span>
+              <span class="swatch-meta"><code>kindlingBorder</code><small>rgba(138,82,0,0.45)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#B3261E"></span>
+              <span class="swatch-meta"><code>ember</code><small>#B3261E</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(179,38,30,0.12)"></span>
+              <span class="swatch-meta"><code>emberDim</code><small>rgba(179,38,30,0.12)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Depth</h3>
+          <p class="group-blurb">Shadow and modal scrim.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(140,60,100,0.28)"></span>
+              <span class="swatch-meta"><code>shadow</code><small>rgba(140,60,100,0.28)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(253,228,238,0.85)"></span>
+              <span class="swatch-meta"><code>overlay</code><small>rgba(253,228,238,0.85)</small></span>
+            </div>
+          </div>
+        </section>
+        <section class="group">
+          <h3>Environment</h3>
+          <p class="group-blurb">Drives the living background: sky, celestial body, scenery, particles.</p>
+          <div class="swatches">
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFD9EA"></span>
+              <span class="swatch-meta"><code>skyTop</code><small>#FFD9EA</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:#FFF2F7"></span>
+              <span class="swatch-meta"><code>skyBottom</code><small>#FFF2F7</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(120,40,90,0.55)"></span>
+              <span class="swatch-meta"><code>scenery</code><small>rgba(120,40,90,0.55)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,150,200,0.85)"></span>
+              <span class="swatch-meta"><code>sceneryAlt</code><small>rgba(255,150,200,0.85)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,206,128,0.95)"></span>
+              <span class="swatch-meta"><code>celestial</code><small>rgba(255,206,128,0.95)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(255,200,150,0.35)"></span>
+              <span class="swatch-meta"><code>celestialGlow</code><small>rgba(255,200,150,0.35)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(230,90,150,0.85)"></span>
+              <span class="swatch-meta"><code>particle</code><small>rgba(230,90,150,0.85)</small></span>
+            </div>
+            <div class="swatch">
+              <span class="chipcolor" style="background:rgba(170,130,245,0.7)"></span>
+              <span class="swatch-meta"><code>particleAlt</code><small>rgba(170,130,245,0.7)</small></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+    </section>
 
     <p class="footnote">
-      Generated from <code>packs/seasons/palettes.ts</code>, <code>packs/seasons/seasons.ts</code> and <code>core/tokens.ts</code> by <code>tools/showroom.ts</code> — never edit <code>showroom/index.html</code> by hand, it is overwritten.
-      The background here is a CSS approximation of <code>WeatherOverlay.tsx</code>: right for colour and feel, not a pixel match for the RN Animated original.
-      Typefaces load from Google Fonts; offline, the page falls back to system faces and the metrics shift slightly.
+      Generated from each pack's <code>preview.ts</code> and <code>core/tokens.ts</code> by <code>tools/showroom.ts</code> — never edit <code>showroom/index.html</code> by hand, it is overwritten.
+      Backgrounds here are CSS approximations of each pack's overlay component: right for colour and composition, not a pixel match for the RN Animated original.
+      Typefaces load from Google Fonts; offline the page falls back to system faces and the metrics shift slightly.
     </p>
   </div>
 
 <script>
   (function () {
-    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-    var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
-    function select(name) {
-      tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.tab === name)); });
-      panels.forEach(function (p) { p.hidden = p.dataset.panel !== name; });
-      try { localStorage.setItem('masset-showroom-variant', name); } catch (e) {}
-      if (location.hash.slice(1) !== name) history.replaceState(null, '', '#' + name);
+    var packTabs = Array.prototype.slice.call(document.querySelectorAll('.pack-tab'));
+    var packs = Array.prototype.slice.call(document.querySelectorAll('.pack'));
+
+    function selectVariant(packEl, key) {
+      var tabs = Array.prototype.slice.call(packEl.querySelectorAll('.tab'));
+      var panels = Array.prototype.slice.call(packEl.querySelectorAll('.panel'));
+      tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.tab === key)); });
+      panels.forEach(function (p) { p.hidden = p.dataset.panel !== key; });
+      try { localStorage.setItem('masset-showroom-variant-' + packEl.dataset.pack, key); } catch (e) {}
+      if (location.hash.slice(1) !== key) history.replaceState(null, '', '#' + key);
     }
-    tabs.forEach(function (t) { t.addEventListener('click', function () { select(t.dataset.tab); }); });
-    var stored = null;
-    try { stored = localStorage.getItem('masset-showroom-variant'); } catch (e) {}
-    var initial = location.hash.slice(1) || stored || "meadow";
-    if (!tabs.some(function (t) { return t.dataset.tab === initial; })) initial = "rain";
-    select(initial);
+
+    function selectPack(id) {
+      packTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.packtab === id)); });
+      packs.forEach(function (p) { p.hidden = p.dataset.pack !== id; });
+      try { localStorage.setItem('masset-showroom-pack', id); } catch (e) {}
+      var el = packs.filter(function (p) { return p.dataset.pack === id; })[0];
+      if (!el) return;
+      var stored = null;
+      try { stored = localStorage.getItem('masset-showroom-variant-' + id); } catch (e) {}
+      var first = el.querySelector('.tab');
+      var wanted = stored && el.querySelector('.tab[data-tab="' + stored + '"]') ? stored : (first ? first.dataset.tab : null);
+      if (wanted) selectVariant(el, wanted);
+    }
+
+    packs.forEach(function (packEl) {
+      packEl.querySelectorAll('.tab').forEach(function (t) {
+        t.addEventListener('click', function () { selectVariant(packEl, t.dataset.tab); });
+      });
+      packEl.querySelectorAll('.strip-card').forEach(function (c) {
+        c.addEventListener('click', function () { selectVariant(packEl, c.dataset.variant); });
+      });
+    });
+    packTabs.forEach(function (t) { t.addEventListener('click', function () { selectPack(t.dataset.packtab); }); });
+
+    // A #pack-variant hash deep-links straight to one variant.
+    var hash = location.hash.slice(1);
+    var target = hash ? document.querySelector('.panel[data-panel="' + hash + '"]') : null;
+    if (target) {
+      var owner = target.closest('.pack');
+      selectPack(owner.dataset.pack);
+      selectVariant(owner, hash);
+    } else {
+      var storedPack = null;
+      try { storedPack = localStorage.getItem('masset-showroom-pack'); } catch (e) {}
+      var valid = packTabs.some(function (t) { return t.dataset.packtab === storedPack; });
+      selectPack(valid ? storedPack : packTabs[0].dataset.packtab);
+    }
   })();
 </script>
 </body>
