@@ -49,9 +49,10 @@ export type PreviewEffect =
   | 'water-sheets'
   | 'forked-lightning'
   | 'spray'
-  // Voidcore. 'void-vortex' draws the whole rotating assembly; 'pointer-strike'
-  // wires the stage's pointer into the same `focus` the RN overlay consumes,
-  // and adds a pulse slider. The only interactive preview.
+  // Voidcore. 'void-vortex' emits the canvas the filament renderer draws into
+  // — the only effect here that is not CSS or SVG. 'pointer-strike' wires the
+  // stage's pointer into the same `focus` the RN overlay consumes, squares the
+  // stage and adds a pulse slider. The only interactive preview.
   | 'void-vortex'
   | 'pointer-strike';
 

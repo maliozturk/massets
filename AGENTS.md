@@ -63,15 +63,41 @@ owns this code.
   Folding them into `MassetValue` would re-render every screen calling
   `useMasset()` on every frame of a reaction. Only `voidcore` reads them; a
   pack that ignores them costs nothing.
-- **SVG filters are available and are the quality lever.** `react-native-svg`
-  ships the full primitive set on both SDK 54 and 57 (verified). The voidcore
-  swirls use `feTurbulence` + `feDisplacementMap` so the bands read as dust
-  lanes rather than dashed circles, and bolts use stacked `feGaussianBlur` +
-  `feMerge` for real bloom. They are not free — keep `numOctaves` at 2 and
-  don't filter every layer.
-- **Rare effects stay rare.** Lightning and the shooting star use
-  `restAfterMs` so they surprise rather than strobe. Don't turn them into
-  metronomes, and don't add a third one to the same variant.
+- **SVG filters are available, but bake noise into geometry where you can.**
+  `react-native-svg` ships the full primitive set on both SDK 54 and 57
+  (verified), so `feTurbulence` / `feDisplacementMap` / `feGaussianBlur` are
+  there if a pack needs them. Voidcore used to displace its bands with a
+  filter and now generates already-noised path data instead (`filaments()` in
+  `voids.ts`) — same look, none of the per-frame filter cost. Reach for a
+  filter when the shape genuinely cannot be precomputed; if you do, keep
+  `numOctaves` at 2 and don't filter every layer.
+- **Rare effects stay rare.** The shooting star and voidcore's infalling
+  streaks use `restAfterMs` so they surprise rather than strobe. Don't turn
+  them into metronomes, and don't add a second one to the same variant.
+- **Voidcore's rare event is an infall, not lightning.** It used to throw
+  forked bolts; the user cut them because lightning is borrowed from weather
+  and reads wrong against a starfield. What replaced them comes out of the
+  same physics as the rest of the frame — a body falling in on a decaying
+  spiral, and hot spots orbiting inside the disc. Keep new effects inside that
+  rule: if it could not happen to an accretion disc, it does not go here.
+- **No washes over the voidcore disc.** A halo around it and dust clouds
+  across it were both tried and both fogged the picture — any large soft
+  gradient over the filaments costs contrast, the preview's bloom compounds
+  it, and the result reads as out of focus. Space is clear and black. Depth
+  comes from the starfield: a steep power-law magnitude distribution so most
+  specks are faint, three hues off the palette, and only about a fifth of them
+  scintillating.
+- **Voidcore is the one pack whose showroom preview is a canvas.** Every other
+  effect in `tools/showroom.ts` is CSS or SVG. The vortex is 8000 hairline
+  strokes accumulating additively into a buffer that is never cleared, which
+  CSS cannot express — so it ships a `<canvas>` and a renderer in the page's
+  script block, reading its colours from the panel's CSS variables like
+  everything else. The RN overlay reaches the same composition with ~180 SVG
+  filaments. Two things it deliberately cannot match: additive blending (so
+  its stroke alphas are 0.10–0.30, not the canvas's 0.02–0.12), and
+  per-frame density (so all five tiers share one rotation period — running
+  them at different rates would wind the spiral arms apart within a minute).
+  Keep the two in step on composition, not on mechanism.
 - **Every pack ships a pure `preview.ts`.** The showroom generator runs in
   Node and cannot import a pack's `index.ts` (React components). The preview is
   a second, deliberate description of the scenery — see the header of

@@ -2,8 +2,8 @@
 //
 // The only pack that reads `useMassetSignal()`. The host pushes `pulse` when
 // its core is listening or answering, and `focus` from pointer or touch
-// position; the vortex leans toward that point and throws lightning at it.
-// Both are optional — with nothing pushed it simply turns and storms quietly.
+// position; the vortex leans toward that point and the flow brightens and
+// bends around it. Both are optional — with nothing pushed it simply turns.
 //
 // No Ambience: there is no licensed audio in the repo for this, so no
 // expo-audio needed.
@@ -33,5 +33,15 @@ export const voidcorePack = definePack<Void>({
 });
 
 export { ABYSS, EMBER, FROST, VERDANT, VIOLET } from './palettes';
-export { boltPoints, forkPoints, isVoid, spiralPath, VOIDS, VOID_LABELS, voidForDate, type Void } from './voids';
+export {
+  filaments,
+  isVoid,
+  spiralPath,
+  VOIDS,
+  VOID_LABELS,
+  voidForDate,
+  type Filament,
+  type FilamentOptions,
+  type Void,
+} from './voids';
 export { VoidOverlay } from './VoidOverlay';

@@ -17,7 +17,6 @@ import { cartoonPreview } from '../packs/cartoon/preview';
 import { seasonsPreview } from '../packs/seasons/preview';
 import { stormyPreview } from '../packs/stormy/preview';
 import { voidcorePreview } from '../packs/voidcore/preview';
-import { boltPoints, forkPoints } from '../packs/voidcore/voids';
 
 // Every pack the showroom renders. One line per pack.
 const PACKS: PackPreview<string>[] = [seasonsPreview, stormyPreview, cartoonPreview, voidcorePreview];
@@ -304,125 +303,17 @@ function sceneryHtml(preview: VariantPreview, colors: ThemeColors): string {
 }
 
 // --- Voidcore vortex -------------------------------------------------------
-// Colours come from the panel's CSS variables, so one piece of markup themes
-// itself for all five voids. The filters are the same feTurbulence /
-// feDisplacementMap / feGaussianBlur chain the RN overlay uses.
-
-function swirlLayer(key: string, id: string, rings: number, inner: number, wisp: number, seed: number): string {
-  const bands: string[] = [];
-  for (let i = 0; i < rings; i++) {
-    const t = (i + 1) / rings;
-    const r = 470 * (inner + t * (1 - inner));
-    const dashOn = 6 + (1 - t) * 46 + i * 3;
-    const dashOff = 10 + t * 90;
-    const width = 1 + (1 - t) * 3.2;
-    const alpha = (0.14 + (1 - t) * 0.5).toFixed(2);
-    bands.push(
-      `<circle cx="500" cy="500" r="${r.toFixed(0)}" fill="none" stroke="${
-        i % 3 === 0 ? 'var(--scenery-alt)' : 'var(--scenery)'
-      }" stroke-width="${width.toFixed(1)}" stroke-dasharray="${dashOn.toFixed(0)} ${dashOff.toFixed(
-        0
-      )}" stroke-dashoffset="${i * 37}" stroke-linecap="round" opacity="${alpha}"/>`
-    );
-  }
-  const fid = `wisp-${id}-${key}`;
-  return (
-    `<svg class="vx-layer vx-${id}" viewBox="0 0 1000 1000" aria-hidden="true">` +
-    `<defs><filter id="${fid}" x="-25%" y="-25%" width="150%" height="150%">` +
-    `<feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="${seed}" result="n"/>` +
-    `<feDisplacementMap in="SourceGraphic" in2="n" scale="${wisp}" xChannelSelector="R" yChannelSelector="G" result="d"/>` +
-    `<feGaussianBlur in="d" stdDeviation="2.2" result="s"/>` +
-    `<feMerge><feMergeNode in="s"/><feMergeNode in="d"/></feMerge>` +
-    `</filter></defs>` +
-    `<g filter="url(#${fid})">${bands.join('')}</g></svg>`
-  );
-}
-
-function boltSvg(key: string, id: string, length: number, seed: number, scale: number): string {
-  const rand = mulberry32(seed);
-  const main = boltPoints(length, 9, length * 0.09, rand);
-  const forks = [
-    forkPoints(length, 0.32, -38 - rand() * 24, rand),
-    forkPoints(length, 0.58, 34 + rand() * 26, rand),
-    forkPoints(length, 0.76, -26 - rand() * 20, rand),
-  ];
-  const h = Math.max(56, length * 0.5);
-  const fid = `glow-${id}-${key}`;
-  return (
-    `<svg viewBox="0 ${-h / 2} ${length} ${h}" width="${length}" height="${h}" aria-hidden="true">` +
-    `<defs><filter id="${fid}" x="-40%" y="-140%" width="180%" height="380%">` +
-    `<feGaussianBlur in="SourceGraphic" stdDeviation="${(5.5 * scale).toFixed(1)}" result="w"/>` +
-    `<feGaussianBlur in="SourceGraphic" stdDeviation="${(1.8 * scale).toFixed(1)}" result="t"/>` +
-    `<feMerge><feMergeNode in="w"/><feMergeNode in="w"/><feMergeNode in="t"/><feMergeNode in="SourceGraphic"/></feMerge>` +
-    `</filter></defs>` +
-    `<g filter="url(#${fid})">` +
-    `<polyline points="${main}" fill="none" stroke="var(--scenery-alt)" stroke-width="${(4.2 * scale).toFixed(
-      1
-    )}" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>` +
-    forks
-      .map(
-        (f) =>
-          `<polyline points="${f}" fill="none" stroke="var(--scenery-alt)" stroke-width="${(1.8 * scale).toFixed(
-            1
-          )}" stroke-linecap="round" opacity="0.7"/>`
-      )
-      .join('') +
-    `<polyline points="${main}" fill="none" stroke="var(--celestial)" stroke-width="${(1.7 * scale).toFixed(
-      1
-    )}" stroke-linecap="round" stroke-linejoin="round"/>` +
-    `</g></svg>`
-  );
-}
+// One canvas per variant. Everything — filaments, throat, stars, bloom — is
+// drawn at runtime by the renderer at the foot of the document, which reads
+// its colours from the panel's CSS variables. So one line of markup themes
+// itself for all five voids.
+//
+// Why not SVG like every other effect here: the vortex is 8000 hairline
+// strokes accumulating additively into a buffer that is never cleared. Neither
+// SVG nor CSS can add light, and neither can keep last frame's ink.
 
 function vortexHtml(key: string): string {
-  const rand = mulberry32(seedFrom(`motes-${key}`));
-
-  // Each mote is a rotating wrapper with an element travelling inward — the
-  // composition of the two is the spiral, using nothing but transforms.
-  const motes = Array.from({ length: 34 }, () => {
-    const size = (1.4 + rand() * 2.6).toFixed(1);
-    const dur = (4.2 + rand() * 5.2).toFixed(2);
-    const delay = (rand() * 8).toFixed(2);
-    const spin = (140 + rand() * 190).toFixed(0);
-    const start = (38 + rand() * 22).toFixed(1);
-    return `<i style="--spin:${spin}deg;--start:${start}%;animation-duration:${dur}s;animation-delay:-${delay}s"><b style="width:${size}px;height:${size}px;animation-duration:${dur}s;animation-delay:-${delay}s"></b></i>`;
-  }).join('');
-
-  // Rim lightning: the first is always live, the rest arm as pulse rises.
-  const rim = [
-    { a: -64, len: 200, seed: 11, dur: 8.2, arm: 0 },
-    { a: 128, len: 160, seed: 29, dur: 9.8, arm: 0.25 },
-    { a: 26, len: 180, seed: 47, dur: 5.8, arm: 0.5 },
-    { a: -142, len: 140, seed: 83, dur: 4.8, arm: 0.75 },
-    { a: 82, len: 220, seed: 101, dur: 4.0, arm: 0.95 },
-  ]
-    .map(
-      (b, i) =>
-        `<div class="vx-rimbolt" style="--a:${b.a}deg;--arm:${b.arm};animation-duration:${b.dur}s;animation-delay:-${(
-          i * 1.7
-        ).toFixed(1)}s">${boltSvg(key, `r${i}`, b.len, b.seed, 0.75)}</div>`
-    )
-    .join('');
-
-  return (
-    `<div class="vortex">` +
-    swirlLayer(key, 'outer', 9, 0.28, 22, 7) +
-    swirlLayer(key, 'mid', 11, 0.28, 14, 19) +
-    swirlLayer(key, 'inner', 8, 0.28, 7, 31) +
-    `<div class="vx-throat"></div>` +
-    `<svg class="vx-rim" viewBox="0 0 1000 1000" aria-hidden="true">` +
-    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--scenery-alt)" stroke-width="5" opacity="0.55"/>` +
-    `<circle cx="500" cy="500" r="288" fill="none" stroke="var(--celestial)" stroke-width="2.2" opacity="0.35"/>` +
-    `</svg>` +
-    `<svg class="vx-hotspot" viewBox="0 0 1000 1000" aria-hidden="true">` +
-    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--celestial)" stroke-width="10" stroke-linecap="round" stroke-dasharray="330 3000" opacity="0.85"/>` +
-    `<circle cx="500" cy="500" r="300" fill="none" stroke="var(--celestial)" stroke-width="30" stroke-linecap="round" stroke-dasharray="210 3000" opacity="0.18"/>` +
-    `</svg>` +
-    `<div class="vx-motes">${motes}</div>` +
-    `<div class="vx-rimbolts">${rim}</div>` +
-    `<div class="vx-strike">${boltSvg(key, 'strike', 340, 7, 1)}</div>` +
-    `</div>`
-  );
+  return `<div class="vortex"><canvas class="vx-canvas" data-vortex="${key}" aria-hidden="true"></canvas></div>`;
 }
 
 /** The named moving parts a world can ask for, beyond scenery and particles. */
@@ -619,7 +510,9 @@ function variantPanel(pack: PackPreview<string>, variant: string): string {
           <div class="particles">${particleField(pack.id, variant, preview, colors)}</div>
           ${effectsHtml(preview, key)}
           <div class="stage-caption">${
-            interactive ? 'Move the pointer over this — it strikes where you point' : 'Living background — CSS approximation'
+            interactive
+              ? 'Move the pointer over this — the flow bends and brightens where you stir it'
+              : 'Living background — CSS approximation'
           }</div>
         </div>
         ${
@@ -937,91 +830,15 @@ ${themeBlocks}
   }
 
   /* --- Voidcore vortex ---
-     Same feTurbulence / feDisplacementMap / feGaussianBlur chain as the RN
-     overlay. --pulse is driven live by the slider below the stage. */
-  .stage.interactive { cursor: crosshair; --pulse: 0; --sa: 0deg; --sd: 300px; --fx: 50%; --fy: 42%; min-height: 520px; }
-  .vortex { position: absolute; inset: 0; overflow: hidden; }
-  .vx-layer, .vx-rim, .vx-hotspot {
-    position: absolute; left: 50%; top: 42%; width: 148%; aspect-ratio: 1; translate: -50% -50%;
-    transform-origin: 50% 50%; will-change: transform;
-  }
-  .vx-outer { width: 184%; opacity: 0.5; animation: vspin 92s linear infinite; }
-  .vx-mid   { width: 148%; opacity: 0.85; animation: vspin 54s linear infinite reverse; }
-  .vx-inner { width: 116%; animation: vspin 19s linear infinite; opacity: calc(0.12 + var(--pulse) * 0.8); }
-  @keyframes vspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-  .vx-throat {
-    position: absolute; left: 50%; top: 42%; width: 148%; aspect-ratio: 1; translate: -50% -50%;
-    border-radius: 50%;
-    background: radial-gradient(circle closest-side,
-      var(--bg-deep) 0%, var(--bg-deep) 42%,
-      var(--scenery) 62%, var(--celestial-glow) 78%, transparent 100%);
-    scale: calc(1 + var(--pulse) * 0.09);
-    transition: scale 0.42s cubic-bezier(0.2,0.7,0.3,1);
-  }
-  .vx-rim { width: 92%; opacity: calc(0.5 + var(--pulse) * 0.5); }
-  .vx-hotspot { width: 92%; opacity: calc(0.5 + var(--pulse) * 0.5); animation: vspin 16s linear infinite; }
-
-  /* Motes: a rotating wrapper plus an element travelling inward. The two
-     composed give a spiral without needing offset-path. */
-  .vx-motes { position: absolute; inset: 0; }
-  .vx-motes i {
-    position: absolute; left: 50%; top: 42%; width: 0; height: 0; display: block;
-    animation-name: vmote-spin; animation-timing-function: linear; animation-iteration-count: infinite;
-  }
-  .vx-motes b {
-    position: absolute; display: block; border-radius: 50%; background: var(--celestial);
-    animation-name: vmote-fall; animation-timing-function: cubic-bezier(0.45,0,0.9,0.5); animation-iteration-count: infinite;
-  }
-  @keyframes vmote-spin { from { transform: rotate(0deg); } to { transform: rotate(var(--spin)); } }
-  @keyframes vmote-fall {
-    0%   { left: var(--start); opacity: 0; transform: scaleX(1); }
-    10%  { opacity: 0.75; }
-    72%  { opacity: 0.5; }
-    100% { left: 0%; opacity: 0; transform: scaleX(4); }
-  }
-
-  .vx-rimbolts { position: absolute; inset: 0; }
-  .vx-rimbolt {
-    position: absolute; left: 50%; top: 42%; transform-origin: 0 50%;
-    transform: rotate(var(--a)) translateX(24%);
-    opacity: 0;
-    animation-name: vstrike; animation-timing-function: linear; animation-iteration-count: infinite;
-  }
-  /* Armed only once pulse passes this bolt's threshold — the storm thickens
-     with the reaction, and nothing has to restart to do it. */
-  .vx-rimbolt { --armed: clamp(0, (var(--pulse) - var(--arm)) * 8, 1); }
-  @keyframes vstrike {
-    0%, 100% { opacity: 0; }
-    1%   { opacity: calc(1 * var(--armed)); }
-    2.2% { opacity: calc(0.2 * var(--armed)); }
-    3.4% { opacity: calc(0.85 * var(--armed)); }
-    5%   { opacity: calc(0.15 * var(--armed)); }
-    7%   { opacity: 0; }
-  }
-
-  /* What it throws at the pointer. JS sets --sa (angle) and --sd (distance). */
-  .vx-strike {
-    position: absolute; left: 50%; top: 42%; transform-origin: 0 50%;
-    transform: rotate(var(--sa));
-    width: var(--sd); opacity: 0; pointer-events: none;
-  }
-  .vx-strike svg { width: 100%; height: auto; }
-  .stage.interactive.pointing .vx-strike { animation: vstrike-hold 0.78s linear infinite; }
-  @keyframes vstrike-hold {
-    0%   { opacity: 0; }
-    6%   { opacity: 1; }
-    14%  { opacity: 0.25; }
-    22%  { opacity: 0.9; }
-    34%  { opacity: 0.2; }
-    46%  { opacity: 0; }
-    100% { opacity: 0; }
-  }
-  /* The whole disc leans toward the pointer. */
-  .stage.interactive .vortex {
-    transform: translate(calc((var(--fx) - 50%) * 0.09), calc((var(--fy) - 42%) * 0.07));
-    transition: transform 0.5s cubic-bezier(0.2,0.7,0.3,1);
-  }
+     A canvas and nothing else; the renderer at the foot of the document does
+     the drawing. --pulse and --fx/--fy are the seam: the slider and the
+     pointer write them here, the renderer reads them back as the same
+     pulse / focus signal the RN overlay consumes. */
+  /* Square, because the disc is face-on and concentric — a portrait panel
+     would leave a third of the frame dead below it. */
+  .stage.interactive { cursor: crosshair; --pulse: 0; --fx: 50%; --fy: 50%; aspect-ratio: 1; min-height: 380px; }
+  .vortex { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .vx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
   .signal-bar { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-family: var(--mono); font-size: 11.5px; color: var(--text-tertiary); flex-wrap: wrap; }
   .signal-bar label { display: flex; align-items: center; gap: 8px; letter-spacing: 1.2px; text-transform: uppercase; }
@@ -1217,25 +1034,13 @@ ${themeBlocks}
     Array.prototype.slice.call(document.querySelectorAll('.stage.interactive')).forEach(function (stage) {
       function aim(ev) {
         var r = stage.getBoundingClientRect();
-        var fx = (ev.clientX - r.left) / r.width;
-        var fy = (ev.clientY - r.top) / r.height;
-        // The disc sits at 50% / 42% of the stage; the bolt is drawn from there.
-        var dx = (fx - 0.5) * r.width;
-        var dy = (fy - 0.42) * r.height;
-        var dist = Math.max(60, Math.sqrt(dx * dx + dy * dy));
-        stage.style.setProperty('--fx', (fx * 100).toFixed(2) + '%');
-        stage.style.setProperty('--fy', (fy * 100).toFixed(2) + '%');
-        stage.style.setProperty('--sa', (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(2) + 'deg');
-        stage.style.setProperty('--sd', dist.toFixed(0) + 'px');
+        stage.style.setProperty('--fx', (((ev.clientX - r.left) / r.width) * 100).toFixed(2) + '%');
+        stage.style.setProperty('--fy', (((ev.clientY - r.top) / r.height) * 100).toFixed(2) + '%');
         stage.classList.add('pointing');
       }
       stage.addEventListener('mousemove', aim);
       stage.addEventListener('touchmove', function (ev) { if (ev.touches[0]) aim(ev.touches[0]); }, { passive: true });
-      stage.addEventListener('mouseleave', function () {
-        stage.classList.remove('pointing');
-        stage.style.setProperty('--fx', '50%');
-        stage.style.setProperty('--fy', '42%');
-      });
+      stage.addEventListener('mouseleave', function () { stage.classList.remove('pointing'); });
       stage.addEventListener('touchend', function () { stage.classList.remove('pointing'); });
     });
 
@@ -1253,25 +1058,800 @@ ${themeBlocks}
       apply(0);
     });
 
-    // Ramp up and decay, the way a core answering a question would.
+    // What answering actually sounds like: a hard attack, a couple of swells
+    // as the thought lands, then a long tail. A single ramp up and down reads
+    // as a slider being dragged, which is the one thing this button exists
+    // NOT to look like.
     Array.prototype.slice.call(document.querySelectorAll('button.pulse-demo')).forEach(function (btn) {
       var key = btn.dataset.for;
+      var timer = null;
       btn.addEventListener('click', function () {
         var slider = document.querySelector('input.pulse[data-for="' + key + '"]');
         var out = document.querySelector('.pulse-out[data-for="' + key + '"]');
         var st = stageFor(key);
+        if (timer) clearInterval(timer);
         var t = 0;
-        var timer = setInterval(function () {
-          t += 0.05;
-          // Fast attack, long tail.
-          var v = t < 0.35 ? t / 0.35 : Math.max(0, 1 - (t - 0.35) / 1.9);
+        timer = setInterval(function () {
+          t += 0.04;
+          var v;
+          if (t < 0.22) v = t / 0.22;
+          else {
+            var d = t - 0.22;
+            v = Math.exp(-d * 0.62) * (0.7 + 0.3 * Math.cos(d * 5.1)) * (0.86 + 0.14 * Math.cos(d * 13.7));
+          }
+          if (v < 0) v = 0; else if (v > 1) v = 1;
           if (st) st.style.setProperty('--pulse', String(v));
           if (slider) slider.value = String(Math.round(v * 100));
           if (out) out.textContent = v.toFixed(2);
-          if (t > 2.3) { clearInterval(timer); if (st) st.style.setProperty('--pulse', '0'); if (slider) slider.value = '0'; if (out) out.textContent = '0.00'; }
-        }, 50);
+          if (t > 6) {
+            clearInterval(timer); timer = null;
+            if (st) st.style.setProperty('--pulse', '0');
+            if (slider) slider.value = '0';
+            if (out) out.textContent = '0.00';
+          }
+        }, 40);
       });
     });
+
+    // --- Voidcore: the filament vortex -----------------------------------
+    // A face-on disc built from 8000 hairline strokes on a log-spiral flow
+    // field. Nothing here is drawn as a shape: the lit arc, the core boundary
+    // and the outer rim are all stroke density. There is no outline anywhere,
+    // and no stroke is wider than 1.2 device px.
+    //
+    // Four things do the work, in order of how much they matter:
+    //   1. Differential rotation. omega falls off as 1/r^0.7, so the inner
+    //      disc laps the outer one and the shear sweeps the filaments out.
+    //      Rotate uniformly and it reads as a spinning wheel instead.
+    //   2. Arm structure. Seen face-on the winding IS the subject, so density
+    //      is modulated by sin(m*theta - k*ln r) into three arms. Without it
+    //      the disc is a uniform smear.
+    //   3. The trail buffer is never cleared, only faded. Last frame's ink is
+    //      most of the texture.
+    //   4. Additive blending at 0.02-0.12 per stroke. Brightness is overlap,
+    //      not bright lines. If one stroke is visibly bright, it is wrong.
+    (function () {
+      var canvases = Array.prototype.slice.call(document.querySelectorAll('canvas[data-vortex]'));
+      if (!canvases.length || typeof Path2D === 'undefined') return;
+
+      var TAU = Math.PI * 2;
+      var COUNT = 8000;              // density IS the effect - never trade it for fps
+      var SPIRAL_B = 0.19;           // r = a * e^(b * theta)
+      var SHEAR = 0.7;               // omega proportional to 1 / r^SHEAR
+      var R_CORE = 0.32;             // the hole, as a fraction of the outer radius
+      var R_OUT = 1.0;
+      var EDGE = 0.08;               // both boundaries ramp out over this much of R
+      var OMEGA = 0.075;             // rad/s at r = 1: the rim turns once in ~85s
+      var INFALL = 0.011;            // slow accretion inward
+      var MESO = 0.04;               // curl wobble, 4% of radius
+      var MICRO = 0.5;               // per-point jitter, device px
+      var ARM_M = 3;                 // three arms
+      var ARM_K = 3.2;               // ...winding about half a turn across the disc
+      var LIGHT = 215 * Math.PI / 180;
+      var POINTER_R = 180;           // css px
+      var POINTER_EASE = 0.18;       // seconds; ~600ms to settle back
+
+      // Two events, both things an accretion disc actually does. Lightning
+      // would be borrowed from weather; these come out of the same physics as
+      // the rest of the picture.
+      //
+      //   infall  a body falling in on a fast decaying spiral, drawn as a
+      //           moving point - the trail buffer makes the streak for free
+      //   flare   a hot spot orbiting inside the disc, brightening the
+      //           filaments around it exactly the way the pointer does
+      //
+      // Rare at rest, frequent under pulse.
+      var IN_MAX = 8;
+      var HS_MAX = 3;
+      var HS_R = 0.3;                // flare radius, fraction of the disc
+
+      // Depth tiers: alpha up, width down, wobble down. Their speeds sit in a
+      // narrow band on purpose - face-on, two tiers at the same radius running
+      // at visibly different rates tear against each other. All of the
+      // differential rotation has to come from r.
+      var LAYERS = 5;
+      var L_ALPHA = [0.030, 0.048, 0.070, 0.095, 0.120];
+      var L_WIDTH = [1.20, 0.95, 0.75, 0.55, 0.40];
+      var L_SPEED = [0.90, 0.95, 1.00, 1.05, 1.10];
+      var L_NOISE = [1.00, 0.78, 0.56, 0.36, 0.20];
+      var L_SPAN =  [0.46, 0.38, 0.30, 0.23, 0.17];   // arc length, radians
+      var ARC_PTS = 4;
+
+      // Strokes are batched by (layer, width, intensity) so 8000 of them cost
+      // ~120 stroke calls. The intensity buckets are spaced by the SQUARE of
+      // the index: the lit arc times the arm crest is a small fraction of the
+      // disc, so most strokes are dim and that is where the resolution has to
+      // go.
+      var W_BUCKETS = 3, T_BUCKETS = 8, T_LAST = 7;
+      var W_SCALE = [0.68, 0.86, 1.00];               // thinner toward the centre
+      var INT_MAX = 1.6;                              // headroom for the pointer boost
+      var BIN_N = LAYERS * W_BUCKETS * T_BUCKETS;
+
+      // r^-SHEAR and ln r, sampled on the one range that exists. 8000 pow and
+      // log calls a frame is real time; this is accurate to well under a
+      // percent.
+      var RL_N = 640, RL_LO = 0.28, RL_HI = 1.06;
+      var POW_LUT = new Float32Array(RL_N), LOG_LUT = new Float32Array(RL_N);
+      var RL_SCALE = (RL_N - 1) / (RL_HI - RL_LO);
+      for (var pq = 0; pq < RL_N; pq++) {
+        var rq = RL_LO + (RL_HI - RL_LO) * pq / (RL_N - 1);
+        POW_LUT[pq] = Math.pow(rq, -SHEAR);
+        LOG_LUT[pq] = Math.log(rq);
+      }
+
+      // Angle offsets along each layer's arc, and the matching e^(b*dtheta).
+      // With these precomputed the exponential and all but two of the trig
+      // calls drop out of the inner loop entirely.
+      var ARC_CD = new Float32Array(LAYERS * ARC_PTS);
+      var ARC_SD = new Float32Array(LAYERS * ARC_PTS);
+      var ARC_F = new Float32Array(LAYERS * ARC_PTS);
+      for (var al = 0; al < LAYERS; al++) {
+        for (var ap = 0; ap < ARC_PTS; ap++) {
+          var d = L_SPAN[al] * (ap / (ARC_PTS - 1) - 0.5);
+          ARC_CD[al * ARC_PTS + ap] = Math.cos(d);
+          ARC_SD[al * ARC_PTS + ap] = Math.sin(d);
+          ARC_F[al * ARC_PTS + ap] = Math.exp(SPIRAL_B * d);
+        }
+      }
+
+      function mulberry32(a) {
+        return function () {
+          a |= 0; a = (a + 0x6d2b79f5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      function seedFrom(text) {
+        var h = 2166136261;
+        for (var i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return h >>> 0;
+      }
+
+      // Uncorrelated sub-pixel jitter, so no path reads as a clean arc.
+      var JIT = new Float32Array(1024);
+      var jr = mulberry32(0x5eed);
+      for (var jq = 0; jq < 1024; jq++) JIT[jq] = (jr() - 0.5) * 2;
+
+      // --- Curl noise ------------------------------------------------------
+      // A scalar potential's curl is divergence-free, so the field swirls
+      // rather than pumping filaments in and out of the disc. Baked once into
+      // a grid and sampled bilinearly - evaluating it per particle per frame
+      // costs more than everything else combined.
+      var NF = 96;
+      var NFX = new Float32Array(NF * NF), NFY = new Float32Array(NF * NF);
+      (function () {
+        function hash(ix, iy, s) {
+          var h = Math.imul(ix, 374761393) + Math.imul(iy, 668265263) + Math.imul(s, 1274126177);
+          h = Math.imul(h ^ (h >>> 13), 1274126177);
+          return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+        }
+        function vn(x, y, s) {
+          var ix = Math.floor(x), iy = Math.floor(y);
+          var fx = x - ix, fy = y - iy;
+          var ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+          var a = hash(ix, iy, s), b = hash(ix + 1, iy, s);
+          var c = hash(ix, iy + 1, s), e = hash(ix + 1, iy + 1, s);
+          return a + (b - a) * ux + (c - a) * uy + (a - b - c + e) * ux * uy;
+        }
+        function psi(x, y) { return vn(x * 3.1, y * 3.1, 17) + 0.5 * vn(x * 7.3, y * 7.3, 91); }
+        var h = 0.01, mx = 0;
+        for (var j = 0; j < NF; j++) {
+          for (var i = 0; i < NF; i++) {
+            var x = (i / (NF - 1)) * 2.8 - 1.4, y = (j / (NF - 1)) * 2.8 - 1.4;
+            var gx = (psi(x, y + h) - psi(x, y - h)) / (2 * h);
+            var gy = -(psi(x + h, y) - psi(x - h, y)) / (2 * h);
+            NFX[j * NF + i] = gx; NFY[j * NF + i] = gy;
+            if (Math.abs(gx) > mx) mx = Math.abs(gx);
+            if (Math.abs(gy) > mx) mx = Math.abs(gy);
+          }
+        }
+        if (mx > 0) for (var k = 0; k < NFX.length; k++) { NFX[k] /= mx; NFY[k] /= mx; }
+      })();
+
+      var FV = [0, 0];
+      function sampleField(x, y) {
+        var u = (x + 1.4) / 2.8 * (NF - 1);
+        var v = (y + 1.4) / 2.8 * (NF - 1);
+        if (u < 0) u = 0; else if (u > NF - 1.002) u = NF - 1.002;
+        if (v < 0) v = 0; else if (v > NF - 1.002) v = NF - 1.002;
+        var i0 = u | 0, j0 = v | 0, fu = u - i0, fv2 = v - j0;
+        var a = j0 * NF, b = a + NF, i1 = i0 + 1;
+        FV[0] = (NFX[a + i0] * (1 - fu) + NFX[a + i1] * fu) * (1 - fv2) + (NFX[b + i0] * (1 - fu) + NFX[b + i1] * fu) * fv2;
+        FV[1] = (NFY[a + i0] * (1 - fu) + NFY[a + i1] * fu) * (1 - fv2) + (NFY[b + i0] * (1 - fu) + NFY[b + i1] * fu) * fv2;
+      }
+
+      // --- Colour ----------------------------------------------------------
+      function rgb(value) {
+        var v = (value || '').trim();
+        if (v.charAt(0) === '#') {
+          var n = parseInt(v.slice(1, 7), 16);
+          return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        }
+        var o = v.indexOf('(');
+        if (o < 0) return [255, 255, 255];
+        var p = v.slice(o + 1, v.indexOf(')')).split(',');
+        return [parseFloat(p[0]) || 0, parseFloat(p[1]) || 0, parseFloat(p[2]) || 0];
+      }
+      function mix(a, b, t) {
+        return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+      }
+      function css(c, a) {
+        return 'rgba(' + Math.round(c[0]) + ',' + Math.round(c[1]) + ',' + Math.round(c[2]) + ',' + a + ')';
+      }
+
+      var instances = [];
+
+      function build(canvas) {
+        var stage = canvas.closest('.stage');
+        var panel = canvas.closest('.panel');
+        var pack = canvas.closest('.pack');
+        if (!stage) return null;
+
+        var view = canvas.getContext('2d', { alpha: false });
+        var trailEl = document.createElement('canvas');
+        var trail = trailEl.getContext('2d', { alpha: false });
+        var bAEl = document.createElement('canvas'), bBEl = document.createElement('canvas');
+        var bA = bAEl.getContext('2d', { alpha: false }), bB = bBEl.getContext('2d', { alpha: false });
+        if (!view || !trail || !bA || !bB) return null;
+        var canBloom = ('filter' in bA);
+
+        // Every colour comes from the palette via the panel's CSS variables -
+        // nothing is hardcoded, so all five voids theme themselves. Hue rides
+        // intensity: navy in shadow, steel blue through the body, cyan-white
+        // in the cores. One flat blue reads dead.
+        var cs = getComputedStyle(canvas);
+        var bgDeep = rgb(cs.getPropertyValue('--bg-deep'));
+        var shadow = rgb(cs.getPropertyValue('--sky-bottom'));
+        var midtone = mix(rgb(cs.getPropertyValue('--scenery')), rgb(cs.getPropertyValue('--scenery-alt')), 0.6);
+        var core = rgb(cs.getPropertyValue('--celestial'));
+        var glow = rgb(cs.getPropertyValue('--celestial-glow'));
+        var dust = rgb(cs.getPropertyValue('--scenery'));
+        var hotCol = css(core, 1);
+        var bgFlat = css(bgDeep, 1);
+
+        var BIN_COL = new Array(BIN_N), BIN_A = new Float64Array(BIN_N), BIN_W = new Float64Array(BIN_N);
+        for (var L = 0; L < LAYERS; L++) {
+          for (var W = 0; W < W_BUCKETS; W++) {
+            for (var T = 0; T < T_BUCKETS; T++) {
+              // Squared, to undo the square root the bucket index is taken by.
+              var q = T / T_LAST;
+              var tf = q * q * INT_MAX;
+              var ti = tf > 1 ? 1 : tf;
+              var col = ti < 0.5 ? mix(shadow, midtone, ti * 2) : mix(midtone, core, (ti - 0.5) * 2);
+              // The floor has to be near nothing, not a comfortable minimum:
+              // the unlit arc is supposed to go out, and a 0.3 floor here is
+              // what stops it.
+              var a = L_ALPHA[L] * (0.08 + 1.04 * tf);
+              if (a > 0.12) a = 0.12;
+              var wpx = L_WIDTH[L] * W_SCALE[W];
+              if (wpx < 0.4) wpx = 0.4; else if (wpx > 1.2) wpx = 1.2;
+              var idx = (L * W_BUCKETS + W) * T_BUCKETS + T;
+              BIN_COL[idx] = css(col, 1);
+              BIN_A[idx] = a;
+              BIN_W[idx] = wpx;
+            }
+          }
+        }
+
+        var rnd = mulberry32(seedFrom(canvas.getAttribute('data-vortex') || 'void'));
+        var pr = new Float32Array(COUNT), pth = new Float32Array(COUNT);
+        var pl = new Uint8Array(COUNT), pv = new Float32Array(COUNT);
+        for (var i = 0; i < COUNT; i++) {
+          // sqrt spreads them by area, so the per-particle a in
+          // r = a*e^(b*theta) covers the whole radial range rather than
+          // crowding the core.
+          pr[i] = R_CORE + (R_OUT - R_CORE) * Math.sqrt(rnd());
+          pth[i] = rnd() * TAU;
+          pl[i] = (rnd() * LAYERS) | 0;
+          pv[i] = 0.55 + rnd() * 0.9;
+        }
+        if (pl[0] >= LAYERS) pl[0] = LAYERS - 1;
+
+        // The field. A real sky is mostly faint: brightness runs as a steep
+        // power law, so a handful carry the eye and the rest are dust. They
+        // are kept off the disc - anything landing on the outer haze competes
+        // with the filaments instead of sitting behind them - and held in
+        // panel fractions so they survive a resize.
+        var starN = 150;
+        var starX = new Float32Array(starN), starY = new Float32Array(starN);
+        var starA = new Float32Array(starN), starS = new Float32Array(starN);
+        var starC = new Array(starN), starTw = new Float32Array(starN), starPh = new Float32Array(starN);
+        var hotStar = css(rgb(cs.getPropertyValue('--particle')), 1);
+        var coolStar = css(rgb(cs.getPropertyValue('--particle-alt')), 1);
+        var warmStar = css(rgb(cs.getPropertyValue('--ember')), 1);
+        for (var s = 0; s < starN; s++) {
+          var sx = 0.5, sy = 0.5;
+          for (var tries = 0; tries < 60; tries++) {
+            sx = rnd(); sy = rnd();
+            var ddx = sx - 0.5, ddy = sy - 0.5;
+            if (ddx * ddx + ddy * ddy > 0.245) break;
+          }
+          var mag = rnd();
+          starX[s] = sx; starY[s] = sy;
+          starA[s] = 0.12 + 0.82 * mag * mag * mag;      // steep: most are faint
+          starS[s] = mag > 0.93 ? 2 : 1;                 // only the brightest widen
+          var hue = rnd();
+          starC[s] = hue < 0.07 ? warmStar : hue < 0.42 ? coolStar : hotStar;
+          // A quarter of them scintillate. The rest are dead still, because a
+          // sky where everything twinkles reads as a screensaver.
+          starTw[s] = rnd() < 0.25 ? 0.18 + rnd() * 0.3 : 0;
+          starPh[s] = rnd() * TAU;
+        }
+
+        var paths = new Array(BIN_N);
+        var w = 0, h = 0, bw = 0, bh = 0, dpr = 1, ccx = 0, ccy = 0, R = 1;
+        var decayFill = css(bgDeep, 0.075), vignette = null, frameNo = 0;
+        var ptrS = 0, ptrX = 0, ptrY = 0, ptrSeeded = false;
+        var onScreen = true;
+
+        // Deep field: a halo bleeding off the disc and a couple of dust
+        // clouds. Baked once, composited additively on the way out - drawn
+        // into the trail buffer instead they would compound frame on frame.
+        var spaceEl = document.createElement('canvas');
+        var space = spaceEl.getContext('2d');
+
+        // Live events. Preallocated: they arrive in bursts under pulse, and
+        // allocating mid-burst is the one place this could stutter.
+        var inR = new Float32Array(IN_MAX), inTh = new Float32Array(IN_MAX);
+        var inR0 = new Float32Array(IN_MAX), inSpin = new Float32Array(IN_MAX);
+        var inLeft = new Float32Array(IN_MAX), inLife = new Float32Array(IN_MAX);
+        var inPx = new Float32Array(IN_MAX), inPy = new Float32Array(IN_MAX);
+        var inWait = 1.5 + rnd() * 5;
+
+        var hsR = new Float32Array(HS_MAX), hsTh = new Float32Array(HS_MAX);
+        var hsSpin = new Float32Array(HS_MAX);
+        var hsLeft = new Float32Array(HS_MAX), hsLife = new Float32Array(HS_MAX);
+        // Flattened for the inner loop: screen x, screen y, strength.
+        var hsLive = new Float32Array(HS_MAX * 3);
+        var hsN = 0;
+        var hsWait = 2 + rnd() * 5;
+
+        if (window.IntersectionObserver) {
+          new window.IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; }, { rootMargin: '160px' }).observe(canvas);
+        }
+
+        function resize() {
+          var r = canvas.getBoundingClientRect();
+          if (!r.width || !r.height) return false;
+          var d = Math.min(2, window.devicePixelRatio || 1);
+          var nw = Math.max(2, Math.round(r.width * d)), nh = Math.max(2, Math.round(r.height * d));
+          if (nw === w && nh === h && d === dpr) return true;
+          w = nw; h = nh; dpr = d;
+          canvas.width = w; canvas.height = h;
+          trailEl.width = w; trailEl.height = h;
+          bw = Math.max(1, w >> 2); bh = Math.max(1, h >> 2);
+          bAEl.width = bw; bAEl.height = bh; bBEl.width = bw; bBEl.height = bh;
+          // Face-on and concentric with the panel.
+          ccx = w * 0.5; ccy = h * 0.5;
+          R = Math.min(w, h) * 0.42;
+          spaceEl.width = w; spaceEl.height = h;
+          paintSpace();
+
+          // The decay fill is FLAT, not a gradient. A gradient here dithers,
+          // and because the same dither lands in the same pixels every frame
+          // the trail buffer accumulates it into a visible grid that competes
+          // with the filaments. The vignette is a separate pass on the way
+          // out, where it is drawn once and never fed back.
+          var far = Math.sqrt(ccx * ccx + ccy * ccy);
+          vignette = view.createRadialGradient(ccx, ccy, R * 1.15, ccx, ccy, far);
+          vignette.addColorStop(0, css(bgDeep, 0));
+          vignette.addColorStop(0.6, css(bgDeep, 0.3));
+          vignette.addColorStop(1, css(bgDeep, 0.86));
+
+          trail.globalCompositeOperation = 'source-over';
+          trail.globalAlpha = 1;
+          trail.fillStyle = bgFlat;
+          trail.fillRect(0, 0, w, h);
+          return true;
+        }
+
+        /**
+         * The deep field, baked once per resize. Deliberately almost nothing.
+         *
+         * A halo around the disc and real dust clouds were both tried here and
+         * both fogged the picture: any wash over the filaments costs contrast,
+         * the bloom compounds it, and the result reads as out of focus. Space
+         * is clear and black — the realism has to come from the starfield.
+         * What is left is two corner clouds at a barely-there alpha, kept well
+         * off the disc, only so the corners are not perfectly flat.
+         */
+        function paintSpace() {
+          if (!space) return;
+          space.globalCompositeOperation = 'source-over';
+          space.clearRect(0, 0, w, h);
+          var cloud = [
+            { x: 0.12, y: 0.14, r: 0.34, c: dust, a: 0.05 },
+            { x: 0.9, y: 0.88, r: 0.3, c: glow, a: 0.035 },
+          ];
+          for (var q = 0; q < cloud.length; q++) {
+            var cd = cloud[q];
+            var m = Math.min(w, h) * cd.r;
+            var g = space.createRadialGradient(cd.x * w, cd.y * h, 0, cd.x * w, cd.y * h, m);
+            g.addColorStop(0, css(cd.c, cd.a));
+            g.addColorStop(0.5, css(cd.c, cd.a * 0.3));
+            g.addColorStop(1, css(cd.c, 0));
+            space.fillStyle = g;
+            space.fillRect(0, 0, w, h);
+          }
+        }
+
+        /** Something falling in from outside the rim, on a decaying spiral. */
+        function spawnInfall() {
+          var slot = -1;
+          for (var q = 0; q < IN_MAX; q++) if (inLeft[q] <= 0) { slot = q; break; }
+          if (slot < 0) return;
+          inR0[slot] = 1.02 + rnd() * 0.2;
+          inR[slot] = inR0[slot];
+          inTh[slot] = rnd() * TAU;
+          inSpin[slot] = 1.5 + rnd() * 1.8;
+          inLife[slot] = 1.3 + rnd() * 1.7;
+          inLeft[slot] = inLife[slot];
+          inPx[slot] = ccx + Math.cos(inTh[slot]) * inR[slot] * R;
+          inPy[slot] = ccy + Math.sin(inTh[slot]) * inR[slot] * R;
+        }
+
+        /**
+         * Drawn as a moving point, not a streak: the trail buffer is already
+         * holding forty frames of it, so the streak draws itself and stays in
+         * the same visual language as the filaments.
+         */
+        function drawInfall(dt) {
+          trail.globalCompositeOperation = 'lighter';
+          trail.lineCap = 'round';
+          trail.strokeStyle = hotCol;
+          for (var q = 0; q < IN_MAX; q++) {
+            if (inLeft[q] <= 0) continue;
+            inLeft[q] -= dt;
+            if (inLeft[q] <= 0) { inLeft[q] = 0; continue; }
+            var f = 1 - inLeft[q] / inLife[q];
+            var stop = R_CORE * 0.94;
+            // Accelerating in, the way anything falling actually does.
+            inR[q] = stop + (inR0[q] - stop) * Math.pow(1 - f, 1.9);
+            // Same shear law as the disc, so it rides the flow rather than
+            // cutting across it.
+            var rc2 = inR[q] < RL_LO ? RL_LO : inR[q];
+            var pi2 = ((rc2 - RL_LO) * RL_SCALE) | 0;
+            if (pi2 < 0) pi2 = 0; else if (pi2 >= RL_N) pi2 = RL_N - 1;
+            inTh[q] += inSpin[q] * POW_LUT[pi2] * dt;
+            var nx = ccx + Math.cos(inTh[q]) * inR[q] * R;
+            var ny = ccy + Math.sin(inTh[q]) * inR[q] * R;
+            // Brightens as it falls, then burns out at the core.
+            var a = (0.25 + 0.75 * f) * Math.min(1, (1 - f) * 6);
+            trail.globalAlpha = a * 0.5;
+            trail.lineWidth = 0.8 + f * 0.4;
+            trail.beginPath();
+            trail.moveTo(inPx[q], inPy[q]);
+            trail.lineTo(nx, ny);
+            trail.stroke();
+            inPx[q] = nx; inPy[q] = ny;
+          }
+          trail.globalAlpha = 1;
+        }
+
+        /** A hot spot orbiting inside the disc. */
+        function spawnFlare() {
+          var slot = -1;
+          for (var q = 0; q < HS_MAX; q++) if (hsLeft[q] <= 0) { slot = q; break; }
+          if (slot < 0) return;
+          hsR[slot] = R_CORE + 0.1 + rnd() * 0.5;
+          hsTh[slot] = rnd() * TAU;
+          hsSpin[slot] = 0.25 + rnd() * 0.4;
+          hsLife[slot] = 2.4 + rnd() * 3.4;
+          hsLeft[slot] = hsLife[slot];
+        }
+
+        /**
+         * Advance the flares and flatten them for the particle loop. They
+         * brighten filaments locally through the same term the pointer uses,
+         * so a flare and a fingertip do the same thing to the flow.
+         */
+        function stepFlares(dt) {
+          hsN = 0;
+          for (var q = 0; q < HS_MAX; q++) {
+            if (hsLeft[q] <= 0) continue;
+            hsLeft[q] -= dt;
+            if (hsLeft[q] <= 0) { hsLeft[q] = 0; continue; }
+            var f = 1 - hsLeft[q] / hsLife[q];
+            var rc2 = hsR[q] < RL_LO ? RL_LO : hsR[q];
+            var pi2 = ((rc2 - RL_LO) * RL_SCALE) | 0;
+            if (pi2 < 0) pi2 = 0; else if (pi2 >= RL_N) pi2 = RL_N - 1;
+            hsTh[q] += hsSpin[q] * POW_LUT[pi2] * dt;
+            hsLive[hsN * 3] = ccx + Math.cos(hsTh[q]) * hsR[q] * R;
+            hsLive[hsN * 3 + 1] = ccy + Math.sin(hsTh[q]) * hsR[q] * R;
+            hsLive[hsN * 3 + 2] = Math.sin(f * Math.PI);   // in and out, no snap
+            hsN++;
+          }
+        }
+
+        // The core is a hole, not a disc drawn over the top: density ramps to
+        // nothing at R_CORE, so nothing is ever painted inside it and the
+        // trail decay takes it to bg-deep on its own. Same at the rim. An
+        // edge you can point at is an edge that was drawn.
+        function strokeAll() {
+          for (var k = 0; k < BIN_N; k++) {
+            var p = paths[k];
+            if (!p) continue;
+            trail.strokeStyle = BIN_COL[k];
+            trail.globalAlpha = BIN_A[k];
+            trail.lineWidth = BIN_W[k];
+            trail.stroke(p);
+          }
+        }
+
+        function frame(dt, now) {
+          frameNo++;
+
+          // The signal in. Same two values the RN overlay reads.
+          var pulse = parseFloat(stage.style.getPropertyValue('--pulse'));
+          if (!isFinite(pulse)) pulse = 0;
+          var fx = parseFloat(stage.style.getPropertyValue('--fx'));
+          var fy = parseFloat(stage.style.getPropertyValue('--fy'));
+          if (!isFinite(fx)) fx = 50;
+          if (!isFinite(fy)) fy = 50;
+          var tx = fx / 100 * w, ty = fy / 100 * h;
+          if (!ptrSeeded) { ptrX = tx; ptrY = ty; ptrSeeded = true; }
+          // Eased in and out, not switched. A reaction, not a blink.
+          var ease = 1 - Math.exp(-dt / POINTER_EASE);
+          ptrS += ((stage.classList.contains('pointing') ? 1 : 0) - ptrS) * ease;
+          ptrX += (tx - ptrX) * ease;
+          ptrY += (ty - ptrY) * ease;
+
+          trail.globalCompositeOperation = 'source-over';
+          trail.globalAlpha = 1;
+          trail.fillStyle = decayFill;
+          trail.fillRect(0, 0, w, h);
+
+          // Stars: source-over at their own alpha, so the trail buffer cannot
+          // accumulate them up to white. Static - they are not the motion.
+          var sp = Math.max(1, Math.round(dpr));
+          for (var s = 0; s < starN; s++) {
+            var sa = starA[s];
+            if (starTw[s] > 0) sa *= 1 - starTw[s] * (0.5 + 0.5 * Math.sin(now * 1.7 + starPh[s]));
+            trail.globalAlpha = sa;
+            trail.fillStyle = starC[s];
+            trail.fillRect((starX[s] * w) | 0, (starY[s] * h) | 0, sp * starS[s], sp * starS[s]);
+          }
+          trail.globalAlpha = 1;
+
+          for (var b = 0; b < BIN_N; b++) paths[b] = null;
+
+          var nAng = now * 0.011;
+          var cnA = Math.cos(nAng), snA = Math.sin(nAng);
+          var jb = (frameNo * 7) & 1023;
+          var ptrOn = ptrS > 0.004;
+          var pRad = POINTER_R * dpr, pRad2 = pRad * pRad;
+
+          // The disc does not turn at a constant rate. Two incommensurate
+          // periods, so it wanders between about half speed and half again
+          // and never repeats - a metronome is the thing that makes a loop
+          // read as a loop.
+          var wander = 1 + 0.36 * Math.sin(now * 0.107) + 0.15 * Math.sin(now * 0.263 + 1.3);
+          var spinMul = wander * (1 + pulse * 1.4);
+          // And the light drifts, so the hot arc breathes rather than sitting.
+          var lightAng = LIGHT + 0.22 * Math.sin(now * 0.061) + 0.09 * Math.sin(now * 0.147);
+          var breath = 1 + 0.09 * Math.sin(now * 0.37) + 0.05 * Math.sin(now * 0.83 + 2.1);
+
+          inWait -= dt;
+          if (inWait <= 0) {
+            spawnInfall();
+            if (pulse > 0.5 && rnd() < pulse * 0.7) spawnInfall();
+            inWait = (0.5 + rnd() * 2.2) / (0.2 + pulse * 2.4);
+          }
+          hsWait -= dt;
+          if (hsWait <= 0) {
+            spawnFlare();
+            hsWait = (1.6 + rnd() * 4.5) / (0.3 + pulse * 2.2);
+          }
+          stepFlares(dt);
+
+          var hsRad = HS_R * R, hsRad2 = hsRad * hsRad;
+          var i, j;
+
+          for (i = 0; i < COUNT; i++) {
+            var layer = pl[i];
+            var r = pr[i], th = pth[i];
+            var c0 = Math.cos(th), s0 = Math.sin(th);
+            var dx = c0 * r, dy = s0 * r;
+
+            // Meso wobble, sampled in a frame that turns with the disc so the
+            // pattern travels with the flow instead of sitting in screen space.
+            sampleField(dx * cnA - dy * snA, dx * snA + dy * cnA);
+            var na = MESO * L_NOISE[layer];
+            var mx = FV[0] * na, my = FV[1] * na;
+
+            var px = ccx + (dx + mx) * R;
+            var py = ccy + (dy + my) * R;
+
+            // The pointer perturbs the flow field: a local swirl and lift, and
+            // brighter where it is stirring. It is not a target for a bolt.
+            var boost = 0;
+            if (ptrOn) {
+              var ddx = px - ptrX, ddy = py - ptrY;
+              var d2 = ddx * ddx + ddy * ddy;
+              if (d2 < pRad2) {
+                var f = 1 - Math.sqrt(d2) / pRad;
+                boost = f * f * ptrS;
+              }
+            }
+            for (var hq = 0; hq < hsN; hq++) {
+              var hdx = px - hsLive[hq * 3], hdy = py - hsLive[hq * 3 + 1];
+              var hd2 = hdx * hdx + hdy * hdy;
+              if (hd2 < hsRad2) {
+                var hf = 1 - Math.sqrt(hd2) / hsRad;
+                var hb = hf * hf * hsLive[hq * 3 + 2] * 0.8;
+                if (hb > boost) boost = hb;
+              }
+            }
+
+            var pi = ((r - RL_LO) * RL_SCALE) | 0;
+            if (pi < 0) pi = 0; else if (pi >= RL_N) pi = RL_N - 1;
+            var dth = OMEGA * L_SPEED[layer] * spinMul * POW_LUT[pi] * (1 + boost * 1.1) * dt;
+
+            th += dth;
+            r -= (INFALL * pv[i] - boost * 0.11) * dt;
+
+            var c1, s1;
+            if (r <= R_CORE - 0.02 || r > R_OUT + 0.06) {
+              // Respawn at the rim, inside the density ramp, so a particle
+              // fades in rather than appearing.
+              r = R_OUT - rnd() * 0.02;
+              th = rnd() * TAU;
+              c1 = Math.cos(th); s1 = Math.sin(th);
+            } else {
+              // dth is a small fraction of a radian per frame, so the
+              // small-angle rotation is exact to ~1e-5 here and saves 8000
+              // sin/cos pairs. th itself stays exact - it is not derived back.
+              var hc = 1 - dth * dth * 0.5;
+              c1 = c0 * hc - s0 * dth;
+              s1 = s0 * hc + c0 * dth;
+            }
+            if (th > TAU) th -= TAU; else if (th < 0) th += TAU;
+            pr[i] = r; pth[i] = th;
+
+            var rr = (r - R_CORE) / (R_OUT - R_CORE);
+            if (rr < 0) rr = 0; else if (rr > 1) rr = 1;
+            var tR = (1 - rr) * (1 - rr);      // energy piles up toward the hole
+
+            // Both boundaries ramp out over EDGE of the radius. Not a hard
+            // cutoff, but tight enough that each still reads as an edge -
+            // and it is the only thing making them, nothing is stroked there.
+            var eIn = (r - R_CORE) / EDGE; if (eIn > 1) eIn = 1; else if (eIn < 0) eIn = 0;
+            var eOut = (R_OUT - r) / EDGE; if (eOut > 1) eOut = 1; else if (eOut < 0) eOut = 0;
+            var edge = eIn * eIn * (3 - 2 * eIn) * eOut * eOut * (3 - 2 * eOut);
+
+            // Fixed directional light. Face-on there is no near rim to sit
+            // behind, so the asymmetry has to be lit rather than perspectival:
+            // one arc hot, the opposite one all but out, smooth the whole way
+            // round with no seam at the antipode.
+            var ad = th - lightAng;
+            while (ad > Math.PI) ad -= TAU;
+            while (ad < -Math.PI) ad += TAU;
+            var hc2 = Math.cos(ad * 0.5);
+            var lit = 0.15 + 0.85 * hc2 * hc2 * hc2;
+
+            // Three arms. Seen face-on the winding is the whole subject, so
+            // the density has to be structured or it reads as one smear. The
+            // smoothstep sharpens crest and trough without putting an edge
+            // anywhere - the trail decay smears a raw sine back into mush.
+            // The floor matters as much as the crest: taken all the way to
+            // zero the arms detach into three separate commas and the disc
+            // stops being a disc.
+            var raw = 0.5 + 0.5 * Math.sin(ARM_M * th - ARM_K * LOG_LUT[pi]);
+            var arm = 0.18 + 0.82 * raw * raw * (3 - 2 * raw);
+
+            // Strokes span a fixed ANGLE, so a filament out at the rim lays
+            // down three times the ink of one near the core. This pays for
+            // that - without it the rim accumulates into a bright ring that
+            // reads as a drawn circle - but not so steeply that the outer
+            // boundary loses the ink it needs to read as an edge at all.
+            var dens = 0.22 + 0.78 * tR;
+            // 2.25 is the ceiling before the arm crests clip to flat white and
+            // take the filament texture with them - and a blown-out crest plus
+            // bloom is exactly what reads as "out of focus".
+            var t = dens * arm * lit * edge * breath * 2.25 + (pulse * 0.3 + boost * 0.75) * edge;
+            if (t < 0) t = 0; else if (t > INT_MAX) t = INT_MAX;
+
+            // sqrt-spaced buckets: most of the disc is dim, so that is where
+            // the eight steps need to land.
+            var tb = (Math.sqrt(t / INT_MAX) * T_LAST + 0.5) | 0;
+            if (tb > T_LAST) tb = T_LAST; else if (tb < 0) tb = 0;
+            var wb = rr < 0.34 ? 0 : (rr < 0.67 ? 1 : 2);
+            var bin = (layer * W_BUCKETS + wb) * T_BUCKETS + tb;
+            var p = paths[bin];
+            if (!p) { p = new Path2D(); paths[bin] = p; }
+
+            var base = layer * ARC_PTS;
+            for (j = 0; j < ARC_PTS; j++) {
+              var k = base + j;
+              var cd = ARC_CD[k], sd = ARC_SD[k];
+              var cj = c1 * cd - s1 * sd, sj = s1 * cd + c1 * sd;
+              var rj = r * ARC_F[k];
+              // Hashed, not indexed in sequence: stepping the jitter table by
+              // one per particle correlates neighbours and prints a faint
+              // lattice into the trail buffer.
+              var jh = (Math.imul(i + 1, 2654435761) ^ Math.imul(j + jb + 1, 40503)) >>> 0;
+              var ux = ccx + (cj * rj + mx) * R + JIT[jh & 1023] * MICRO;
+              var uy = ccy + (sj * rj + my) * R + JIT[(jh >>> 10) & 1023] * MICRO;
+              if (j === 0) p.moveTo(ux, uy); else p.lineTo(ux, uy);
+            }
+          }
+
+          trail.lineCap = 'round';
+          trail.lineJoin = 'round';
+          trail.globalCompositeOperation = 'lighter';
+          strokeAll();
+          drawInfall(dt);
+          trail.globalCompositeOperation = 'source-over';
+          trail.globalAlpha = 1;
+
+          // Present. The trail buffer stays clean - bloom is applied on the way
+          // out, never fed back into it, or it would run away over a few
+          // hundred frames.
+          view.globalCompositeOperation = 'copy';
+          view.globalAlpha = 1;
+          view.drawImage(trailEl, 0, 0);
+
+          if (canBloom) {
+            // Quarter size, squared so dim regions stay dim and only the hot
+            // cores blow out, two gaussian passes, then added back at 0.5.
+            // shadowBlur at this stroke count is not on the table.
+            bB.globalCompositeOperation = 'copy'; bB.filter = 'none';
+            bB.drawImage(trailEl, 0, 0, bw, bh);
+            bA.globalCompositeOperation = 'copy'; bA.filter = 'none';
+            bA.drawImage(bBEl, 0, 0);
+            bA.globalCompositeOperation = 'multiply';
+            bA.drawImage(bBEl, 0, 0);
+            bB.globalCompositeOperation = 'copy'; bB.filter = 'blur(3px)';
+            bB.drawImage(bAEl, 0, 0);
+            bA.globalCompositeOperation = 'copy'; bA.filter = 'blur(3px)';
+            bA.drawImage(bBEl, 0, 0);
+            bA.filter = 'none'; bB.filter = 'none';
+
+            view.globalCompositeOperation = 'lighter';
+            view.globalAlpha = 0.45;
+            view.drawImage(bAEl, 0, 0, w, h);
+            view.globalAlpha = 1;
+            view.globalCompositeOperation = 'source-over';
+          }
+
+          // Halo and dust, then the vignette, and only here. Drawn into the
+          // trail buffer either would compound every frame and dither itself
+          // into a grid; on the way out they just sit where they belong.
+          view.globalCompositeOperation = 'lighter';
+          view.drawImage(spaceEl, 0, 0);
+          view.globalCompositeOperation = 'source-over';
+          view.fillStyle = vignette;
+          view.fillRect(0, 0, w, h);
+        }
+
+        return {
+          step: function (dt, now) {
+            if (document.hidden || !onScreen) return;
+            if (panel && panel.hidden) return;
+            if (pack && pack.hidden) return;
+            if (!resize()) return;
+            frame(dt, now);
+          }
+        };
+      }
+
+      for (var ci = 0; ci < canvases.length; ci++) {
+        var inst = build(canvases[ci]);
+        if (inst) instances.push(inst);
+      }
+      if (!instances.length) return;
+
+      var last = 0;
+      function tick(now) {
+        var dt = last ? (now - last) / 1000 : 1 / 60;
+        last = now;
+        if (dt > 0.05) dt = 0.05;
+        for (var i = 0; i < instances.length; i++) instances[i].step(dt, now / 1000);
+        window.requestAnimationFrame(tick);
+      }
+      window.requestAnimationFrame(tick);
+    })();
 
     // A #pack-variant hash deep-links straight to one variant.
     var hash = location.hash.slice(1);
