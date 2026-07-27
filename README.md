@@ -48,6 +48,10 @@ npx expo install expo-linear-gradient expo-audio expo-font react-native-svg \
   @expo-google-fonts/space-grotesk @expo-google-fonts/manrope @expo-google-fonts/jetbrains-mono
 ```
 
+`expo install` also adds `expo-audio` and `expo-font` to `plugins` in the app's
+`app.json`. Keep them — they are config plugins the native build needs. (If you
+skip the pack's `Ambience`, `expo-audio` is optional.)
+
 **3. Provide storage and mount the provider.** MASSETS has no storage
 dependency; you inject one. Anything with `getItem` / `setItem` works —
 AsyncStorage satisfies it as-is.
