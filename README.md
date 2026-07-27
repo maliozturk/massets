@@ -112,7 +112,7 @@ existing installs don't reset to the month default:
 ### Updating to a newer MASSETS
 
 ```bash
-cd <app>/masset && git pull origin main
+cd <app>/masset && git pull origin master
 cd .. && git add masset && git commit -m "Bump MASSETS"
 ```
 
